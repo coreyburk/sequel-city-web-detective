@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13327,
+      "sizeLines": 13317,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3901,
+      "sizeLines": 3895,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15629,
+      "sizeLines": 15618,
       "fileCategory": "config"
     },
     {
@@ -646,7 +646,7 @@
     {
       "path": "apps/web/src/App.test.tsx",
       "language": "typescript",
-      "sizeLines": 4344,
+      "sizeLines": 4412,
       "fileCategory": "code"
     },
     {
@@ -766,7 +766,7 @@
     {
       "path": "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx",
       "language": "typescript",
-      "sizeLines": 346,
+      "sizeLines": 390,
       "fileCategory": "code"
     },
     {
@@ -994,7 +994,7 @@
     {
       "path": "apps/web/tests/browser/case-001-live-smoke.spec.ts",
       "language": "typescript",
-      "sizeLines": 222,
+      "sizeLines": 227,
       "fileCategory": "code"
     },
     {
@@ -2800,7 +2800,13 @@
     {
       "path": "docs/01-work-packages/WP-265-student-text-size-control.md",
       "language": "markdown",
-      "sizeLines": 243,
+      "sizeLines": 247,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/01-work-packages/WP-266-case-001-guidance-no-answer-prefill.md",
+      "language": "markdown",
+      "sizeLines": 200,
       "fileCategory": "docs"
     },
     {
@@ -3860,14 +3866,14 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 643,
+  "totalFiles": 644,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 643,
+    "filesScanned": 644,
     "byCategory": {
       "config": 18,
-      "docs": 394,
+      "docs": 395,
       "data": 33,
       "code": 144,
       "markup": 2,
@@ -3875,7 +3881,7 @@
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 394,
+      "markdown": 395,
       "csv": 24,
       "python": 15,
       "unknown": 1,

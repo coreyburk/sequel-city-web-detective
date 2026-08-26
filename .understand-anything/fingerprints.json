@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "ef5c2d748b0e22043831619e9ec58d867440d6ec",
-  "generatedAt": "2026-08-21T16:53:27.529Z",
+  "gitCommitHash": "8950839ebb441585765a2eb0c8747817e023a569",
+  "generatedAt": "2026-08-24T16:53:57.395Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "5ceb547112941494500a813307220e3e3068d712ff706b6590746dec3393e8e0",
+      "contentHash": "9251d5c137ccfda598f9dce04649130186100b066bb72fafae80d9d3801fc7e8",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13328,
+      "totalLines": 13318,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "a03fb8413e812b9f3cf20e9d3c12efcc7acf975cf21b31654623cab0bb131307",
+      "contentHash": "0114250ede94b7edf66d51e9232f1bdec6d14f747ae1d594a1f51dd65f64b269",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3896,
+      "totalLines": 3902,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "a077282adcf9ff55e950eb8496de25d7a287373d39a6a4eb449e5a97be1b09a5",
+      "contentHash": "f0d538e16c96af7846cba4ec50ba5fc2f39ed540c21866c964824a8ecc719e78",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15619,
+      "totalLines": 15630,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "3a0315518ec0036431d7f96d45ae1a4f648f5680dce994f0d45d0b3aceb89abd",
+      "contentHash": "9469173546722514ec39c852b634481e1c405cb5e4354f1513c72a16fcd82940",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -3466,7 +3466,7 @@
     },
     "apps/web/src/App.test.tsx": {
       "filePath": "apps/web/src/App.test.tsx",
-      "contentHash": "cc930602612348aba896d14ace5da6ed3acf08002151fb8e0ac1358e24a3a946",
+      "contentHash": "e35edf2b2933d58207f904fd9bf0f421ef79a831333a64c32d093c0e9ce29401",
       "functions": [
         {
           "name": "chooseJeremyBowersIfAvailable",
@@ -3540,7 +3540,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 4345,
+      "totalLines": 4413,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/App.tsx": {
@@ -4704,7 +4704,7 @@
     },
     "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx": {
       "filePath": "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx",
-      "contentHash": "0ca65a06972b780f163ac0bd78e3078b3ef4895ce5bf50b059f3ac6923a33c4c",
+      "contentHash": "b9bc7a979f9833731f8f9858a0a5058cedc1c2ce61987d9fb3155903a290e5c3",
       "functions": [
         {
           "name": "buildSuccessfulQueryResponse",
@@ -4774,7 +4774,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 347,
+      "totalLines": 391,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/components/student/StudentPlayableCaseSkeletonView.tsx": {
@@ -6527,7 +6527,7 @@
     },
     "apps/web/src/studentCase001.ts": {
       "filePath": "apps/web/src/studentCase001.ts",
-      "contentHash": "243b2d0c5b860cd5c2cab02c112de001959626edec85a2cb55f3f5e9c60a165b",
+      "contentHash": "11bb0a76137c92bbb78495b5549c4d7bf132192baba72a1ba20c93e9e95df7d3",
       "functions": [
         {
           "name": "normalizeSql",
@@ -6815,7 +6815,7 @@
     },
     "apps/web/src/useStudentCaseState.ts": {
       "filePath": "apps/web/src/useStudentCaseState.ts",
-      "contentHash": "06531fba5a4ba53c130bb383f2010774797bffd2e23a86cd11eb237be0007360",
+      "contentHash": "ba289be8e05415d39a23a063f0754d1759693e3635608c9b1cf2ab59d9bed2f8",
       "functions": [
         {
           "name": "getStudentCaseStorageKey",
@@ -7241,7 +7241,7 @@
     },
     "apps/web/tests/browser/case-001-live-smoke.spec.ts": {
       "filePath": "apps/web/tests/browser/case-001-live-smoke.spec.ts",
-      "contentHash": "307a9a508db9d7ae830369dd2b05501a50f3ddb28f1deb2b17580673d486d768",
+      "contentHash": "eb9545c17437c9dfb7412103f694399920babb33d12932606857a97a55436e4f",
       "functions": [
         {
           "name": "isJsonObject",
@@ -7292,7 +7292,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 223,
+      "totalLines": 228,
       "hasStructuralAnalysis": true
     },
     "apps/web/tests/browser/demo-walkthrough.spec.ts": {
@@ -8064,7 +8064,7 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "81791d01587fc5753f127927c9c986f90c5ab680d7f312f2c78446a49df33099",
+      "contentHash": "1750377555357bbc327b30bd4e8080c06b06d87c912b9a5b17deec0ea5ac87f6",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -10864,12 +10864,22 @@
     },
     "docs/01-work-packages/WP-265-student-text-size-control.md": {
       "filePath": "docs/01-work-packages/WP-265-student-text-size-control.md",
-      "contentHash": "b3fca8ac907e792d1793769da4f776aa99051be14fac3b4a6f744840b1ee1fce",
+      "contentHash": "527aa53a20906ab288c36367c5a08e72053def2f1281446ab594d100472fbff2",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 244,
+      "totalLines": 248,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-266-case-001-guidance-no-answer-prefill.md": {
+      "filePath": "docs/01-work-packages/WP-266-case-001-guidance-no-answer-prefill.md",
+      "contentHash": "650a0d1a8dafdf8fe2378605440e495d8e3947768f42b9b46961fe6416efa9dd",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 201,
       "hasStructuralAnalysis": true
     },
     "docs/02-runtime/Backend-Setup-and-Validation.md": {

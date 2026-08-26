@@ -292,17 +292,17 @@ export const CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE: Case001SqlFeedbackSlice 
   milestoneId: CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id,
   title: "Report Interview Check",
   prompt:
-    "Run a read-only query that follows the public clocktower report into InterviewLog.",
+    "Use the located report row to inspect InterviewLog. Start broad, then use ReportID from Query Results or Pinned Facts when you are ready to narrow.",
   inputLabel: "Interview query",
   starterSql:
-    "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;",
+    "SELECT * FROM InterviewLog;",
   submitLabel: "Check Interview Query",
   emptyQueryMessage: "Enter a read-only SQL query before checking report interviews.",
   loadingMessage: "Checking the query against the gated Case 001 interview boundary.",
   matchedMessage:
     "Report-linked interviews located. The backend recognized the clocktower interview trail, but no case progress was saved or advanced.",
   noMatchMessage:
-    "No interview milestone match yet. Keep the query tied to InterviewLog rows for the public clocktower report.",
+    "No interview milestone match yet. Keep the query tied to InterviewLog rows for the public clocktower report and use the proved ReportID when you narrow.",
   missingMetadataMessage:
     "The query ran, but no gated Case 001 interview metadata was returned.",
   nonProgressingMessage:
@@ -313,17 +313,17 @@ export const CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE: Case001SqlFeedbackSlice
   milestoneId: CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id,
   title: "Witness Identity Check",
   prompt:
-    "Run a read-only query that resolves report-linked interview PersonIDs through PersonsOfInterest.",
+    "Use the interview PersonID values you observed to inspect PersonsOfInterest. Use Pinned Facts and query-assist tokens for exact values before writing the relationship query.",
   inputLabel: "Identity query",
   starterSql:
-    "SELECT p.PersonID, p.PersonName FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID WHERE i.ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY p.PersonID;",
+    "SELECT * FROM PersonsOfInterest;",
   submitLabel: "Check Identity Query",
   emptyQueryMessage: "Enter a read-only SQL query before checking witness identities.",
   loadingMessage: "Checking the query against the gated Case 001 witness boundary.",
   matchedMessage:
     "Witness identities resolved. The backend recognized the report-linked people lookup, but no case progress was saved or advanced.",
   noMatchMessage:
-    "No witness-identity milestone match yet. Keep the query tied to report-linked interviews and PersonsOfInterest.",
+    "No witness-identity milestone match yet. Keep the query tied to report-linked InterviewLog PersonIDs and PersonsOfInterest.",
   missingMetadataMessage:
     "The query ran, but no gated Case 001 witness metadata was returned.",
   nonProgressingMessage:
@@ -380,11 +380,11 @@ export const CASE_001_SAMUEL_STEPS: SamuelBriefingStep[] = [
     label: "Step 2",
     title: "Follow the report into interviews.",
     guidance:
-      "Use the report trail to find the interviews tied to the same public incident.",
+      "Use the located report row to find InterviewLog rows tied to the same public incident. Let ReportID come from Query Results, Pinned Facts, or query-assist tokens before you narrow.",
     observationPrompt:
-      "The interviews should keep the investigation tied to the report instead of the crowd's broad rumor.",
+      "The interviews should keep the investigation tied to the report instead of the crowd's broad rumor. Check ReportID before reading transcripts as evidence.",
     nextStep:
-      "Query InterviewLog for rows tied to the clocktower report you just located.",
+      "Inspect InterviewLog, then narrow with the proved ReportID from the clocktower report row.",
     successSignal:
       "The report-linked interview rows are visible in Query Results.",
     queryDraft: CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE.starterSql
@@ -394,11 +394,11 @@ export const CASE_001_SAMUEL_STEPS: SamuelBriefingStep[] = [
     label: "Step 3",
     title: "Resolve the interview identities.",
     guidance:
-      "Turn report-linked PersonIDs into names before drawing conclusions about access or opportunity.",
+      "Turn report-linked interview PersonIDs into names before drawing conclusions about access or opportunity. Use PersonsOfInterest and the PersonID values you actually observed.",
     observationPrompt:
-      "A named witness/access list is easier to test than disconnected transcript fragments.",
+      "A named witness/access list is easier to test than disconnected transcript fragments. Keep the InterviewLog-to-PersonsOfInterest relationship explicit.",
     nextStep:
-      "Join InterviewLog to PersonsOfInterest for the report-linked PersonIDs.",
+      "Inspect PersonsOfInterest, then relate it back to the InterviewLog PersonIDs tied to the report.",
     successSignal:
       "The report-linked names are visible in Query Results.",
     queryDraft: CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE.starterSql

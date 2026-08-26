@@ -149,6 +149,50 @@ vi.mock("./components/QueryRunner", () => ({
             type="button"
             onClick={() =>
               onExecutionComplete?.({
+                sql: "SELECT CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';",
+                response: {
+                  success: true,
+                  data: { columns: [], rows: [], rowCount: 1 },
+                  caseMilestoneEvaluation: {
+                    caseId: "case-001",
+                    milestoneId: "case-001-clocktower-report-located",
+                    matched: true,
+                    runtimeStatus: "evaluated-no-progression",
+                    milestoneAdvanced: false
+                  }
+                },
+                error: null
+              })
+            }
+          >
+            Simulate Case 001 Report Match
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              onExecutionComplete?.({
+                sql: "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID;",
+                response: {
+                  success: true,
+                  data: { columns: [], rows: [], rowCount: 2 },
+                  caseMilestoneEvaluation: {
+                    caseId: "case-001",
+                    milestoneId: "case-001-report-interviews-located",
+                    matched: true,
+                    runtimeStatus: "evaluated-no-progression",
+                    milestoneAdvanced: false
+                  }
+                },
+                error: null
+              })
+            }
+          >
+            Simulate Case 001 Interview Match
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              onExecutionComplete?.({
                 sql: "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID",
                 response: {
                   success: true,
@@ -2118,6 +2162,29 @@ describe("App", () => {
     expect(screen.queryByText(/Draft Query: .*ReportDate = 20230502/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Draft Query: .*ReportCity = 'Sequel City'/i)).not.toBeInTheDocument();
 
+
+    fireEvent.click(screen.getByRole("button", { name: "Simulate Case 001 Report Match" }));
+
+    expect(screen.getByText(/Public report located/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/proved ReportID from the clocktower report row/i).length).toBeGreaterThan(0);
+    expect(screen.getByText("Draft Query: SELECT * FROM InterviewLog;")).toBeInTheDocument();
+    expect(screen.queryByText(/Draft Query: .*WHERE ReportID IN/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Draft Query: .*CrimeID = 1080/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Draft Query: .*ReportDate = 20230502/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Draft Query: .*ReportCity = 'Sequel City'/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("InterviewLog");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("ReportID");
+
+    fireEvent.click(screen.getByRole("button", { name: "Simulate Case 001 Interview Match" }));
+
+    expect(screen.getByText(/Report-linked interviews located/i)).toBeInTheDocument();
+    expect(screen.getByText(/PersonID values you actually observed/i)).toBeInTheDocument();
+    expect(screen.getByText("Draft Query: SELECT * FROM PersonsOfInterest;")).toBeInTheDocument();
+    expect(screen.queryByText(/Draft Query: .*JOIN InterviewLog/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Draft Query: .*WHERE i\.ReportID IN/i)).not.toBeInTheDocument();
+    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("PersonsOfInterest");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("PersonID");
+
     fireEvent.click(screen.getByRole("button", { name: "Case File" }));
 
     expect(screen.getByRole("tab", { name: "Pinned Facts" })).toBeInTheDocument();
@@ -2126,8 +2193,9 @@ describe("App", () => {
     fireEvent.click(screen.getByRole("button", { name: "Evidence Board" }));
 
     expect(screen.getByRole("heading", { name: "Evidence Notebook" })).toBeInTheDocument();
-    expect(screen.getByText("Completed milestones: 0 / 3")).toBeInTheDocument();
+    expect(document.body).toHaveTextContent(/Completed milestones:\s*2\s*\/\s*3/);
     expect(screen.getByText("Clocktower Incident Report Located")).toBeInTheDocument();
+    expect(screen.getByText("Clocktower Report Interviews Located")).toBeInTheDocument();
     expect(screen.queryByText("Suspect Theory Check")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Case Library" })).toBeInTheDocument();
     expect(screen.queryByText("Case 004 Briefing")).not.toBeInTheDocument();

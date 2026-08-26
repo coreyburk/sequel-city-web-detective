@@ -174,11 +174,22 @@ describe("StudentPlayableCaseSkeletonView", () => {
 
     render(<StudentPlayableCaseSkeletonView module={CASE_001_PLAYABLE_SKELETON_MODULE} />);
 
+    expect(screen.getByLabelText("Interview query")).toHaveValue("SELECT * FROM InterviewLog;");
+    expect(screen.getByLabelText("Interview query")).not.toHaveValue(
+      "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;"
+    );
+    fireEvent.change(screen.getByLabelText("Interview query"), {
+      target: {
+        value:
+          "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID;"
+      }
+    });
+
     fireEvent.click(screen.getByRole("button", { name: "Check Interview Query" }));
 
     await waitFor(() => {
       expect(executeQuery).toHaveBeenCalledWith(
-        expect.stringContaining("FROM InterviewLog"),
+        "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID;",
         {
           caseMilestoneEvaluation: {
             caseId: "case-001",
@@ -224,11 +235,22 @@ describe("StudentPlayableCaseSkeletonView", () => {
 
     render(<StudentPlayableCaseSkeletonView module={CASE_001_PLAYABLE_SKELETON_MODULE} />);
 
+    expect(screen.getByLabelText("Identity query")).toHaveValue("SELECT * FROM PersonsOfInterest;");
+    expect(screen.getByLabelText("Identity query")).not.toHaveValue(
+      "SELECT p.PersonID, p.PersonName FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID WHERE i.ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY p.PersonID;"
+    );
+    fireEvent.change(screen.getByLabelText("Identity query"), {
+      target: {
+        value:
+          "SELECT p.PersonID, p.PersonName FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID WHERE i.ReportID = 10975 ORDER BY p.PersonID;"
+      }
+    });
+
     fireEvent.click(screen.getByRole("button", { name: "Check Identity Query" }));
 
     await waitFor(() => {
       expect(executeQuery).toHaveBeenCalledWith(
-        expect.stringContaining("FROM PersonsOfInterest"),
+        "SELECT p.PersonID, p.PersonName FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID WHERE i.ReportID = 10975 ORDER BY p.PersonID;",
         {
           caseMilestoneEvaluation: {
             caseId: "case-001",
@@ -280,6 +302,17 @@ describe("StudentPlayableCaseSkeletonView", () => {
 
     render(<StudentPlayableCaseSkeletonView module={CASE_001_PLAYABLE_SKELETON_MODULE} />);
 
+    expect(screen.getByLabelText("Interview query")).toHaveValue("SELECT * FROM InterviewLog;");
+    expect(screen.getByLabelText("Interview query")).not.toHaveValue(
+      "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;"
+    );
+    fireEvent.change(screen.getByLabelText("Interview query"), {
+      target: {
+        value:
+          "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID;"
+      }
+    });
+
     fireEvent.click(screen.getByRole("button", { name: "Check Interview Query" }));
     expect(await screen.findByText(/No interview milestone match yet/i)).toBeInTheDocument();
 
@@ -311,6 +344,17 @@ describe("StudentPlayableCaseSkeletonView", () => {
     });
 
     render(<StudentPlayableCaseSkeletonView module={CASE_001_PLAYABLE_SKELETON_MODULE} />);
+
+    expect(screen.getByLabelText("Interview query")).toHaveValue("SELECT * FROM InterviewLog;");
+    expect(screen.getByLabelText("Interview query")).not.toHaveValue(
+      "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;"
+    );
+    fireEvent.change(screen.getByLabelText("Interview query"), {
+      target: {
+        value:
+          "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID;"
+      }
+    });
 
     fireEvent.click(screen.getByRole("button", { name: "Check Interview Query" }));
     expect(

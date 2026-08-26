@@ -7,6 +7,8 @@ const API_BASE_URL = process.env.VITE_API_BASE_URL ?? "http://127.0.0.1:3001";
 const EXPLORATORY_STARTER_SQL = "SELECT * FROM CrimeSceneReport;";
 const M1_TARGET_SQL =
   "SELECT CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';";
+const OLD_M2_ANSWER_PREFILL_SQL =
+  "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;";
 
 type PreflightResult =
   | {
@@ -200,6 +202,9 @@ test.describe("Case 001 gated live-stack smoke", () => {
       milestoneAdvanced: false
     });
     await expect(page.getByText(/Public report located/i)).toBeVisible();
+    await expect(page.getByLabel("SQL query input")).toHaveValue("SELECT * FROM InterviewLog;");
+    await expect(page.getByLabel("SQL query input")).not.toHaveValue(OLD_M2_ANSWER_PREFILL_SQL);
+    await expect(page.getByText(/proved ReportID from the clocktower report row/i).first()).toBeVisible();
     await expect(page.getByRole("table")).toBeVisible();
     await expect(page.getByText(/Public clocktower ceremony report/i)).toBeVisible();
     await expect(page.getByRole("button", { name: /Log row 1 as evidence/i })).toBeVisible();

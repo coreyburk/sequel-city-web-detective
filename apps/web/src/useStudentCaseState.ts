@@ -3864,7 +3864,7 @@ export function useStudentCaseState(
 
     if (!evaluation.matched) {
       setStudentEvidenceFeedback(
-        "The query ran and results are visible, but this result set has not matched the active Case 001 milestone yet."
+        "The query ran and results are visible, but this result set has not matched the active Case 001 milestone yet. Recheck the table relationship and narrow with proved values from the rows or Pinned Facts."
       );
       setStudentEvidenceFeedbackTone("advisory");
       setStudentEvidenceFeedbackVersion((current) => current + 1);
@@ -4438,7 +4438,7 @@ export function useStudentCaseState(
     const case001QueryGuide = {
       title: "Clocktower Evidence Path",
       intro:
-        "Samuel's next step: use SQL to prove the public report, then follow it into interviews and names.",
+        "Samuel's next step: inspect the current result rows, use pinned facts for exact values, and follow the report-to-interview-to-person relationship yourself.",
       clue: case001ActiveStep.nextStep,
       tokens: [
         "CrimeSceneReport",
@@ -4449,7 +4449,7 @@ export function useStudentCaseState(
         "Sequel City"
       ],
       footer:
-        "Run the query yourself in Query Runner. The results table stays visible so you can inspect the records before logging a clue."
+        "Run the query yourself in Query Runner. Use broad table drafts as starting points, then add only the filters supported by visible rows, pinned facts, or query-assist tokens."
     };
 
     return {
@@ -4520,7 +4520,7 @@ export function useStudentCaseState(
       studentEvidenceFeedbackTone,
       studentEvidenceFeedbackVersion,
       studentEvidencePrompt:
-        "When a Case 001 milestone result is visible, use Log Clue to pin the non-spoiler evidence note.",
+        "When a Case 001 milestone result is visible, use Log Clue to pin the non-spoiler evidence note, then use Pinned Facts to build the next query yourself.",
       studentLastQueryExecution,
       studentQueryRunnerResetKey,
       studentRestoredExecution,
@@ -4536,7 +4536,7 @@ export function useStudentCaseState(
       studentObjective: case001ActiveStep.nextStep,
       pinnedReportId,
       studentQueryFailureGuidance:
-        "Keep the query read-only and tied to the report, interview, or identity trail Samuel is asking for.",
+        "Keep the query read-only and tied to the report, interview, or identity trail Samuel is asking for. Use Pinned Facts and query-assist tokens for exact values instead of guessing.",
       studentQueryReinforcement,
       studentQueryRunnerInstruction: case001ActiveStep.nextStep,
       studentSamuelReaction,
