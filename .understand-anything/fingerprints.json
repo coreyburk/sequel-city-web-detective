@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "33b1e88812fef5da45c66d54c9deaff293f8fec8",
-  "generatedAt": "2026-08-28T15:49:39.456Z",
+  "gitCommitHash": "ec005bdebd72810105e0dcc6914c4fb687548cf7",
+  "generatedAt": "2026-08-28T16:18:34.455Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "f43ff637a170315655b08b79b003f034000bb66899755861921b6bd141487949",
+      "contentHash": "c61747bf52ea3537cd7897ce62082a832ea44d8570e1e9269966bd31710e56da",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13449,
+      "totalLines": 13489,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "6bed8c899b01931f57a9a45daa5c629a0a579609df90e5925b1cf7c9b169c522",
+      "contentHash": "8b3f22d366e15634b3c70e22ea86e5b7b2094139d181dffc6064e09885a44d50",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3956,
+      "totalLines": 3968,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "cf929a66dce74b8d4ae336e02497ac5a5218ee3cc570e6dfcc447277ffdcbd7b",
+      "contentHash": "effb3dc8dc498742eca1a92cbd8cef70df73cd4f2c43b2a00f2949bbd025745c",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15876,
+      "totalLines": 15898,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "f7dc08a2569388e3752141ee04f8f6dbed8426df84d7d8e31357e59c8c14dcb8",
+      "contentHash": "8fe48e0e815aa59cc79c8218a167e91abcfa492bbfd06025e6ae79c576e4fe02",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -8135,12 +8135,12 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "37a365ee9fc23e23f204c9d2b2bbbfea07339be6226b1cdb66649deed21eb29a",
+      "contentHash": "b94dacd1d0a0e82d6131a36d9712e19308178d7cbb0d5f7bfd49b3fa6152b7d3",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 84,
+      "totalLines": 86,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-AI-Agent-Boundaries.md": {
@@ -8165,12 +8165,12 @@
     },
     "docs/00-ssot/SSOT-Case-Authoring.md": {
       "filePath": "docs/00-ssot/SSOT-Case-Authoring.md",
-      "contentHash": "c5126d619c3ddfa1f5351333525b5908a367e9b315a9c0e15ae97157d0eaf838",
+      "contentHash": "0047f6d4e3ad13389f9532a5124d4234c45a2577b64be698ae5c8a3e8ee847be",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 91,
+      "totalLines": 93,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-Case-Progression.md": {
@@ -10985,12 +10985,22 @@
     },
     "docs/01-work-packages/WP-269-sequel-city-tier-system-and-case-authoring-template.md": {
       "filePath": "docs/01-work-packages/WP-269-sequel-city-tier-system-and-case-authoring-template.md",
-      "contentHash": "c215e7c4a0fef8420823ec9619b0eba61126c3f25d000b2e9364d3532c5c0140",
+      "contentHash": "022f6d08a75043fedffaccfcad421400a2d74a464e2d7728de7eadfd90dca67e",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 213,
+      "totalLines": 314,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-271-streamlined-tier-1-case-production-workflow.md": {
+      "filePath": "docs/01-work-packages/WP-271-streamlined-tier-1-case-production-workflow.md",
+      "contentHash": "73034d44ff710d9425162c9efc7ff0d032ce674da06aa9e27f58eb02347e60a7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 195,
       "hasStructuralAnalysis": true
     },
     "docs/02-runtime/Backend-Setup-and-Validation.md": {
@@ -11153,6 +11163,16 @@
       "totalLines": 157,
       "hasStructuralAnalysis": true
     },
+    "docs/05-development-workflow/Case-Production-Workflow.md": {
+      "filePath": "docs/05-development-workflow/Case-Production-Workflow.md",
+      "contentHash": "3c47ab18298b29fca1468c52574cf8abe5b42db8fb8975ee876e62e3c48d75b7",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 101,
+      "hasStructuralAnalysis": true
+    },
     "docs/05-development-workflow/Codex-Gemini-Execution-Guide.md": {
       "filePath": "docs/05-development-workflow/Codex-Gemini-Execution-Guide.md",
       "contentHash": "10d169f883d1857dae1587736bc1c36cda0fc581ff20f5b1d227345fe3eb8814",
@@ -11185,12 +11205,12 @@
     },
     "docs/05-development-workflow/Contributor-Workflow-Guide.md": {
       "filePath": "docs/05-development-workflow/Contributor-Workflow-Guide.md",
-      "contentHash": "2d38717049bcd91d950fde0f59c43b21bdddeb838b567c76b4eb8f9a001b9cc9",
+      "contentHash": "f3f086a49de0f9f0aeef3be654bd89649c538e49adfebd711bc468bb2137b346",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 135,
+      "totalLines": 138,
       "hasStructuralAnalysis": true
     },
     "docs/05-development-workflow/OpenAI-Agents-SDK-Orchestration-Readiness.md": {

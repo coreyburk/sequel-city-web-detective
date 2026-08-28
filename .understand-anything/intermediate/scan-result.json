@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13448,
+      "sizeLines": 13488,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3931,
+      "sizeLines": 3955,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15831,
+      "sizeLines": 15875,
       "fileCategory": "config"
     },
     {
@@ -1120,7 +1120,7 @@
     {
       "path": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
       "language": "markdown",
-      "sizeLines": 83,
+      "sizeLines": 85,
       "fileCategory": "docs"
     },
     {
@@ -1138,7 +1138,7 @@
     {
       "path": "docs/00-ssot/SSOT-Case-Authoring.md",
       "language": "markdown",
-      "sizeLines": 90,
+      "sizeLines": 92,
       "fileCategory": "docs"
     },
     {
@@ -2830,7 +2830,13 @@
     {
       "path": "docs/01-work-packages/WP-269-sequel-city-tier-system-and-case-authoring-template.md",
       "language": "markdown",
-      "sizeLines": 212,
+      "sizeLines": 313,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/01-work-packages/WP-271-streamlined-tier-1-case-production-workflow.md",
+      "language": "markdown",
+      "sizeLines": 194,
       "fileCategory": "docs"
     },
     {
@@ -2930,6 +2936,12 @@
       "fileCategory": "docs"
     },
     {
+      "path": "docs/05-development-workflow/Case-Production-Workflow.md",
+      "language": "markdown",
+      "sizeLines": 100,
+      "fileCategory": "docs"
+    },
+    {
       "path": "docs/05-development-workflow/Codex-Gemini-Execution-Guide.md",
       "language": "markdown",
       "sizeLines": 245,
@@ -2950,7 +2962,7 @@
     {
       "path": "docs/05-development-workflow/Contributor-Workflow-Guide.md",
       "language": "markdown",
-      "sizeLines": 134,
+      "sizeLines": 137,
       "fileCategory": "docs"
     },
     {
@@ -3920,14 +3932,14 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 653,
+  "totalFiles": 655,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 653,
+    "filesScanned": 655,
     "byCategory": {
       "config": 18,
-      "docs": 402,
+      "docs": 404,
       "data": 33,
       "code": 144,
       "markup": 2,
@@ -3935,7 +3947,7 @@
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 402,
+      "markdown": 404,
       "csv": 24,
       "python": 15,
       "unknown": 1,

@@ -43,6 +43,8 @@ Before audit closeout or accepted-WP finalization, run `scripts/check-work-packa
 
 When a WP is ready for closeout, use clear trigger wording such as `Close out WP-178`, `AGY audit is complete. Close out WP-178`, or `Review, update, commit, push, and refresh handoff`. Those phrases should invoke the repo-local closeout/handoff skill, which coordinates audit review, scoped corrections, final decision, required handoff refresh, commit-helper finalization, and push.
 
+For new case production, use [Case Production Workflow](./Case-Production-Workflow.md) before planning implementation packages. That workflow turns the case-tier SSOT, authoring template, and vetting checklist into the standard low-churn lane for tier-first intake, Tier 1/Foundations shaping, bundle sizing, validation selection, audit, and closeout.
+
 ## Branch And Pull Guidance
 
 - start from the correct branch and pull before creating a new work package
@@ -125,6 +127,7 @@ For commit format expectations, see [Commit Message Guide](./Commit-Message-Guid
 
 ## Related Workflow Documents
 
+- [Case Production Workflow](./Case-Production-Workflow.md)
 - [Work Package Lifecycle](./Work-Package-Lifecycle.md)
 - [Code Agent And Audit Execution Guide](./Codex-Gemini-Execution-Guide.md)
 - [Commit Message Guide](./Commit-Message-Guide.md)

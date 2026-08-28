@@ -35,6 +35,8 @@ A full case plan is still authoring documentation. It does not release a case, c
 
 Use `docs/15-case-plans/CASE-AUTHORING-TEMPLATE.md` for new case plans and `docs/15-case-plans/CASE-VETTING-CHECKLIST.md` before implementation or release review.
 
+Use `docs/05-development-workflow/Case-Production-Workflow.md` for the development workflow that turns those artifacts into low-churn production steps, Tier 1/Foundations shaping decisions, implementation bundle sizing, validation selection, audit, and closeout.
+
 ## Production Sequence
 
 Future cases should be built in production-sized packages rather than isolated skeleton polish:
