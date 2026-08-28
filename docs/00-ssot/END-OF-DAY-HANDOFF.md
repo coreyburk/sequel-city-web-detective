@@ -12,63 +12,62 @@ This is the live handoff artifact. Refresh it from `docs/00-ssot/END-OF-DAY-HAND
 - Machine: `BurkG7`, current Codex desktop workspace at `D:\GitHub-Repos\SequelCityWeb`
 - Peer Machine: unspecified
 - Branch: `main`, tracking `origin/main`
-- Repo status before WP-267 closeout commit: dirty only with accepted WP-267 implementation/test/work-package/handoff/Understand graph changes
-- Current HEAD before WP-267 closeout commit: `765fb5b`
+- Repo status before WP-268 closeout commit: dirty only with accepted WP-268 documentation/script/test/work-package/handoff/Understand graph changes
+- Current HEAD before WP-268 closeout commit: `fac4b67`
 - Remote: `origin` -> `https://github.com/coreyburk/sequel-city-web.git`
-- Stash: `stash@{0}` preserves the unrelated WP-268 sandbox-helper draft while WP-267 is finalized; restore it after the WP-267 commit/push if continuing WP-268 planning
-- Understand graph baseline after WP-267 refresh: refreshed during WP-267 with `filesScanned=646`, graph assembly `nodes=1054`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 646 files`
+- Understand graph baseline after WP-268 refresh: refreshed during WP-268 with `filesScanned=649`, graph assembly `nodes=1057`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 649 files`
 
 ## Active Work Package
 
-- Current WP: `WP-267-case-001-ceremony-roster-m4-data-validator.md`
+- Current WP: `WP-268-codex-sandbox-helper-diagnosis-and-resolution.md`
 - Status: accepted after PASS AntiGravity audit and human closeout request; ready for closeout commit/push
 - Final Decision: accepted on 2026-08-28
 
 ## Completed This Session
 
-- Accepted and closed out WP-267 after recorded AntiGravity `Verdict: PASS`.
-- Added Case 001 M4 `case-001-ceremony-roster-narrowed` as a gated, metadata-only, non-progressing ceremony-roster milestone.
-- Updated `database/02-SequelCityCrimesDB - Insert Data.sql` to `v1.3: 8/26/2026`, repurposed `EventID 2993` as `Clocktower Civic Ceremony` on `20230502`, and trimmed its `EventRegistration` roster to four participants: `27412`, `27590`, `50417`, and `62764`.
-- Added deterministic backend M4 validation and gated evaluation transport for `EventRegistration` without exposing row contents, answer keys, suspect verification, final solve data, or progression authority.
-- Extended Case 001 web metadata types, M4 feedback slice, Samuel Step 4, next-query routing, notebook metadata, skeleton reset defaults, and focused UI/module/browser expectations.
-- Refreshed tracked Understand graph artifacts after backend/frontend/source/test/seed changes.
-- Preserved Case 001 default locked/unreleased gating, M1-M3 behavior, Case 004 behavior, migrations, packages, dependencies, persistence, suspect verification, answer-key, release-unlock, and runtime AI boundaries.
+- Accepted and closed out WP-267 before WP-268 work resumed; WP-267 is committed in HEAD as `fac4b67` and is not modified by WP-268.
+- Implemented WP-268 as a bounded Codex sandbox-helper diagnosis and repository-local troubleshooting aid.
+- Added `docs/05-development-workflow/Codex-Sandbox-Troubleshooting.md` with the observed helper failure signature, safe operating policy, read-only diagnostic workflow, and remediation guidance.
+- Added `scripts/check-codex-sandbox-health.ps1` as a read-only diagnostic script for setup errors, sandbox logs, repo `.codex` ownership evidence, classification, and safety flags.
+- Added `scripts/tests/test-codex-sandbox-health.ps1` with fixture-based validation for failure and healthy classifications.
+- Recorded the current diagnosis: sandbox setup fails before process launch with `helper_unknown_error: setup refresh had errors`; latest sandbox log shows a deny ACE failure on `D:\GitHub-Repos\SequelCityWeb\.codex` with Win32 error `5` (`Access is denied`); workspace root owner is `NEUMONT\Cburk`; repo `.codex` owner is `BURKG7\CodexSandboxOffline`; classification is `workspace-acl-on-repo-local-codex-directory`.
+- Preserved sandboxing as the default guardrail. WP-268 does not disable sandboxing, repair ACLs silently, change Codex global configuration, inspect secrets, or modify app, database, dependency, package, runtime AI, migration, or product logic files.
+- Refreshed tracked Understand graph artifacts after adding workflow documentation and scripts.
 
 ## Verification Summary
 
-Verification performed for WP-267:
+Verification performed for WP-268:
 
-- PASS: `npm run test --workspace apps/api -- case001ResultPatternService.test.ts case001GatedMilestoneEvaluationService.test.ts queryExecutionService.test.ts queryRoutes.test.ts`.
-- PASS: `npm run test --workspace apps/web -- App.test.tsx studentCaseModule.test.ts StudentPlayableCaseSkeletonView.test.tsx`.
-- PASS: `npm run build --workspace apps/web`.
+- PASS: `scripts/check-codex-sandbox-health.ps1` reported `SandboxHelperSetupFailureDetected`, classification `workspace-acl-on-repo-local-codex-directory`, repo `.codex` owner `BURKG7\CodexSandboxOffline`, and setup error `helper_unknown_error: setup refresh had errors`.
+- PASS: `scripts/tests/test-codex-sandbox-health.ps1`.
 - PASS: `scripts/check-understand-refresh-readiness.ps1` before graph refresh.
-- PASS: `scripts/refresh-understand-graph.ps1`; graph rebuilt with `filesScanned=646`, `nodes=1054`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 646 files`.
+- PASS: `scripts/refresh-understand-graph.ps1`; graph rebuilt with `filesScanned=649`, `nodes=1057`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 649 files`.
 - PASS: `scripts/check-understand-refresh-readiness.ps1` after graph refresh.
-- PASS: `git diff --check`; line-ending warnings only.
-- PASS: WP-267 AntiGravity audit recorded `Verdict: PASS`.
-- PASS: `scripts/check-work-package-closeout.ps1 WP-267` reported `ReadyForAcceptance` before final decision.
+- PASS: targeted `rg` checks confirmed the troubleshooting doc, diagnostic script, test, and WP record include the helper error string, safe no-global-disable policy, read-only diagnostic behavior, commit-helper escalation distinction, and `workspace-acl-on-repo-local-codex-directory` classification.
+- PASS: `git diff --check`; only Git LF-to-CRLF working-copy warnings were emitted.
+- PASS: official OpenAI documentation search was performed for the exact helper error; no official page documenting this error/remediation was found, so no official fix is claimed.
+- PASS: WP-268 AntiGravity audit recorded `Verdict: PASS`.
+- PASS: `scripts/check-work-package-closeout.ps1 WP-268` reported `ReadyForAcceptance` before final decision.
 
 ## Open Issues / Risks
 
+- Normal sandboxed Codex command execution is still blocked in this local workspace until the repo-local `.codex` ACL/ownership condition is reconciled or the directory is recreated safely.
+- Continue using per-command escalation only for reviewed, necessary operations. Treat escalation as a temporary workaround, not a sandbox fix.
+- Do not disable Codex sandboxing globally as the default response to this issue.
+- Any filesystem ACL repair, repo-local `.codex` recreation, fresh clone strategy, or out-of-repo Codex runtime/configuration change requires explicit user approval and preservation of required `.codex/skills` content first.
 - Case 004 remains the only normal released playable/restorable case.
 - Case 001 remains locked and unreleased by default unless `VITE_ENABLE_CASE_001_PLAYABLE_SKELETON` is exactly `"true"`.
-- Case 001 now has gated M1-M4 shared-shell playtesting with exploratory/broad student-authored query starts, but remains non-persistent and non-progressing beyond component-memory milestone feedback.
-- Local database state may lag the updated fresh-build seed script. M4 manual/live playtesting requires an explicitly approved drop/rebuild from the current scripts if the local DB still has legacy `EventID 2993` data.
 - Case 001 still lacks M5 driver-license narrowing, M6 final opportunity evidence, authored clue logging, persistence, reset behavior, suspect verification, final solve flow, and release unlock.
-- Public case-library metadata is still frontend-static; scaling case metadata requires a separate database-backed public metadata WP rather than additional frontend-only metadata expansion.
-- Future Case 001 story/data work must update fresh database creation/seed scripts rather than adding case-story migrations.
-- WP-268 sandbox-helper diagnosis planning was preserved in `stash@{0}` during WP-267 audit/finalization isolation and should be restored deliberately before continuing that task.
-- Codex should continue requesting sandbox escalation up front for local commands in this managed environment until WP-268 or equivalent resolves the sandbox helper failures.
 
 ## Next Recommended Step
 
-1. After the WP-267 closeout commit is pushed, restore the stashed WP-268 draft if continuing sandbox-helper diagnosis planning.
-2. Pull latest `main` on the next machine/session.
-3. Proceed with WP-268 or the next scoped Case 001 M5 planning package, keeping Case 001 gated until release-readiness work explicitly authorizes unlock behavior.
+1. Restart Codex desktop and retry a minimal sandboxed read in this repository.
+2. If the helper error persists, run `scripts/check-codex-sandbox-health.ps1` and explicitly approve either a scoped ACL repair/recreate plan for `D:\GitHub-Repos\SequelCityWeb\.codex` or a fresh-clone strategy after preserving required `.codex/skills` content.
+3. After the sandbox issue is resolved or explicitly deferred, proceed with the next scoped Case 001 M5 planning package.
 
 ## Resume Prompt (Copy/Paste)
 
-Continue from `docs/00-ssot/END-OF-DAY-HANDOFF.md`. Confirm the WP-267 closeout commit and push are present on `main`. Treat WP-267 as accepted: it added gated Case 001 M4 ceremony-roster seed data, deterministic backend validation, metadata-only frontend guidance/transport, focused tests, and refreshed Understand graph artifacts while preserving Case 001 locked/unreleased status, Case 004 behavior, migrations, packages, dependencies, answer-key, suspect-verification, persistence, release-gate, and runtime AI boundaries. If continuing WP-268, restore `stash@{0}` first and keep that work package isolated.
+Continue from `docs/00-ssot/END-OF-DAY-HANDOFF.md`. Confirm the WP-268 closeout commit and push are present on `main`. Treat WP-268 as accepted: it added a read-only Codex sandbox health diagnostic, fixture tests, troubleshooting documentation, audit evidence, and refreshed Understand graph artifacts. The sandbox helper issue is diagnosed but not repaired: normal sandboxed commands still fail with `helper_unknown_error: setup refresh had errors`, likely due to the repo-local `.codex` ACL/ownership condition classified as `workspace-acl-on-repo-local-codex-directory`. Preserve sandboxing as the default guardrail; use per-command escalation only as a temporary workaround until the user explicitly approves ACL repair/recreation or a fresh-clone strategy. WP-267 remains committed in HEAD as `fac4b67` and untouched by WP-268.
 
 ## Update Checklist
 

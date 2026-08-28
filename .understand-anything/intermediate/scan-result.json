@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13327,
+      "sizeLines": 13418,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3901,
+      "sizeLines": 3913,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15629,
+      "sizeLines": 15798,
       "fileCategory": "config"
     },
     {
@@ -418,7 +418,7 @@
     {
       "path": "apps/api/src/services/case001GatedMilestoneEvaluationService.ts",
       "language": "typescript",
-      "sizeLines": 250,
+      "sizeLines": 249,
       "fileCategory": "code"
     },
     {
@@ -430,7 +430,7 @@
     {
       "path": "apps/api/src/services/case001ResultPatternService.ts",
       "language": "typescript",
-      "sizeLines": 373,
+      "sizeLines": 372,
       "fileCategory": "code"
     },
     {
@@ -640,7 +640,7 @@
     {
       "path": "apps/web/src/api/types.ts",
       "language": "typescript",
-      "sizeLines": 247,
+      "sizeLines": 246,
       "fileCategory": "code"
     },
     {
@@ -946,7 +946,7 @@
     {
       "path": "apps/web/src/studentCase001.ts",
       "language": "typescript",
-      "sizeLines": 749,
+      "sizeLines": 748,
       "fileCategory": "code"
     },
     {
@@ -970,7 +970,7 @@
     {
       "path": "apps/web/src/useStudentCaseState.ts",
       "language": "typescript",
-      "sizeLines": 4669,
+      "sizeLines": 4667,
       "fileCategory": "code"
     },
     {
@@ -2812,7 +2812,7 @@
     {
       "path": "docs/01-work-packages/WP-267-case-001-ceremony-roster-m4-data-validator.md",
       "language": "markdown",
-      "sizeLines": 225,
+      "sizeLines": 323,
       "fileCategory": "docs"
     },
     {
@@ -2921,6 +2921,12 @@
       "path": "docs/05-development-workflow/Codex-Gemini-Execution-Guide.md",
       "language": "markdown",
       "sizeLines": 245,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/05-development-workflow/Codex-Sandbox-Troubleshooting.md",
+      "language": "markdown",
+      "sizeLines": 104,
       "fileCategory": "docs"
     },
     {
@@ -3494,6 +3500,12 @@
       "fileCategory": "script"
     },
     {
+      "path": "scripts/check-codex-sandbox-health.ps1",
+      "language": "powershell",
+      "sizeLines": 201,
+      "fileCategory": "script"
+    },
+    {
       "path": "scripts/check-understand-refresh-readiness.ps1",
       "language": "powershell",
       "sizeLines": 12,
@@ -3641,6 +3653,12 @@
       "path": "scripts/tests/test-audit-work-package-wrapper.ps1",
       "language": "powershell",
       "sizeLines": 339,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/tests/test-codex-sandbox-health.ps1",
+      "language": "powershell",
+      "sizeLines": 82,
       "fileCategory": "script"
     },
     {
@@ -3878,22 +3896,22 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 646,
+  "totalFiles": 649,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 646,
+    "filesScanned": 649,
     "byCategory": {
       "config": 18,
-      "docs": 397,
+      "docs": 398,
       "data": 33,
       "code": 144,
       "markup": 2,
-      "script": 52
+      "script": 54
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 397,
+      "markdown": 398,
       "csv": 24,
       "python": 15,
       "unknown": 1,
@@ -3907,7 +3925,7 @@
       "docx": 3,
       "batch": 2,
       "pptx": 6,
-      "powershell": 50,
+      "powershell": 52,
       "toml": 1
     }
   }

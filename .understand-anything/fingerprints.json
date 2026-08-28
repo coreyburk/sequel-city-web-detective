@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "765fb5b81614d3e95715a9892f2262c02e2ad61a",
-  "generatedAt": "2026-08-26T17:23:42.256Z",
+  "gitCommitHash": "fac4b676c7e3d585194f063f4ecfc1a05da16df1",
+  "generatedAt": "2026-08-28T14:52:34.896Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "6e5142c95ff095ef837ce10fddf15a4c9c3ae0ab63541b7b018c898eb52fd4a7",
+      "contentHash": "4ae6c28f4d4da17a16c22fb619e8fb0ac6be47b195dd785a72ce66fcdb66b02e",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13328,
+      "totalLines": 13419,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "5cae4e680f3923ea7fdd34cb03df602d7ed8c35d836aac91652fde406052a897",
+      "contentHash": "38e3458e13257cb2e88ece60d8770836df02f80006f053397b1d66284ebcd6e6",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3914,
+      "totalLines": 3932,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "4f6a70679a1b5fe8ee5eefc5fc6c8270716069602be74713cfef343e0c5b6610",
+      "contentHash": "e23a8c89ffb7933f0aecab79cf359d6a2d3be95f65407a0cf50a4790de8d4858",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15799,
+      "totalLines": 15832,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "dba6ad1e0e6c0e26b293d03156c006064ad71ddfcb369903f2a66d681d2eb686",
+      "contentHash": "c079828aff08b06ea069de234b666940d719bc964f20c20b8a54f1351749efb3",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -1558,7 +1558,7 @@
     },
     "apps/api/src/services/case001GatedMilestoneEvaluationService.ts": {
       "filePath": "apps/api/src/services/case001GatedMilestoneEvaluationService.ts",
-      "contentHash": "3cad8c5b3aa9c0e2f7a163b80bff7300602fa0598a2021267ccbf8cf7968e4a4",
+      "contentHash": "53251646b6387d5ff640ab82ca2ea14f3ba82d7cd2d3e1c97c39592f13368d6d",
       "functions": [
         {
           "name": "evaluateCase001GatedMilestone",
@@ -1643,7 +1643,7 @@
         "evaluateCase001GatedMilestone",
         "isSupportedCase001MilestoneId"
       ],
-      "totalLines": 251,
+      "totalLines": 250,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/case001ResultPatternService.test.ts": {
@@ -1692,7 +1692,7 @@
     },
     "apps/api/src/services/case001ResultPatternService.ts": {
       "filePath": "apps/api/src/services/case001ResultPatternService.ts",
-      "contentHash": "04f3d49ebb8bff7c0bcd2e51f5e35362fe505ead6b2e102324b011d551f18974",
+      "contentHash": "a77dee2f481d619805e3aaabe6433d3523e3cc6c72c927b43bec26d977408d2d",
       "functions": [
         {
           "name": "validateCase001ClocktowerReportLocated",
@@ -1901,7 +1901,7 @@
         "validateCase001ClocktowerWitnessIdentitiesResolved",
         "validateCase001ClocktowerCeremonyRosterNarrowed"
       ],
-      "totalLines": 374,
+      "totalLines": 373,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/caseVerificationService.test.ts": {
@@ -3522,12 +3522,12 @@
     },
     "apps/web/src/api/types.ts": {
       "filePath": "apps/web/src/api/types.ts",
-      "contentHash": "ef81bdb42088ba077462cb6fa52d8b2bbde944913b000de1fe0d1183a30ccf81",
+      "contentHash": "c0cea667b577826bd926411c28be6c1cd302ef511235962def2e430aa0276506",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 248,
+      "totalLines": 247,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/App.test.tsx": {
@@ -6593,7 +6593,7 @@
     },
     "apps/web/src/studentCase001.ts": {
       "filePath": "apps/web/src/studentCase001.ts",
-      "contentHash": "8517c4df2840da8b399a39be8222ae441d197fe2780fb0a10085226eb285c42b",
+      "contentHash": "dac8476d7a576753ceb76369435224fb659f1f867f3bf51ed358f9eba0c0dec4",
       "functions": [
         {
           "name": "normalizeSql",
@@ -6723,7 +6723,7 @@
         "normalizeCase001SkeletonState",
         "isCase001PlayableSkeletonEnabled"
       ],
-      "totalLines": 750,
+      "totalLines": 749,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/studentCaseModule.test.ts": {
@@ -6884,7 +6884,7 @@
     },
     "apps/web/src/useStudentCaseState.ts": {
       "filePath": "apps/web/src/useStudentCaseState.ts",
-      "contentHash": "a9b881d405681ce2ccac7db49ab08d32e49e21cda269236f64f4275c1add9b25",
+      "contentHash": "345e2af423ce66f99c691463afc081078d6b9af15975054eaa6b7df1001c80ac",
       "functions": [
         {
           "name": "getStudentCaseStorageKey",
@@ -7203,7 +7203,7 @@
         "getStudentCaseStorageKey",
         "useStudentCaseState"
       ],
-      "totalLines": 4670,
+      "totalLines": 4668,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/useStudentCaseState.upsert.test.tsx": {
@@ -8045,7 +8045,7 @@
     },
     "database/02-SequelCityCrimesDB - Insert Data.sql": {
       "filePath": "database/02-SequelCityCrimesDB - Insert Data.sql",
-      "contentHash": "166167ef7f725a22a4038795836a833f23f3b820a98db86176f2ec010da5376e",
+      "contentHash": "a61badd11696d9643740203f252b82a2471b722be5f6cb7133ddfe04e1315d91",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -8135,7 +8135,7 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "20700898090d5beb95ad6bbf340d16f209addd27f45e8f6dea80ec4b84f25dab",
+      "contentHash": "28cb98ece2c524a73ab1d5de67484422ee6e1f1ba0b250d5d94035e91cb8b619",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -10955,17 +10955,17 @@
     },
     "docs/01-work-packages/WP-267-case-001-ceremony-roster-m4-data-validator.md": {
       "filePath": "docs/01-work-packages/WP-267-case-001-ceremony-roster-m4-data-validator.md",
-      "contentHash": "ece0b337fec10cd04bfaf3c1d0339247dc5b941cd5bc2016f48876655528d847",
+      "contentHash": "6d519de2d810918d4396a0520292c233eb6c801ec1fc9719d1ffea54eb7cfa33",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 226,
+      "totalLines": 324,
       "hasStructuralAnalysis": true
     },
     "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md": {
       "filePath": "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md",
-      "contentHash": "4e39f8e59331d21d3fe064ccfabc1c7c5cf0fbe029d226da873d108fa6d344a4",
+      "contentHash": "8d3f2e28ce1c7cde15cfde5db237208f09bcf2f23f190a7fc8ab7d64152df7a9",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -11141,6 +11141,16 @@
       "imports": [],
       "exports": [],
       "totalLines": 246,
+      "hasStructuralAnalysis": true
+    },
+    "docs/05-development-workflow/Codex-Sandbox-Troubleshooting.md": {
+      "filePath": "docs/05-development-workflow/Codex-Sandbox-Troubleshooting.md",
+      "contentHash": "b5d60fba1964cd9c1b550b9e8e5f5496f545a7013ec662ce2a2af3769322284a",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 105,
       "hasStructuralAnalysis": true
     },
     "docs/05-development-workflow/Commit-Message-Guide.md": {
@@ -12093,6 +12103,16 @@
       "totalLines": 11,
       "hasStructuralAnalysis": false
     },
+    "scripts/check-codex-sandbox-health.ps1": {
+      "filePath": "scripts/check-codex-sandbox-health.ps1",
+      "contentHash": "d38d32e57d2096aa44bff6109e9fd7ecf69860450fe0fcd2983c279b34228120",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 202,
+      "hasStructuralAnalysis": false
+    },
     "scripts/check-understand-refresh-readiness.ps1": {
       "filePath": "scripts/check-understand-refresh-readiness.ps1",
       "contentHash": "042620e740e5f7a26a6f620a1342921a17f5241d8fa4e9f751a1be82db37652e",
@@ -12350,6 +12370,16 @@
       "imports": [],
       "exports": [],
       "totalLines": 340,
+      "hasStructuralAnalysis": false
+    },
+    "scripts/tests/test-codex-sandbox-health.ps1": {
+      "filePath": "scripts/tests/test-codex-sandbox-health.ps1",
+      "contentHash": "a5f881abd0aa5f76ff5b8806b98c7b8092dbca5f5d9ca4d346ec17a0cf20ed74",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 83,
       "hasStructuralAnalysis": false
     },
     "scripts/tests/test-run-work-package-audit-runner.ps1": {
