@@ -360,6 +360,42 @@ const testCases: AsyncTestCase[] = [
     }
   },
   {
+    name: "successful execution includes Case 001 M4 metadata for explicit enabled milestone opt-in",
+    run: async () => {
+      const queryExecutionService =
+        require("./queryExecutionService.ts") as typeof import("./queryExecutionService");
+
+      const result = await queryExecutionService.executeSafeQuery(
+        "SELECT e.EventID, e.EventDate, e.EventName, r.EventPersonID, p.PersonName FROM EventSchedule e JOIN EventRegistration r ON r.EventID = e.EventID JOIN PersonsOfInterest p ON p.PersonID = r.EventPersonID WHERE e.EventID = 2993",
+        async () => createClocktowerCeremonyRosterRecordset(),
+        {
+          caseMilestoneEvaluation: {
+            caseId: "case-001",
+            milestoneId: "case-001-ceremony-roster-narrowed",
+            isSkeletonGateEnabled: true
+          }
+        }
+      );
+
+      assert.equal(result.success, true);
+      assert.deepEqual(result.caseMilestoneEvaluation, {
+        caseId: "case-001",
+        milestoneId: "case-001-ceremony-roster-narrowed",
+        evidenceTableFamily: "EventRegistration",
+        gate: {
+          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
+          enabledValue: "true",
+          isEnabled: true
+        },
+        evaluated: true,
+        matched: true,
+        matchedRowCount: 4,
+        runtimeStatus: "evaluated-no-progression",
+        milestoneAdvanced: false
+      });
+    }
+  },
+  {
     name: "successful execution returns evaluated no-match metadata for enabled Case 001 opt-in",
     run: async () => {
       const queryExecutionService =
@@ -660,6 +696,25 @@ function createClocktowerInterviewRecordset(): import("./queryResultNormalizer")
     PersonID: { name: "PersonID" },
     ReportID: { name: "ReportID" },
     LogTranscript: { name: "LogTranscript" }
+  };
+
+  return recordset;
+}
+
+function createClocktowerCeremonyRosterRecordset(): import("./queryResultNormalizer").QueryRecordset {
+  const recordset = [
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 27412, PersonName: "Les Eskridge" },
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 27590, PersonName: "Taryn Swoboda" },
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 50417, PersonName: "Shayla Kehl" },
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 62764, PersonName: "Herschel Tanious" }
+  ] as import("./queryResultNormalizer").QueryRecordset;
+
+  recordset.columns = {
+    EventID: { name: "EventID" },
+    EventDate: { name: "EventDate" },
+    EventName: { name: "EventName" },
+    EventPersonID: { name: "EventPersonID" },
+    PersonName: { name: "PersonName" }
   };
 
   return recordset;

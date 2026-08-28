@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "8950839ebb441585765a2eb0c8747817e023a569",
-  "generatedAt": "2026-08-24T16:53:57.395Z",
+  "gitCommitHash": "765fb5b81614d3e95715a9892f2262c02e2ad61a",
+  "generatedAt": "2026-08-26T17:23:42.256Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "9251d5c137ccfda598f9dce04649130186100b066bb72fafae80d9d3801fc7e8",
+      "contentHash": "6e5142c95ff095ef837ce10fddf15a4c9c3ae0ab63541b7b018c898eb52fd4a7",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13318,
+      "totalLines": 13328,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "0114250ede94b7edf66d51e9232f1bdec6d14f747ae1d594a1f51dd65f64b269",
+      "contentHash": "5cae4e680f3923ea7fdd34cb03df602d7ed8c35d836aac91652fde406052a897",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3902,
+      "totalLines": 3914,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "f0d538e16c96af7846cba4ec50ba5fc2f39ed540c21866c964824a8ecc719e78",
+      "contentHash": "4f6a70679a1b5fe8ee5eefc5fc6c8270716069602be74713cfef343e0c5b6610",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15630,
+      "totalLines": 15799,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "9469173546722514ec39c852b634481e1c405cb5e4354f1513c72a16fcd82940",
+      "contentHash": "dba6ad1e0e6c0e26b293d03156c006064ad71ddfcb369903f2a66d681d2eb686",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -1301,7 +1301,7 @@
     },
     "apps/api/src/routes/queryRoutes.test.ts": {
       "filePath": "apps/api/src/routes/queryRoutes.test.ts",
-      "contentHash": "d87950e7df68bb87d5f43416b5f7856b8c336214069adc13c4274a0bd244bd92",
+      "contentHash": "ce666d97422bd49efd4954d8f4ce1ccb36dabcfd45fbeac6503669307ff52064",
       "functions": [
         {
           "name": "runTests",
@@ -1325,6 +1325,13 @@
           "lineCount": 30
         },
         {
+          "name": "createClocktowerCeremonyRosterRecordset",
+          "params": [],
+          "returnType": "import(\"../services/queryResultNormalizer\").QueryRecordset",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
           "name": "createClocktowerIdentityRecordset",
           "params": [],
           "returnType": "import(\"../services/queryResultNormalizer\").QueryRecordset",
@@ -1335,7 +1342,7 @@
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 411,
+      "totalLines": 483,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/routes/queryRoutes.ts": {
@@ -1507,7 +1514,7 @@
     },
     "apps/api/src/services/case001GatedMilestoneEvaluationService.test.ts": {
       "filePath": "apps/api/src/services/case001GatedMilestoneEvaluationService.test.ts",
-      "contentHash": "ab8b01dc214bc1bf9a0bc0b6515539cfaba16f028771f3ed49697a9027b8989b",
+      "contentHash": "fe65aede7c4e63c6c7ebba190b7ac44b1e4a82b6c3438a53991635b8f760c0fa",
       "functions": [
         {
           "name": "createQueryResult",
@@ -1546,12 +1553,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 360,
+      "totalLines": 419,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/case001GatedMilestoneEvaluationService.ts": {
       "filePath": "apps/api/src/services/case001GatedMilestoneEvaluationService.ts",
-      "contentHash": "c6c515038db891337a61d599de81666e066e092a8b208a5a3b4622e9e8e96e8c",
+      "contentHash": "3cad8c5b3aa9c0e2f7a163b80bff7300602fa0598a2021267ccbf8cf7968e4a4",
       "functions": [
         {
           "name": "evaluateCase001GatedMilestone",
@@ -1587,7 +1594,7 @@
           ],
           "returnType": "Case001SupportedMilestoneId | null",
           "exported": false,
-          "lineCount": 13
+          "lineCount": 14
         },
         {
           "name": "getEvidenceTableFamily",
@@ -1596,7 +1603,7 @@
           ],
           "returnType": "Case001SupportedEvidenceTableFamily | null",
           "exported": false,
-          "lineCount": 15
+          "lineCount": 18
         }
       ],
       "classes": [],
@@ -1611,15 +1618,19 @@
           "source": "./case001ResultPatternService.ts",
           "specifiers": [
             "CASE_001_CLOCKTOWER_CASE_ID",
+            "CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY",
+            "CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID",
             "CASE_001_CLOCKTOWER_EVIDENCE_TABLE_FAMILY",
             "CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY",
             "CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID",
             "CASE_001_CLOCKTOWER_INTERVIEWS_EVIDENCE_TABLE_FAMILY",
             "CASE_001_CLOCKTOWER_INTERVIEWS_MILESTONE_ID",
             "CASE_001_CLOCKTOWER_REPORT_MILESTONE_ID",
+            "Case001ClocktowerCeremonyRosterValidationResult",
             "Case001ClocktowerIdentitiesValidationResult",
             "Case001ClocktowerInterviewsValidationResult",
             "Case001ClocktowerReportValidationResult",
+            "validateCase001ClocktowerCeremonyRosterNarrowed",
             "validateCase001ClocktowerReportInterviewsLocated",
             "validateCase001ClocktowerReportLocated",
             "validateCase001ClocktowerWitnessIdentitiesResolved"
@@ -1632,12 +1643,12 @@
         "evaluateCase001GatedMilestone",
         "isSupportedCase001MilestoneId"
       ],
-      "totalLines": 237,
+      "totalLines": 251,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/case001ResultPatternService.test.ts": {
       "filePath": "apps/api/src/services/case001ResultPatternService.test.ts",
-      "contentHash": "ca582a81f04491c7ac556e003b67d99c31016403aa4f4edc19f6b0d8c0890580",
+      "contentHash": "290005d8288ff163c5a1e259b9bec3eb27a3536af092ebe1e3f195205071be52",
       "functions": [
         {
           "name": "createQueryResult",
@@ -1676,12 +1687,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 508,
+      "totalLines": 616,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/case001ResultPatternService.ts": {
       "filePath": "apps/api/src/services/case001ResultPatternService.ts",
-      "contentHash": "783495709123a2b56c3590ce1277a47a61c9aa81ce45760f0b38d3cc2464eef0",
+      "contentHash": "04f3d49ebb8bff7c0bcd2e51f5e35362fe505ead6b2e102324b011d551f18974",
       "functions": [
         {
           "name": "validateCase001ClocktowerReportLocated",
@@ -1707,6 +1718,15 @@
             "queryResult"
           ],
           "returnType": "Case001ClocktowerIdentitiesValidationResult",
+          "exported": true,
+          "lineCount": 14
+        },
+        {
+          "name": "validateCase001ClocktowerCeremonyRosterNarrowed",
+          "params": [
+            "queryResult"
+          ],
+          "returnType": "Case001ClocktowerCeremonyRosterValidationResult",
           "exported": true,
           "lineCount": 14
         },
@@ -1746,6 +1766,16 @@
           "returnType": "string",
           "exported": false,
           "lineCount": 9
+        },
+        {
+          "name": "getFirstNormalizedRowValue",
+          "params": [
+            "row",
+            "requiredKeys"
+          ],
+          "returnType": "string",
+          "exported": false,
+          "lineCount": 11
         },
         {
           "name": "findFieldValue",
@@ -1793,6 +1823,32 @@
           "lineCount": 11
         },
         {
+          "name": "isClocktowerCeremonyRosterRow",
+          "params": [
+            "row"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 33
+        },
+        {
+          "name": "isExpectedClocktowerCeremonyRosterPersonId",
+          "params": [
+            "personId"
+          ],
+          "exported": false,
+          "lineCount": 7
+        },
+        {
+          "name": "containsAllExpectedCeremonyRosterPersonIds",
+          "params": [
+            "rows"
+          ],
+          "returnType": "boolean",
+          "exported": false,
+          "lineCount": 16
+        },
+        {
           "name": "normalizeDateKey",
           "params": [
             "value"
@@ -1838,11 +1894,14 @@
         "CASE_001_CLOCKTOWER_INTERVIEWS_EVIDENCE_TABLE_FAMILY",
         "CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID",
         "CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY",
+        "CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID",
+        "CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY",
         "validateCase001ClocktowerReportLocated",
         "validateCase001ClocktowerReportInterviewsLocated",
-        "validateCase001ClocktowerWitnessIdentitiesResolved"
+        "validateCase001ClocktowerWitnessIdentitiesResolved",
+        "validateCase001ClocktowerCeremonyRosterNarrowed"
       ],
-      "totalLines": 256,
+      "totalLines": 374,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/caseVerificationService.test.ts": {
@@ -2465,7 +2524,7 @@
     },
     "apps/api/src/services/queryExecutionService.test.ts": {
       "filePath": "apps/api/src/services/queryExecutionService.test.ts",
-      "contentHash": "c863bb90160bab05de43dac0f54561d64f1c9a2e97847bf83c57999aefccef73",
+      "contentHash": "a47c1616cbd85e1ddc7362af30f2ab78902e94ece6f0bbb0c2716499eba68e23",
       "functions": [
         {
           "name": "runTests",
@@ -2489,6 +2548,13 @@
           "lineCount": 30
         },
         {
+          "name": "createClocktowerCeremonyRosterRecordset",
+          "params": [],
+          "returnType": "import(\"./queryResultNormalizer\").QueryRecordset",
+          "exported": false,
+          "lineCount": 18
+        },
+        {
           "name": "createClocktowerIdentityRecordset",
           "params": [],
           "returnType": "import(\"./queryResultNormalizer\").QueryRecordset",
@@ -2499,7 +2565,7 @@
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 695,
+      "totalLines": 750,
       "hasStructuralAnalysis": true
     },
     "apps/api/src/services/queryExecutionService.ts": {
@@ -3456,17 +3522,17 @@
     },
     "apps/web/src/api/types.ts": {
       "filePath": "apps/web/src/api/types.ts",
-      "contentHash": "bf7e0ad2c09495af2f0090a9c86009c8f3667daf287156d0e3198a7901ee4356",
+      "contentHash": "ef81bdb42088ba077462cb6fa52d8b2bbde944913b000de1fe0d1183a30ccf81",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 245,
+      "totalLines": 248,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/App.test.tsx": {
       "filePath": "apps/web/src/App.test.tsx",
-      "contentHash": "e35edf2b2933d58207f904fd9bf0f421ef79a831333a64c32d093c0e9ce29401",
+      "contentHash": "c4e678682ec091e41925eddeed863d7443698d7e8ce192bd0a3d68683063233d",
       "functions": [
         {
           "name": "chooseJeremyBowersIfAvailable",
@@ -3540,7 +3606,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 4413,
+      "totalLines": 4446,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/App.tsx": {
@@ -4704,7 +4770,7 @@
     },
     "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx": {
       "filePath": "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx",
-      "contentHash": "b9bc7a979f9833731f8f9858a0a5058cedc1c2ce61987d9fb3155903a290e5c3",
+      "contentHash": "b44a1b7f59fd031aad50f3f9ea58e176e7db98d8fbd0abd07d87d499832391d7",
       "functions": [
         {
           "name": "buildSuccessfulQueryResponse",
@@ -4774,7 +4840,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 391,
+      "totalLines": 463,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/components/student/StudentPlayableCaseSkeletonView.tsx": {
@@ -6527,7 +6593,7 @@
     },
     "apps/web/src/studentCase001.ts": {
       "filePath": "apps/web/src/studentCase001.ts",
-      "contentHash": "11bb0a76137c92bbb78495b5549c4d7bf132192baba72a1ba20c93e9e95df7d3",
+      "contentHash": "8517c4df2840da8b399a39be8222ae441d197fe2780fb0a10085226eb285c42b",
       "functions": [
         {
           "name": "normalizeSql",
@@ -6545,7 +6611,7 @@
           ],
           "returnType": "QueryExecutionCaseMilestoneEvaluationRequest | undefined",
           "exported": true,
-          "lineCount": 26
+          "lineCount": 32
         },
         {
           "name": "createDefaultCase001SkeletonState",
@@ -6639,10 +6705,12 @@
         "CASE_001_FIRST_SQL_MILESTONE_BOUNDARY",
         "CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY",
         "CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY",
+        "CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY",
         "CASE_001_SQL_MILESTONE_BOUNDARIES",
         "CASE_001_FIRST_SQL_FEEDBACK_SLICE",
         "CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE",
         "CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE",
+        "CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE",
         "CASE_001_SQL_FEEDBACK_SLICES",
         "CASE_001_MILESTONES",
         "CASE_001_SAMUEL_STEPS",
@@ -6655,12 +6723,12 @@
         "normalizeCase001SkeletonState",
         "isCase001PlayableSkeletonEnabled"
       ],
-      "totalLines": 677,
+      "totalLines": 750,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/studentCaseModule.test.ts": {
       "filePath": "apps/web/src/studentCaseModule.test.ts",
-      "contentHash": "ab66212e18a42c78c1c27d0049f4896af4cbdf103ac0f0287ccd6e77e96f8b53",
+      "contentHash": "ac4476484ad092209246e23b56d78039b42991bedf32a8310e0a6af7f3b4fee6",
       "functions": [],
       "classes": [],
       "imports": [
@@ -6689,6 +6757,7 @@
             "CASE_001_SKELETON_CHECKPOINT_COMPLETE_MESSAGE",
             "CASE_001_TIMELINE_SLICE",
             "CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY",
+            "CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY",
             "buildCase001SkeletonCheckpoint",
             "createDefaultCase001SkeletonState",
             "normalizeCase001SkeletonState",
@@ -6716,7 +6785,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 296,
+      "totalLines": 299,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/studentCaseModule.ts": {
@@ -6815,7 +6884,7 @@
     },
     "apps/web/src/useStudentCaseState.ts": {
       "filePath": "apps/web/src/useStudentCaseState.ts",
-      "contentHash": "ba289be8e05415d39a23a063f0754d1759693e3635608c9b1cf2ab59d9bed2f8",
+      "contentHash": "a9b881d405681ce2ccac7db49ab08d32e49e21cda269236f64f4275c1add9b25",
       "functions": [
         {
           "name": "getStudentCaseStorageKey",
@@ -7004,7 +7073,7 @@
             "activeCaseId"
           ],
           "exported": true,
-          "lineCount": 4019
+          "lineCount": 4036
         }
       ],
       "classes": [],
@@ -7069,6 +7138,8 @@
           "source": "./studentCase001",
           "specifiers": [
             "CASE_001_BRIEF",
+            "CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE",
+            "CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY",
             "CASE_001_ENTRY_ID",
             "CASE_001_FIRST_SQL_MILESTONE_BOUNDARY",
             "CASE_001_KNOWN_CASE_FACTS",
@@ -7132,7 +7203,7 @@
         "getStudentCaseStorageKey",
         "useStudentCaseState"
       ],
-      "totalLines": 4649,
+      "totalLines": 4670,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/useStudentCaseState.upsert.test.tsx": {
@@ -7241,7 +7312,7 @@
     },
     "apps/web/tests/browser/case-001-live-smoke.spec.ts": {
       "filePath": "apps/web/tests/browser/case-001-live-smoke.spec.ts",
-      "contentHash": "eb9545c17437c9dfb7412103f694399920babb33d12932606857a97a55436e4f",
+      "contentHash": "1aede742a60f8485c13288a5da6a4a651af446a0a423e5b71db5bfcd3f913615",
       "functions": [
         {
           "name": "isJsonObject",
@@ -7974,12 +8045,12 @@
     },
     "database/02-SequelCityCrimesDB - Insert Data.sql": {
       "filePath": "database/02-SequelCityCrimesDB - Insert Data.sql",
-      "contentHash": "314ce055831bf645ab1f145a8c0c16b3f98c74f1e18b2f3a63abdbf7508fcc66",
+      "contentHash": "166167ef7f725a22a4038795836a833f23f3b820a98db86176f2ec010da5376e",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 40443,
+      "totalLines": 40456,
       "hasStructuralAnalysis": true
     },
     "database/03-SequelCityCrimesDB - ForeignKeys.sql": {
@@ -8064,7 +8135,7 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "1750377555357bbc327b30bd4e8080c06b06d87c912b9a5b17deec0ea5ac87f6",
+      "contentHash": "20700898090d5beb95ad6bbf340d16f209addd27f45e8f6dea80ec4b84f25dab",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -10874,12 +10945,32 @@
     },
     "docs/01-work-packages/WP-266-case-001-guidance-no-answer-prefill.md": {
       "filePath": "docs/01-work-packages/WP-266-case-001-guidance-no-answer-prefill.md",
-      "contentHash": "650a0d1a8dafdf8fe2378605440e495d8e3947768f42b9b46961fe6416efa9dd",
+      "contentHash": "6ac5c3f0dac3238ac07dc9f55eeacb68a099498561703672201706e186923063",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 201,
+      "totalLines": 279,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-267-case-001-ceremony-roster-m4-data-validator.md": {
+      "filePath": "docs/01-work-packages/WP-267-case-001-ceremony-roster-m4-data-validator.md",
+      "contentHash": "ece0b337fec10cd04bfaf3c1d0339247dc5b941cd5bc2016f48876655528d847",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 226,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md": {
+      "filePath": "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md",
+      "contentHash": "4e39f8e59331d21d3fe064ccfabc1c7c5cf0fbe029d226da873d108fa6d344a4",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 185,
       "hasStructuralAnalysis": true
     },
     "docs/02-runtime/Backend-Setup-and-Validation.md": {

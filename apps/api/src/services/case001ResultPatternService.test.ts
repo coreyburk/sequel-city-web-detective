@@ -53,6 +53,37 @@ const clocktowerIdentityRows = [
     ReportID: 11228
   })
 ];
+const clocktowerCeremonyRosterRows = [
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 27412,
+    PersonName: "Les Eskridge"
+  }),
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 27590,
+    PersonName: "Taryn Swoboda"
+  }),
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 50417,
+    PersonName: "Shayla Kehl"
+  }),
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 62764,
+    PersonName: "Herschel Tanious"
+  })
+];
+
 
 const testCases: TestCase[] = [
   {
@@ -446,6 +477,83 @@ const testCases: TestCase[] = [
 
       assert.equal(result.matched, false);
       assert.equal(result.matchedRowCount, 2);
+    }
+  },
+  {
+    name: "matches Case 001 ceremony roster rows",
+    run: () => {
+      const result =
+        case001ResultPatternService.validateCase001ClocktowerCeremonyRosterNarrowed(
+          createQueryResult(clocktowerCeremonyRosterRows)
+        );
+
+      assert.deepEqual(result, {
+        caseId: "case-001",
+        milestoneId: "case-001-ceremony-roster-narrowed",
+        evidenceTableFamily: "EventRegistration",
+        matched: true,
+        matchedRowCount: 4
+      });
+    }
+  },
+  {
+    name: "matches ceremony roster rows with conservative aliases and PersonID fallback",
+    run: () => {
+      const result =
+        case001ResultPatternService.validateCase001ClocktowerCeremonyRosterNarrowed(
+          createQueryResult([
+            createRow({ event_id: "2993", event_date: "20230502", event_name: "Clocktower Civic Ceremony", person_id: "27412", person_name: "Les Eskridge" }),
+            createRow({ EventID: "2993", EventDate: "2023-05-02T00:00:00.000Z", EventName: "Public Clocktower Ceremony", PersonID: "27590", PersonName: "Taryn Swoboda" }),
+            createRow({ eventId: 2993, eventDate: "2023-05-02", eventName: "Clocktower Ceremony Access Roster", eventPersonId: 50417, personName: "Shayla Kehl" }),
+            createRow({ "event id": 2993, "event date": "2023-05-02", "event name": "Clocktower Civic Ceremony", "event person id": 62764, "person name": "Herschel Tanious" })
+          ])
+        );
+
+      assert.equal(result.matched, true);
+      assert.equal(result.matchedRowCount, 4);
+    }
+  },
+  {
+    name: "rejects partial ceremony roster rows",
+    run: () => {
+      const result =
+        case001ResultPatternService.validateCase001ClocktowerCeremonyRosterNarrowed(
+          createQueryResult(clocktowerCeremonyRosterRows.slice(0, 3))
+        );
+
+      assert.equal(result.matched, false);
+      assert.equal(result.matchedRowCount, 3);
+    }
+  },
+  {
+    name: "rejects unrelated ceremony event rows",
+    run: () => {
+      const result =
+        case001ResultPatternService.validateCase001ClocktowerCeremonyRosterNarrowed(
+          createQueryResult([
+            createRow({ EventID: 3005, EventDate: "2022-12-09", EventName: "Skyline Symphony Showcase", EventPersonID: 27412, PersonName: "Les Eskridge" }),
+            ...clocktowerCeremonyRosterRows.slice(1)
+          ])
+        );
+
+      assert.equal(result.matched, false);
+      assert.equal(result.matchedRowCount, 3);
+    }
+  },
+  {
+    name: "rejects ceremony roster UI-only payloads without returned rows",
+    run: () => {
+      const result =
+        case001ResultPatternService.validateCase001ClocktowerCeremonyRosterNarrowed({
+          columns: [],
+          rows: [],
+          rowCount: 0,
+          sql: "select * from EventSchedule join EventRegistration on EventRegistration.EventID = EventSchedule.EventID",
+          selectedSkeletonOption: "ceremony-roster"
+        } as QueryExecutionSuccessData);
+
+      assert.equal(result.matched, false);
+      assert.equal(result.matchedRowCount, 0);
     }
   },
   {

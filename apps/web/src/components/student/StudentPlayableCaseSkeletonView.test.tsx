@@ -270,6 +270,67 @@ describe("StudentPlayableCaseSkeletonView", () => {
     setItemSpy.mockRestore();
   });
 
+  it("submits the M4 ceremony roster query with explicit gated milestone metadata", async () => {
+    const setItemSpy = vi.spyOn(Storage.prototype, "setItem");
+    vi.stubEnv(CASE_001_SKELETON_RELEASE_GATE, "true");
+    vi.mocked(executeQuery).mockResolvedValue(
+      buildSuccessfulQueryResponse(
+        "case-001-ceremony-roster-narrowed",
+        "EventRegistration",
+        [
+          {
+            values: {
+              EventID: 2993,
+              EventPersonID: 27590,
+              PersonName: "Hidden Ceremony Roster Name"
+            },
+            displayValues: {
+              EventID: "2993",
+              EventPersonID: "27590",
+              PersonName: "Hidden Ceremony Roster Name"
+            }
+          }
+        ]
+      )
+    );
+
+    render(<StudentPlayableCaseSkeletonView module={CASE_001_PLAYABLE_SKELETON_MODULE} />);
+
+    expect(screen.getByLabelText("Roster query")).toHaveValue("SELECT * FROM EventSchedule;");
+    expect(screen.getByLabelText("Roster query")).not.toHaveValue(
+      "SELECT e.EventID, e.EventName, r.EventPersonID, p.PersonName FROM EventSchedule e JOIN EventRegistration r ON r.EventID = e.EventID JOIN PersonsOfInterest p ON p.PersonID = r.EventPersonID WHERE e.EventDate = '2023-05-02' AND e.EventName LIKE '%Clocktower%';"
+    );
+    fireEvent.change(screen.getByLabelText("Roster query"), {
+      target: {
+        value:
+          "SELECT e.EventID, e.EventDate, e.EventName, r.EventPersonID, p.PersonName FROM EventSchedule e JOIN EventRegistration r ON r.EventID = e.EventID JOIN PersonsOfInterest p ON p.PersonID = r.EventPersonID WHERE e.EventID = 2993 ORDER BY r.EventPersonID;"
+      }
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Check Roster Query" }));
+
+    await waitFor(() => {
+      expect(executeQuery).toHaveBeenCalledWith(
+        "SELECT e.EventID, e.EventDate, e.EventName, r.EventPersonID, p.PersonName FROM EventSchedule e JOIN EventRegistration r ON r.EventID = e.EventID JOIN PersonsOfInterest p ON p.PersonID = r.EventPersonID WHERE e.EventID = 2993 ORDER BY r.EventPersonID;",
+        {
+          caseMilestoneEvaluation: {
+            caseId: "case-001",
+            milestoneId: "case-001-ceremony-roster-narrowed",
+            isSkeletonGateEnabled: true
+          }
+        }
+      );
+    });
+
+    expect(await screen.findByText(/Ceremony roster narrowed/i)).toBeInTheDocument();
+    expect(screen.queryByText(/Hidden Ceremony Roster Name/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("27590")).not.toBeInTheDocument();
+    expect(screen.queryByText(/matchedRowCount/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/milestoneAdvanced/i)).not.toBeInTheDocument();
+    expect(setItemSpy).not.toHaveBeenCalled();
+    setItemSpy.mockRestore();
+  });
+
   it("shows non-spoiler no-match feedback without rendering query rows", async () => {
     vi.stubEnv(CASE_001_SKELETON_RELEASE_GATE, "true");
     vi.mocked(executeQuery).mockResolvedValue(
@@ -287,7 +348,7 @@ describe("StudentPlayableCaseSkeletonView", () => {
     expect(screen.queryByRole("table")).not.toBeInTheDocument();
   });
 
-  it("shows M2 and M3 no-match feedback without rendering query rows", async () => {
+  it("shows M2 M3 and M4 no-match feedback without rendering query rows", async () => {
     vi.stubEnv(CASE_001_SKELETON_RELEASE_GATE, "true");
     vi.mocked(executeQuery)
       .mockResolvedValueOnce(
@@ -297,6 +358,12 @@ describe("StudentPlayableCaseSkeletonView", () => {
         buildNoMatchQueryResponse(
           "case-001-witness-identities-resolved",
           "PersonsOfInterest"
+        )
+      )
+      .mockResolvedValueOnce(
+        buildNoMatchQueryResponse(
+          "case-001-ceremony-roster-narrowed",
+          "EventRegistration"
         )
       );
 
@@ -319,6 +386,11 @@ describe("StudentPlayableCaseSkeletonView", () => {
     fireEvent.click(screen.getByRole("button", { name: "Check Identity Query" }));
     expect(
       await screen.findByText(/No witness-identity milestone match yet/i)
+    ).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole("button", { name: "Check Roster Query" }));
+    expect(
+      await screen.findByText(/No ceremony-roster milestone match yet/i)
     ).toBeInTheDocument();
 
     expect(screen.queryByRole("table")).not.toBeInTheDocument();

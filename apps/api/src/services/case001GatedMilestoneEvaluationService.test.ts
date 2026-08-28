@@ -53,6 +53,37 @@ const clocktowerIdentityRows = [
     ReportID: 11228
   })
 ];
+const clocktowerCeremonyRosterRows = [
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 27412,
+    PersonName: "Les Eskridge"
+  }),
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 27590,
+    PersonName: "Taryn Swoboda"
+  }),
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 50417,
+    PersonName: "Shayla Kehl"
+  }),
+  createRow({
+    EventID: 2993,
+    EventDate: "2023-05-02",
+    EventName: "Clocktower Civic Ceremony",
+    EventPersonID: 62764,
+    PersonName: "Herschel Tanious"
+  })
+];
+
 
 const testCases: TestCase[] = [
   {
@@ -134,6 +165,34 @@ const testCases: TestCase[] = [
         evaluated: true,
         matched: true,
         matchedRowCount: 3,
+        runtimeStatus: "evaluated-no-progression",
+        milestoneAdvanced: false
+      });
+    }
+  },
+  {
+    name: "evaluates the Case 001 ceremony roster validator when the skeleton gate is enabled",
+    run: () => {
+      const result =
+        case001GatedMilestoneEvaluationService.evaluateCase001GatedMilestone({
+          caseId: "case-001",
+          milestoneId: "case-001-ceremony-roster-narrowed",
+          isSkeletonGateEnabled: true,
+          queryResult: createQueryResult(clocktowerCeremonyRosterRows)
+        });
+
+      assert.deepEqual(result, {
+        caseId: "case-001",
+        milestoneId: "case-001-ceremony-roster-narrowed",
+        evidenceTableFamily: "EventRegistration",
+        gate: {
+          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
+          enabledValue: "true",
+          isEnabled: true
+        },
+        evaluated: true,
+        matched: true,
+        matchedRowCount: 4,
         runtimeStatus: "evaluated-no-progression",
         milestoneAdvanced: false
       });

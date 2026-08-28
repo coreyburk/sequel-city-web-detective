@@ -18,6 +18,7 @@ import {
   CASE_001_SKELETON_CHECKPOINT_COMPLETE_MESSAGE,
   CASE_001_TIMELINE_SLICE,
   CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY,
+  CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY,
   buildCase001SkeletonCheckpoint,
   createDefaultCase001SkeletonState,
   normalizeCase001SkeletonState,
@@ -124,12 +125,14 @@ describe("student case module contract", () => {
     expect(module.sqlFeedbackSlices.map((slice) => slice.milestoneId)).toEqual([
       CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id,
       CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id,
-      CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id
+      CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id,
+      CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id
     ]);
     expect(module.sqlFeedbackSlices.map((slice) => slice.submitLabel)).toEqual([
       "Check Report Query",
       "Check Interview Query",
-      "Check Identity Query"
+      "Check Identity Query",
+      "Check Roster Query"
     ]);
     expect(PLAYABLE_STUDENT_CASE_MODULES).toEqual([CASE_004_PLAYABLE_MODULE]);
 

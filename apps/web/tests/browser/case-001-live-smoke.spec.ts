@@ -214,7 +214,7 @@ test.describe("Case 001 gated live-stack smoke", () => {
 
     await page.getByRole("button", { name: "Evidence Board" }).click();
     await expect(page.getByRole("heading", { name: "Evidence Notebook" })).toBeVisible();
-    await expect(page.getByText("Completed milestones: 1 / 3")).toBeVisible();
+    await expect(page.getByText("Completed milestones: 1 / 4")).toBeVisible();
     await expect(
       page.getByRole("listitem").filter({ hasText: "Clocktower incident report located" }).first()
     ).toBeVisible();

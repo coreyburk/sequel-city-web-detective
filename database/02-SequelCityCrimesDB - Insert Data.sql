@@ -13,7 +13,7 @@ Heavily modified and updated by:
 Corey Burk
 BSIS Chair 
 Neumont University
-v1.2: 7/4/2026
+v1.3: 8/26/2026
 
 
 1) Run the Create Database script
@@ -11778,7 +11778,7 @@ VALUES
 	,('2957', '20230324', 'Mystical Masquerade Ball')
 	,('2969', '20230416', 'Cityscape Sketching Soiree')
 	,('2981', '20230422', 'Retro Roller Disco Revival')
-	,('2993', '20230504', 'Street Style Fashion Expo')
+	,('2993', '20230502', 'Clocktower Civic Ceremony')
 	,('3005', '20221209', 'Skyline Symphony Showcase')
 	,('3017', '20230508', 'Whirlwind Wine Tasting Tour')
 	,('3029', '20230508', 'Cityscape Spectacular Fireworks Display')
@@ -29456,6 +29456,19 @@ VALUES
 GO
 
 SET IDENTITY_INSERT EventRegistration OFF
+GO
+
+---- Table: EventSchedule/EventRegistration - Case 001 Clocktower Evidence Bundle 2  ----
+
+UPDATE EventSchedule
+SET EventDate = '20230502',
+    EventName = 'Clocktower Civic Ceremony'
+WHERE EventID = 2993;
+
+DELETE FROM EventRegistration
+WHERE EventID = 2993
+  AND EventPersonID NOT IN (27412, 27590, 50417, 62764);
+
 GO
 
 ---------------------------------

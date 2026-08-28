@@ -1,15 +1,19 @@
 import type { QueryExecutionSuccessData } from "../types/query";
 import {
   CASE_001_CLOCKTOWER_CASE_ID,
+  CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY,
+  CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID,
   CASE_001_CLOCKTOWER_EVIDENCE_TABLE_FAMILY,
   CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY,
   CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID,
   CASE_001_CLOCKTOWER_INTERVIEWS_EVIDENCE_TABLE_FAMILY,
   CASE_001_CLOCKTOWER_INTERVIEWS_MILESTONE_ID,
   CASE_001_CLOCKTOWER_REPORT_MILESTONE_ID,
+  type Case001ClocktowerCeremonyRosterValidationResult,
   type Case001ClocktowerIdentitiesValidationResult,
   type Case001ClocktowerInterviewsValidationResult,
   type Case001ClocktowerReportValidationResult,
+  validateCase001ClocktowerCeremonyRosterNarrowed,
   validateCase001ClocktowerReportInterviewsLocated,
   validateCase001ClocktowerReportLocated,
   validateCase001ClocktowerWitnessIdentitiesResolved
@@ -28,17 +32,20 @@ export type Case001GatedMilestoneEvaluationStatus =
 export type Case001SupportedMilestoneId =
   | typeof CASE_001_CLOCKTOWER_REPORT_MILESTONE_ID
   | typeof CASE_001_CLOCKTOWER_INTERVIEWS_MILESTONE_ID
-  | typeof CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID;
+  | typeof CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID
+  | typeof CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID;
 
 export type Case001SupportedEvidenceTableFamily =
   | typeof CASE_001_CLOCKTOWER_EVIDENCE_TABLE_FAMILY
   | typeof CASE_001_CLOCKTOWER_INTERVIEWS_EVIDENCE_TABLE_FAMILY
-  | typeof CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY;
+  | typeof CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY
+  | typeof CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY;
 
 export type Case001GatedMilestoneValidationResult =
   | Case001ClocktowerReportValidationResult
   | Case001ClocktowerInterviewsValidationResult
-  | Case001ClocktowerIdentitiesValidationResult;
+  | Case001ClocktowerIdentitiesValidationResult
+  | Case001ClocktowerCeremonyRosterValidationResult;
 
 export interface Case001GatedMilestoneEvaluationRequest {
   caseId: string;
@@ -80,7 +87,9 @@ const DEFAULT_VALIDATORS: Record<
   [CASE_001_CLOCKTOWER_INTERVIEWS_MILESTONE_ID]:
     validateCase001ClocktowerReportInterviewsLocated,
   [CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID]:
-    validateCase001ClocktowerWitnessIdentitiesResolved
+    validateCase001ClocktowerWitnessIdentitiesResolved,
+  [CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID]:
+    validateCase001ClocktowerCeremonyRosterNarrowed
 };
 
 export function evaluateCase001GatedMilestone(
@@ -211,7 +220,8 @@ function normalizeSupportedMilestoneId(
   if (
     milestoneId === CASE_001_CLOCKTOWER_REPORT_MILESTONE_ID ||
     milestoneId === CASE_001_CLOCKTOWER_INTERVIEWS_MILESTONE_ID ||
-    milestoneId === CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID
+    milestoneId === CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID ||
+    milestoneId === CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID
   ) {
     return milestoneId;
   }
@@ -230,6 +240,9 @@ function getEvidenceTableFamily(
   }
   if (milestoneId === CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID) {
     return CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY;
+  }
+  if (milestoneId === CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID) {
+    return CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY;
   }
 
   return null;

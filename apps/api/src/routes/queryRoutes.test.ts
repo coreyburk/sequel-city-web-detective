@@ -232,6 +232,59 @@ const testCases: AsyncTestCase[] = [
     }
   },
   {
+    name: "route handler returns Case 001 M4 metadata for explicit enabled milestone opt-in",
+    run: async () => {
+      const queryRoutes =
+        require("./queryRoutes.ts") as typeof import("./queryRoutes");
+      const queryExecutionService =
+        require("../services/queryExecutionService.ts") as typeof import("../services/queryExecutionService");
+
+      const handler = queryRoutes.createQueryExecutionHandler(
+        async (sql, _executeQuery, options) =>
+          queryExecutionService.executeSafeQuery(
+            sql,
+            async () => createClocktowerCeremonyRosterRecordset(),
+            options
+          )
+      );
+
+      const response = await handler(
+        {
+          body: {
+            sql: "SELECT e.EventID, e.EventDate, e.EventName, r.EventPersonID, p.PersonName FROM EventSchedule e JOIN EventRegistration r ON r.EventID = e.EventID JOIN PersonsOfInterest p ON p.PersonID = r.EventPersonID WHERE e.EventID = 2993",
+            caseMilestoneEvaluation: {
+              caseId: "case-001",
+              milestoneId: "case-001-ceremony-roster-narrowed",
+              isSkeletonGateEnabled: true
+            }
+          }
+        },
+        {
+          code: () => {
+            // keep default status
+          }
+        }
+      );
+
+      assert.equal(response.success, true);
+      assert.deepEqual(response.caseMilestoneEvaluation, {
+        caseId: "case-001",
+        milestoneId: "case-001-ceremony-roster-narrowed",
+        evidenceTableFamily: "EventRegistration",
+        gate: {
+          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
+          enabledValue: "true",
+          isEnabled: true
+        },
+        evaluated: true,
+        matched: true,
+        matchedRowCount: 4,
+        runtimeStatus: "evaluated-no-progression",
+        milestoneAdvanced: false
+      });
+    }
+  },
+  {
     name: "route handler preserves malformed request behavior without forwarding payload",
     run: async () => {
       const queryRoutes =
@@ -376,6 +429,25 @@ function createClocktowerInterviewRecordset(): import("../services/queryResultNo
     PersonID: { name: "PersonID" },
     ReportID: { name: "ReportID" },
     LogTranscript: { name: "LogTranscript" }
+  };
+
+  return recordset;
+}
+
+function createClocktowerCeremonyRosterRecordset(): import("../services/queryResultNormalizer").QueryRecordset {
+  const recordset = [
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 27412, PersonName: "Les Eskridge" },
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 27590, PersonName: "Taryn Swoboda" },
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 50417, PersonName: "Shayla Kehl" },
+    { EventID: 2993, EventDate: "2023-05-02", EventName: "Clocktower Civic Ceremony", EventPersonID: 62764, PersonName: "Herschel Tanious" }
+  ] as import("../services/queryResultNormalizer").QueryRecordset;
+
+  recordset.columns = {
+    EventID: { name: "EventID" },
+    EventDate: { name: "EventDate" },
+    EventName: { name: "EventName" },
+    EventPersonID: { name: "EventPersonID" },
+    PersonName: { name: "PersonName" }
   };
 
   return recordset;

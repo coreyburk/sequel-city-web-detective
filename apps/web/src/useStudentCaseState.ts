@@ -25,6 +25,8 @@ import type {
 } from "./features/samuelReactions";
 import {
   CASE_001_BRIEF,
+  CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE,
+  CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY,
   CASE_001_ENTRY_ID,
   CASE_001_FIRST_SQL_MILESTONE_BOUNDARY,
   CASE_001_KNOWN_CASE_FACTS,
@@ -668,7 +670,8 @@ export function useStudentCaseState(
   >(() => ({
     [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
     [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false,
-    [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false
+    [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false,
+    [CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id]: false
   }));
   const [samuelStage, setSamuelStage] = useState(() => persistedStudentState?.samuelStage ?? 0);
   const [notebookEntries, setNotebookEntries] = useState<EvidenceNotebookEntry[]>(
@@ -798,7 +801,8 @@ export function useStudentCaseState(
     setCase001CompletedMilestones({
       [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
       [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false,
-      [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false
+      [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false,
+      [CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id]: false
     });
     resetStudentQueryRunner();
   }, [activeCaseId, mode]);
@@ -2649,7 +2653,8 @@ export function useStudentCaseState(
       setCase001CompletedMilestones({
         [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
         [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false,
-        [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false
+        [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false,
+        [CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id]: false
       });
       resetStudentQueryRunner();
       return;
@@ -3809,6 +3814,10 @@ export function useStudentCaseState(
       return CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE.starterSql;
     }
 
+    if (milestoneId === CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id) {
+      return CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE.starterSql;
+    }
+
     return null;
   }
 
@@ -3831,11 +3840,17 @@ export function useStudentCaseState(
               detail: "Report-linked interviews located",
               sourceLabel: "Samuel Step 2"
             }
-          : {
-              id: "case-001-witness-identities-resolved",
-              detail: "Witness identities resolved",
-              sourceLabel: "Samuel Step 3"
-            };
+          : milestoneId === CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id
+            ? {
+                id: "case-001-witness-identities-resolved",
+                detail: "Witness identities resolved",
+                sourceLabel: "Samuel Step 3"
+              }
+            : {
+                id: "case-001-ceremony-roster-narrowed",
+                detail: "Clocktower ceremony roster narrowed",
+                sourceLabel: "Samuel Step 4"
+              };
 
     upsertNotebookEntries([entry]);
     setHighlightedNotebookEntryId(entry.id);
@@ -4444,8 +4459,12 @@ export function useStudentCaseState(
         "CrimeSceneReport",
         "InterviewLog",
         "PersonsOfInterest",
+        "EventSchedule",
+        "EventRegistration",
         "ReportID",
         "PersonID",
+        "EventID",
+        "EventPersonID",
         "Sequel City"
       ],
       footer:

@@ -12,6 +12,10 @@ export const CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID =
   "case-001-witness-identities-resolved";
 export const CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY =
   "PersonsOfInterest";
+export const CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID =
+  "case-001-ceremony-roster-narrowed";
+export const CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY =
+  "EventRegistration";
 
 export interface Case001ClocktowerReportValidationResult {
   caseId: typeof CASE_001_CLOCKTOWER_CASE_ID;
@@ -37,6 +41,14 @@ export interface Case001ClocktowerIdentitiesValidationResult {
   matchedRowCount: number;
 }
 
+export interface Case001ClocktowerCeremonyRosterValidationResult {
+  caseId: typeof CASE_001_CLOCKTOWER_CASE_ID;
+  milestoneId: typeof CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID;
+  evidenceTableFamily: typeof CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY;
+  matched: boolean;
+  matchedRowCount: number;
+}
+
 const REQUIRED_FIELD_KEYS = {
   crimeId: "crimeid",
   reportDate: "reportdate",
@@ -45,7 +57,11 @@ const REQUIRED_FIELD_KEYS = {
   personId: "personid",
   personName: "personname",
   reportId: "reportid",
-  logTranscript: "logtranscript"
+  logTranscript: "logtranscript",
+  eventId: "eventid",
+  eventDate: "eventdate",
+  eventName: "eventname",
+  eventPersonId: "eventpersonid"
 } as const;
 
 const EXPECTED_CRIME_ID = "1080";
@@ -73,6 +89,21 @@ const INTERVIEW_TOKEN_GROUPS_BY_PERSON_ID = {
   "27590": ["access", "after the toast", "clockroom"],
   "50417": ["personid", "clocktower access", "records"],
   "62764": ["crowd", "door", "stayed closed"]
+} as const;
+const CASE_001_CLOCKTOWER_CEREMONY_EVENT_ID = "2993";
+const CASE_001_CLOCKTOWER_CEREMONY_EVENT_DATE = "20230502";
+const REQUIRED_CEREMONY_EVENT_NAME_TOKENS = ["clocktower", "ceremony"] as const;
+const CASE_001_CLOCKTOWER_CEREMONY_ROSTER_PERSON_IDS = [
+  "27412",
+  "27590",
+  "50417",
+  "62764"
+] as const;
+const CASE_001_CLOCKTOWER_CEREMONY_ROSTER_NAMES_BY_ID = {
+  "27412": "les eskridge",
+  "27590": "taryn swoboda",
+  "50417": "shayla kehl",
+  "62764": "herschel tanious"
 } as const;
 
 export function validateCase001ClocktowerReportLocated(
@@ -115,6 +146,21 @@ export function validateCase001ClocktowerWitnessIdentitiesResolved(
     milestoneId: CASE_001_CLOCKTOWER_IDENTITIES_MILESTONE_ID,
     evidenceTableFamily: CASE_001_CLOCKTOWER_IDENTITIES_EVIDENCE_TABLE_FAMILY,
     matched: containsAllExpectedPersonIds(matchedRows),
+    matchedRowCount
+  };
+}
+
+export function validateCase001ClocktowerCeremonyRosterNarrowed(
+  queryResult: QueryExecutionSuccessData
+): Case001ClocktowerCeremonyRosterValidationResult {
+  const matchedRows = queryResult.rows.filter(isClocktowerCeremonyRosterRow);
+  const matchedRowCount = matchedRows.length;
+
+  return {
+    caseId: CASE_001_CLOCKTOWER_CASE_ID,
+    milestoneId: CASE_001_CLOCKTOWER_CEREMONY_ROSTER_MILESTONE_ID,
+    evidenceTableFamily: CASE_001_CLOCKTOWER_CEREMONY_ROSTER_EVIDENCE_TABLE_FAMILY,
+    matched: containsAllExpectedCeremonyRosterPersonIds(matchedRows),
     matchedRowCount
   };
 }
@@ -191,6 +237,18 @@ function getNormalizedRowValue(row: QueryRow, requiredKey: string): string {
   return findFieldValue(row.displayValues, requiredKey) ?? "";
 }
 
+function getFirstNormalizedRowValue(row: QueryRow, requiredKeys: string[]): string {
+  for (const requiredKey of requiredKeys) {
+    const value = getNormalizedRowValue(row, requiredKey);
+
+    if (value !== "") {
+      return value;
+    }
+  }
+
+  return "";
+}
+
 function findFieldValue(
   fields: Record<string, string | number | boolean | null>,
   requiredKey: string
@@ -234,6 +292,65 @@ function containsAllExpectedPersonIds(rows: QueryRow[]): boolean {
   );
 
   return CASE_001_CLOCKTOWER_INTERVIEW_PERSON_IDS.every((personId) =>
+    matchedPersonIds.has(personId)
+  );
+}
+
+function isClocktowerCeremonyRosterRow(row: QueryRow): boolean {
+  const eventId = normalizeIdentifier(
+    getNormalizedRowValue(row, REQUIRED_FIELD_KEYS.eventId)
+  );
+  const eventDate = normalizeDateKey(
+    getNormalizedRowValue(row, REQUIRED_FIELD_KEYS.eventDate)
+  );
+  const eventName = normalizeText(
+    getNormalizedRowValue(row, REQUIRED_FIELD_KEYS.eventName)
+  );
+  const personId = normalizeIdentifier(
+    getFirstNormalizedRowValue(row, [
+      REQUIRED_FIELD_KEYS.eventPersonId,
+      REQUIRED_FIELD_KEYS.personId
+    ])
+  );
+  const personName = normalizeText(
+    getNormalizedRowValue(row, REQUIRED_FIELD_KEYS.personName)
+  );
+
+  if (
+    eventId !== CASE_001_CLOCKTOWER_CEREMONY_EVENT_ID ||
+    eventDate !== CASE_001_CLOCKTOWER_CEREMONY_EVENT_DATE ||
+    !isExpectedClocktowerCeremonyRosterPersonId(personId) ||
+    personName !== CASE_001_CLOCKTOWER_CEREMONY_ROSTER_NAMES_BY_ID[personId]
+  ) {
+    return false;
+  }
+
+  return REQUIRED_CEREMONY_EVENT_NAME_TOKENS.every((token) =>
+    eventName.includes(token)
+  );
+}
+
+function isExpectedClocktowerCeremonyRosterPersonId(
+  personId: string
+): personId is (typeof CASE_001_CLOCKTOWER_CEREMONY_ROSTER_PERSON_IDS)[number] {
+  return CASE_001_CLOCKTOWER_CEREMONY_ROSTER_PERSON_IDS.includes(
+    personId as (typeof CASE_001_CLOCKTOWER_CEREMONY_ROSTER_PERSON_IDS)[number]
+  );
+}
+
+function containsAllExpectedCeremonyRosterPersonIds(rows: QueryRow[]): boolean {
+  const matchedPersonIds = new Set(
+    rows.map((row) =>
+      normalizeIdentifier(
+        getFirstNormalizedRowValue(row, [
+          REQUIRED_FIELD_KEYS.eventPersonId,
+          REQUIRED_FIELD_KEYS.personId
+        ])
+      )
+    )
+  );
+
+  return CASE_001_CLOCKTOWER_CEREMONY_ROSTER_PERSON_IDS.every((personId) =>
     matchedPersonIds.has(personId)
   );
 }
