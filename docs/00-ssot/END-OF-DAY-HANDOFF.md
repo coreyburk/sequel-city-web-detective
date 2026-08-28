@@ -12,62 +12,64 @@ This is the live handoff artifact. Refresh it from `docs/00-ssot/END-OF-DAY-HAND
 - Machine: `BurkG7`, current Codex desktop workspace at `D:\GitHub-Repos\SequelCityWeb`
 - Peer Machine: unspecified
 - Branch: `main`, tracking `origin/main`
-- Repo status before WP-268 closeout commit: dirty only with accepted WP-268 documentation/script/test/work-package/handoff/Understand graph changes
-- Current HEAD before WP-268 closeout commit: `fac4b67`
+- Repo status before WP-269 closeout commit: dirty only with accepted WP-269 documentation/work-package/handoff/Understand graph changes
+- Current HEAD before WP-269 closeout commit: `33b1e88`
 - Remote: `origin` -> `https://github.com/coreyburk/sequel-city-web.git`
-- Understand graph baseline after WP-268 refresh: refreshed during WP-268 with `filesScanned=649`, graph assembly `nodes=1057`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 649 files`
+- Codex sandbox status: repaired after WP-268 closeout by recreating repo-local `.codex` under `NEUMONT\Cburk` and restoring `.codex/skills`; `scripts/check-codex-sandbox-health.ps1` now reports `NoSandboxSetupFailureDetected`
+- Understand graph baseline after WP-269 refresh: refreshed during WP-269 with `filesScanned=653`, graph assembly `nodes=1061`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 653 files`
 
 ## Active Work Package
 
-- Current WP: `WP-268-codex-sandbox-helper-diagnosis-and-resolution.md`
-- Status: accepted after PASS AntiGravity audit and human closeout request; ready for closeout commit/push
+- Current WP: `WP-269-sequel-city-tier-system-and-case-authoring-template.md`
+- Status: accepted after PASS audit and human closeout request; ready for closeout commit/push
 - Final Decision: accepted on 2026-08-28
 
 ## Completed This Session
 
-- Accepted and closed out WP-267 before WP-268 work resumed; WP-267 is committed in HEAD as `fac4b67` and is not modified by WP-268.
-- Implemented WP-268 as a bounded Codex sandbox-helper diagnosis and repository-local troubleshooting aid.
-- Added `docs/05-development-workflow/Codex-Sandbox-Troubleshooting.md` with the observed helper failure signature, safe operating policy, read-only diagnostic workflow, and remediation guidance.
-- Added `scripts/check-codex-sandbox-health.ps1` as a read-only diagnostic script for setup errors, sandbox logs, repo `.codex` ownership evidence, classification, and safety flags.
-- Added `scripts/tests/test-codex-sandbox-health.ps1` with fixture-based validation for failure and healthy classifications.
-- Recorded the current diagnosis: sandbox setup fails before process launch with `helper_unknown_error: setup refresh had errors`; latest sandbox log shows a deny ACE failure on `D:\GitHub-Repos\SequelCityWeb\.codex` with Win32 error `5` (`Access is denied`); workspace root owner is `NEUMONT\Cburk`; repo `.codex` owner is `BURKG7\CodexSandboxOffline`; classification is `workspace-acl-on-repo-local-codex-directory`.
-- Preserved sandboxing as the default guardrail. WP-268 does not disable sandboxing, repair ACLs silently, change Codex global configuration, inspect secrets, or modify app, database, dependency, package, runtime AI, migration, or product logic files.
-- Refreshed tracked Understand graph artifacts after adding workflow documentation and scripts.
+- Closed out WP-268 and pushed `33b1e88 Document Codex sandbox helper diagnosis`.
+- Repaired the local Codex sandbox helper issue after WP-268 closeout by preserving repo-local skills, recreating `.codex` under the current user, cleaning repair artifacts, and verifying normal sandboxed read/write/delete commands.
+- Implemented WP-269 as a documentation-only tier-system and case-authoring workflow package.
+- Added `docs/00-ssot/SSOT-Case-Tier-System.md` as the canonical Sequel City case-tier authority.
+- Updated `docs/00-ssot/SSOT-Case-Authoring.md` so future case plans must declare tier classification, five-axis compliance, completion criteria, completion signal, and implementation bundle strategy.
+- Updated `docs/00-ssot/SSOT-Index.md` so the new tier SSOT is discoverable.
+- Updated `docs/14-progression-design/Detective-Rank-and-Reward-System-Guide.md` to keep rank/reward/badge/promotion language while deferring tier contracts to the new SSOT.
+- Added `docs/15-case-plans/CASE-AUTHORING-TEMPLATE.md` and `docs/15-case-plans/CASE-VETTING-CHECKLIST.md` for future case production and review.
+- Refreshed tracked Understand graph artifacts after the SSOT/progression/case-planning documentation changes.
+- Preserved documentation-only scope: no app, database, migration, package, lockfile, script, runtime AI, or Case 001 implementation behavior changed.
 
 ## Verification Summary
 
-Verification performed for WP-268:
+Verification performed for WP-269:
 
-- PASS: `scripts/check-codex-sandbox-health.ps1` reported `SandboxHelperSetupFailureDetected`, classification `workspace-acl-on-repo-local-codex-directory`, repo `.codex` owner `BURKG7\CodexSandboxOffline`, and setup error `helper_unknown_error: setup refresh had errors`.
-- PASS: `scripts/tests/test-codex-sandbox-health.ps1`.
-- PASS: `scripts/check-understand-refresh-readiness.ps1` before graph refresh.
-- PASS: `scripts/refresh-understand-graph.ps1`; graph rebuilt with `filesScanned=649`, `nodes=1057`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 649 files`.
-- PASS: `scripts/check-understand-refresh-readiness.ps1` after graph refresh.
-- PASS: targeted `rg` checks confirmed the troubleshooting doc, diagnostic script, test, and WP record include the helper error string, safe no-global-disable policy, read-only diagnostic behavior, commit-helper escalation distinction, and `workspace-acl-on-repo-local-codex-directory` classification.
+- PASS: targeted `rg` checks confirmed the new SSOT, case-authoring SSOT update, rank guide update, template, and checklist include the required tier axes, deterministic completion, query-result authority, Foundations mapping, and bundle guidance.
+- PASS: targeted `rg` check for old conflicting rank-guide tier phrases found no remaining matches for `Official Tier Definitions`, `Tier 2 Case Standards`, `Tier 3 Case Standards`, `limited ambiguity`, `early contradictions`, or `moderate red herrings` in the rank guide/tier SSOT authority surface.
+- PASS: `scripts/check-understand-refresh-readiness.ps1` before graph refresh reported `READY`.
+- PASS: `scripts/refresh-understand-graph.ps1`; graph rebuilt with `filesScanned=653`, `nodes=1061`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 653 files`.
+- PASS: `scripts/check-understand-refresh-readiness.ps1` after graph refresh reported `READY`.
+- PASS: `scripts/get-work-package-status.ps1 WP-269` reported no out-of-scope dirty files.
 - PASS: `git diff --check`; only Git LF-to-CRLF working-copy warnings were emitted.
-- PASS: official OpenAI documentation search was performed for the exact helper error; no official page documenting this error/remediation was found, so no official fix is claimed.
-- PASS: WP-268 AntiGravity audit recorded `Verdict: PASS`.
-- PASS: `scripts/check-work-package-closeout.ps1 WP-268` reported `ReadyForAcceptance` before final decision.
+- NOT RUN: runtime app/API/database tests; intentionally not applicable because WP-269 is documentation-only and does not modify runtime code, database scripts, migrations, packages, lockfiles, or scripts.
+- PASS: WP-269 audit recorded `Verdict: PASS`.
+- PASS: `scripts/check-work-package-closeout.ps1 WP-269` reported `ReadyForAcceptance` before final decision.
 
 ## Open Issues / Risks
 
-- Normal sandboxed Codex command execution is still blocked in this local workspace until the repo-local `.codex` ACL/ownership condition is reconciled or the directory is recreated safely.
-- Continue using per-command escalation only for reviewed, necessary operations. Treat escalation as a temporary workaround, not a sandbox fix.
-- Do not disable Codex sandboxing globally as the default response to this issue.
-- Any filesystem ACL repair, repo-local `.codex` recreation, fresh clone strategy, or out-of-repo Codex runtime/configuration change requires explicit user approval and preservation of required `.codex/skills` content first.
 - Case 004 remains the only normal released playable/restorable case.
+- Case 004 remains provisionally classified as `Tier 3: Data Inspector` until an end-to-end case audit validates its full playable path, final query complexity, and observed learner friction.
 - Case 001 remains locked and unreleased by default unless `VITE_ENABLE_CASE_001_PLAYABLE_SKELETON` is exactly `"true"`.
-- Case 001 still lacks M5 driver-license narrowing, M6 final opportunity evidence, authored clue logging, persistence, reset behavior, suspect verification, final solve flow, and release unlock.
+- Case 001 currently uses `Foundations` as a gated pre-release/on-ramp label and must satisfy the Tier 1 contract before release unless a future SSOT update changes the Foundations model.
+- Case 001 still lacks M5 driver-license narrowing, M6 final opportunity evidence, authored clue logging, persistence, reset behavior, suspect verification, final solve flow, database rebuild/version enforcement, and release unlock.
+- Existing Case 001 plan documents were intentionally not rewritten in WP-269; future case-planning work should apply the new template/checklist deliberately rather than reclassifying historical docs in bulk.
 
 ## Next Recommended Step
 
-1. Restart Codex desktop and retry a minimal sandboxed read in this repository.
-2. If the helper error persists, run `scripts/check-codex-sandbox-health.ps1` and explicitly approve either a scoped ACL repair/recreate plan for `D:\GitHub-Repos\SequelCityWeb\.codex` or a fresh-clone strategy after preserving required `.codex/skills` content.
-3. After the sandbox issue is resolved or explicitly deferred, proceed with the next scoped Case 001 M5 planning package.
+1. Pull latest `main` on any other machine/session.
+2. Use the new tier SSOT, case authoring template, and vetting checklist to create the next coherent Case 001 M5-M6 implementation bundle instead of another single-row or single-validator package.
+3. Keep Case 001 gated until tier compliance, fresh-build data, validators, persistence/reset, suspect verification, golden-path playthrough, and release-readiness criteria are all accepted.
 
 ## Resume Prompt (Copy/Paste)
 
-Continue from `docs/00-ssot/END-OF-DAY-HANDOFF.md`. Confirm the WP-268 closeout commit and push are present on `main`. Treat WP-268 as accepted: it added a read-only Codex sandbox health diagnostic, fixture tests, troubleshooting documentation, audit evidence, and refreshed Understand graph artifacts. The sandbox helper issue is diagnosed but not repaired: normal sandboxed commands still fail with `helper_unknown_error: setup refresh had errors`, likely due to the repo-local `.codex` ACL/ownership condition classified as `workspace-acl-on-repo-local-codex-directory`. Preserve sandboxing as the default guardrail; use per-command escalation only as a temporary workaround until the user explicitly approves ACL repair/recreation or a fresh-clone strategy. WP-267 remains committed in HEAD as `fac4b67` and untouched by WP-268.
+Continue from `docs/00-ssot/END-OF-DAY-HANDOFF.md`. Confirm the WP-269 closeout commit and push are present on `main`. Treat WP-269 as accepted: it adds `SSOT-Case-Tier-System.md`, updates case-authoring and rank-guide authority, adds reusable case authoring/vetting templates, and refreshes Understand graph artifacts while preserving documentation-only scope. Sandbox helper repair has been verified locally: normal sandboxed commands work and `scripts/check-codex-sandbox-health.ps1` reports `NoSandboxSetupFailureDetected`. The next high-ROI work should use the new tier/template/checklist to plan a coherent Case 001 M5-M6 bundle, keeping Case 001 locked/unreleased by default.
 
 ## Update Checklist
 

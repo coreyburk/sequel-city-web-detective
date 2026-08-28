@@ -20,6 +20,7 @@ When implementation decisions conflict, the SSOT documents win over chat history
 | SSOT-Architecture.md | System layers, runtime boundaries, and local hosting architecture |
 | SSOT-Database-Schema.md | Database tables, relationships, and schema access rules |
 | SSOT-Case-Progression.md | Investigation milestones and deterministic progression model |
+| SSOT-Case-Tier-System.md | Case difficulty tiers, Foundations mapping, tier-axis compliance, and completion contracts |
 | SSOT-SQL-Safety-Rules.md | Allowed SQL, blocked SQL, safety result model, and execution constraints |
 | SSOT-AI-Agent-Boundaries.md | AI agent roles, allowed behavior, and forbidden behavior |
 | SSOT-UI-UX-Experience.md | Interface model, learner workflow, and screen responsibilities |
@@ -33,6 +34,7 @@ When implementation decisions conflict, the SSOT documents win over chat history
 - Read-only SQL execution and blocked statement rules are defined in `SSOT-SQL-Safety-Rules.md`.
 - Database tables, relationships, schema access, and spoiler-control rules are defined in `SSOT-Database-Schema.md`.
 - Deterministic case progression and suspect verification authority are defined in `SSOT-Case-Progression.md`.
+- Case difficulty tiers, Foundations/on-ramp mapping, tier-axis compliance, and completion contracts are defined in `SSOT-Case-Tier-System.md`.
 - Initial UI responsibilities and learner workflow are defined in `SSOT-UI-UX-Experience.md`.
 - Runtime AI prohibition and future advisory-only limits are defined in `SSOT-AI-Agent-Boundaries.md`.
 - Work package and audit rules are defined in `SSOT-Development-Workflow.md`.

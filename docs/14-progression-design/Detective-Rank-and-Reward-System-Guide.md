@@ -2,7 +2,7 @@
 
 **Date:** May 14, 2026
 **Status:** Working Design Standard
-**Version:** 1.1
+**Version:** 1.2
 **Classification:** Documentation Standard - Future Progression and Case Design
 
 ## Purpose
@@ -11,7 +11,7 @@ This document defines the intended long-term progression model for Sequel City W
 
 It exists so future UI, case design, reward wording, and progression implementation all follow one shared system instead of adding isolated labels or mechanics piecemeal.
 
-This guide is the authoritative design reference for future detective-rank and reward work until a later accepted work package revises it.
+This guide is the authoritative design reference for future detective-rank and reward work until a later accepted work package revises it. Case difficulty tiers, tier-axis compliance, Foundations mapping, and completion contracts are authoritative in `docs/00-ssot/SSOT-Case-Tier-System.md`.
 
 ## Scope Boundary
 
@@ -22,11 +22,12 @@ It does:
 - define the official rank ladder
 - define reward terminology and progression rules
 - define badge intent and naming
-- define tier-oriented case design expectations
+- reference tier-oriented case design expectations from the tier-system SSOT
 - provide a provisional placement for the current murder case
 
 It does not:
 
+- override `SSOT-Case-Tier-System.md`
 - mean the full rank system is already implemented
 - define save-file architecture
 - define classroom roster or teacher tooling
@@ -151,221 +152,20 @@ The official detective career ladder for Sequel City Web Detective is:
 4. `Data Detective`
 5. `Director of Data Integrity`
 
-## Official Tier Definitions
+## Tier Authority
 
-### Tier 1: Junior Data Analyst
+The official rank titles are listed here, but case-tier definitions are owned by `docs/00-ssot/SSOT-Case-Tier-System.md`.
 
-Official definition:
-Entry-level learner beginning a data-investigation career with close guidance and foundational SQL skills.
+Use the tier-system SSOT for:
 
-Career stage:
-Foundational
+- the five mandatory tier axes,
+- Foundations/on-ramp mapping,
+- story-step, SQL-scope, people/entity, clue/evidence, and interpretation-complexity limits,
+- ambiguity and red-herring rules,
+- deterministic completion criteria and completion signals,
+- case implementation bundle guidance.
 
-Responsibility level:
-Learning and observation
-
-Authority level:
-None; guided by the system and mentor
-
-Role narrative:
-`I'm beginning my data career.`
-
-Student competencies:
-
-- simple `SELECT`
-- basic `WHERE`
-- table and column reading
-- following structured clue prompts
-
-Case characteristics:
-
-- short
-- guided
-- low ambiguity
-- minimal or no red herrings
-- clear success conditions
-
-Promotion criteria:
-
-- complete all required Tier 1 cases
-- demonstrate dependable basic query construction
-- show understanding of simple filtering and table reading
-
-Badge:
-
-- Bronze medal
-- `Started Your Data Career`
-
-### Tier 2: Senior Data Analyst
-
-Official definition:
-Independent learner who can combine evidence sources and write more capable SQL without constant step-by-step guidance.
-
-Career stage:
-Developing specialization
-
-Responsibility level:
-Independent analysis with guidance available
-
-Authority level:
-Technical competence, no leadership framing
-
-Role narrative:
-`I'm specializing in data analysis.`
-
-Student competencies:
-
-- multi-table joins across a small number of tables
-- multi-condition filtering
-- basic aggregation
-- increasingly independent investigation steps
-
-Case characteristics:
-
-- moderate guidance
-- a few branching clues
-- limited ambiguity
-- early contradictions or red herrings
-
-Promotion criteria:
-
-- complete all required Tier 2 cases
-- demonstrate reliable join construction
-- reason across multiple related data sources
-
-Badge:
-
-- Silver medal
-- `Reached Individual Contributor Expertise`
-
-### Tier 3: Data Inspector
-
-Official definition:
-Verification-focused investigator who specializes in data quality, evidence integrity, contradiction handling, and systematic narrowing.
-
-Career stage:
-Quality and verification specialization
-
-Responsibility level:
-Evidence verification and careful narrowing
-
-Authority level:
-Quality and correctness expertise
-
-Role narrative:
-`I'm ensuring data quality and integrity.`
-
-Student competencies:
-
-- multi-table joins
-- pattern recognition
-- layered verification
-- resolving contradictions with evidence
-- careful elimination of misleading rows
-
-Case characteristics:
-
-- moderate red herrings
-- layered evidence chains
-- stronger emphasis on narrowing and verification
-- meaningful follow-up query planning
-
-Promotion criteria:
-
-- complete all required Tier 3 cases
-- demonstrate systematic evidence validation
-- handle contradictions and misleading clues appropriately
-
-Badge:
-
-- Gold medal
-- `Specialized in Data Quality`
-
-### Tier 4: Data Detective
-
-Official definition:
-Advanced investigator who can lead complex, ambiguous investigations with larger evidence webs and deeper synthesis.
-
-Career stage:
-Investigation specialist
-
-Responsibility level:
-Complex investigation leadership
-
-Authority level:
-Lead investigator capability
-
-Role narrative:
-`I'm solving mysteries hidden in data.`
-
-Student competencies:
-
-- sophisticated multi-step investigation logic
-- deeper synthesis across several sources
-- strategic query planning
-- separating signal from noise in larger cases
-- handling layered red herrings and ambiguity
-
-Case characteristics:
-
-- substantial branching
-- higher ambiguity
-- multiple deceptive leads
-- longer evidence chains
-
-Promotion criteria:
-
-- complete all required Tier 4 cases
-- demonstrate strategic investigation thinking
-- synthesize complex findings without over-reliance on guided prompts
-
-Badge:
-
-- Platinum medal
-- `Lead Complex Investigations`
-
-### Tier 5: Director of Data Integrity
-
-Official definition:
-Executive-level investigator who can reason through ambiguity, strategic implications, and multiple defensible interpretations in large organizational cases.
-
-Career stage:
-Strategic oversight
-
-Responsibility level:
-Organization-scale data integrity judgment
-
-Authority level:
-Executive decision-making and strategic framing
-
-Role narrative:
-`I'm leading organizational data strategy.`
-
-Student competencies:
-
-- advanced synthesis
-- strategic interpretation
-- professional handling of incomplete evidence
-- explaining tradeoffs and uncertainty
-- reasoning across complex, organization-scale data stories
-
-Case characteristics:
-
-- long-form investigations
-- high ambiguity
-- multiple valid interpretations
-- strategic or organizational scope
-
-Promotion criteria:
-
-- complete all required Tier 5 cases
-- demonstrate expert evidence synthesis
-- make defensible recommendations under uncertainty
-
-Badge:
-
-- Diamond medal
-- `Executive Leadership Achieved`
+This guide may describe reward, badge, and promotion language for the same rank titles, but it must not redefine case-tier contracts separately.
 
 ## Progression Rules
 
@@ -424,45 +224,11 @@ Career progression only feels real when the transition is acknowledged.
 
 ## Case Design Standards By Tier
 
-### Tier 1 Case Standards
+Case design standards by tier are owned by `docs/00-ssot/SSOT-Case-Tier-System.md`.
 
-- no major red herrings
-- little to no contradiction handling
-- simple story steps
-- obvious query targets
-- confidence-building wins
+This guide preserves the rank and reward vocabulary around those tiers. It does not define separate story-step counts, SQL-scope limits, ambiguity rules, red-herring rules, completion criteria, completion signals, or implementation bundle sizes.
 
-### Tier 2 Case Standards
-
-- light branching
-- a few misleading possibilities
-- joins begin to matter
-- some inference required
-- guidance becomes less explicit
-
-### Tier 3 Case Standards
-
-- evidence narrowing is central
-- contradictions and misleading rows matter
-- students verify rather than merely retrieve
-- multiple evidence sources must align
-- clue logging should reward precision
-
-### Tier 4 Case Standards
-
-- substantial ambiguity
-- several red herrings
-- longer, less linear evidence chains
-- strategic query planning matters
-- students must decide what deserves pursuit
-
-### Tier 5 Case Standards
-
-- genuine ambiguity with multiple plausible interpretations
-- strategic and organizational implications
-- complex evidence synthesis
-- some uncertainty remains even near the end
-- students justify conclusions, not just produce them
+When designing or auditing a case, use the tier-system SSOT and then use this guide only for career-rank, commendation, badge, and promotion-language alignment.
 
 ## UI Terminology Standards
 
@@ -571,3 +337,4 @@ The first implementation WP that applies this guide should:
 |---|---|---|
 | 1.0 | May 14, 2026 | Initial detective rank and reward system guide |
 | 1.1 | May 14, 2026 | Added formal tier definitions, progression rules, case-design standards, UI terminology standards, and Samuel guidance adaptation notes |
+| 1.2 | August 28, 2026 | Moved authoritative case-tier contracts to `SSOT-Case-Tier-System.md` and retained this guide as rank, reward, badge, and promotion-language authority |

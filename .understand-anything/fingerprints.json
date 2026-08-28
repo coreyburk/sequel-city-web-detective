@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "fac4b676c7e3d585194f063f4ecfc1a05da16df1",
-  "generatedAt": "2026-08-28T14:52:34.896Z",
+  "gitCommitHash": "33b1e88812fef5da45c66d54c9deaff293f8fec8",
+  "generatedAt": "2026-08-28T15:49:39.456Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "4ae6c28f4d4da17a16c22fb619e8fb0ac6be47b195dd785a72ce66fcdb66b02e",
+      "contentHash": "f43ff637a170315655b08b79b003f034000bb66899755861921b6bd141487949",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13419,
+      "totalLines": 13449,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "38e3458e13257cb2e88ece60d8770836df02f80006f053397b1d66284ebcd6e6",
+      "contentHash": "6bed8c899b01931f57a9a45daa5c629a0a579609df90e5925b1cf7c9b169c522",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3932,
+      "totalLines": 3956,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "e23a8c89ffb7933f0aecab79cf359d6a2d3be95f65407a0cf50a4790de8d4858",
+      "contentHash": "cf929a66dce74b8d4ae336e02497ac5a5218ee3cc570e6dfcc447277ffdcbd7b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15832,
+      "totalLines": 15876,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "c079828aff08b06ea069de234b666940d719bc964f20c20b8a54f1351749efb3",
+      "contentHash": "f7dc08a2569388e3752141ee04f8f6dbed8426df84d7d8e31357e59c8c14dcb8",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -8135,7 +8135,7 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "28cb98ece2c524a73ab1d5de67484422ee6e1f1ba0b250d5d94035e91cb8b619",
+      "contentHash": "37a365ee9fc23e23f204c9d2b2bbbfea07339be6226b1cdb66649deed21eb29a",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -8165,12 +8165,12 @@
     },
     "docs/00-ssot/SSOT-Case-Authoring.md": {
       "filePath": "docs/00-ssot/SSOT-Case-Authoring.md",
-      "contentHash": "72ebe3b019b937d50ed470792e33ea597b3bed32557f0c2b6fac925604a3aa87",
+      "contentHash": "c5126d619c3ddfa1f5351333525b5908a367e9b315a9c0e15ae97157d0eaf838",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 85,
+      "totalLines": 91,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-Case-Progression.md": {
@@ -8181,6 +8181,16 @@
       "imports": [],
       "exports": [],
       "totalLines": 63,
+      "hasStructuralAnalysis": true
+    },
+    "docs/00-ssot/SSOT-Case-Tier-System.md": {
+      "filePath": "docs/00-ssot/SSOT-Case-Tier-System.md",
+      "contentHash": "d173436afc29596e72598946a7f19ab26e3d7bea3aa7db0f63ea5b363059f2fc",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 226,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-Database-Schema.md": {
@@ -8205,12 +8215,12 @@
     },
     "docs/00-ssot/SSOT-Index.md": {
       "filePath": "docs/00-ssot/SSOT-Index.md",
-      "contentHash": "ed8bf9e7144a91ee1c50cfce934ecf8501b577870eefe2bd4a968f059b1a8378",
+      "contentHash": "bee6f1a37c6fba6de0821d894438f9efbe8b6fc978a40a359576174c330a000b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 44,
+      "totalLines": 46,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-Investigation-State-Architecture.md": {
@@ -10965,12 +10975,22 @@
     },
     "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md": {
       "filePath": "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md",
-      "contentHash": "8d3f2e28ce1c7cde15cfde5db237208f09bcf2f23f190a7fc8ab7d64152df7a9",
+      "contentHash": "4a92f370fd2af44c3978604bf6af78d673d6250e92e995e99246d5ba67ddec22",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 185,
+      "totalLines": 289,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-269-sequel-city-tier-system-and-case-authoring-template.md": {
+      "filePath": "docs/01-work-packages/WP-269-sequel-city-tier-system-and-case-authoring-template.md",
+      "contentHash": "c215e7c4a0fef8420823ec9619b0eba61126c3f25d000b2e9364d3532c5c0140",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 213,
       "hasStructuralAnalysis": true
     },
     "docs/02-runtime/Backend-Setup-and-Validation.md": {
@@ -11885,12 +11905,12 @@
     },
     "docs/14-progression-design/Detective-Rank-and-Reward-System-Guide.md": {
       "filePath": "docs/14-progression-design/Detective-Rank-and-Reward-System-Guide.md",
-      "contentHash": "2de02cbcf20bbe931ff45d06bb64550399fceb1ad50e7421edfdbdeb67897a34",
+      "contentHash": "741c2e47b0faba03c0725ba6787b9480b1f78bfd7710c9f382ad183c179543ad",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 574,
+      "totalLines": 341,
       "hasStructuralAnalysis": true
     },
     "docs/14-progression-design/README.md": {
@@ -11921,6 +11941,26 @@
       "imports": [],
       "exports": [],
       "totalLines": 256,
+      "hasStructuralAnalysis": true
+    },
+    "docs/15-case-plans/CASE-AUTHORING-TEMPLATE.md": {
+      "filePath": "docs/15-case-plans/CASE-AUTHORING-TEMPLATE.md",
+      "contentHash": "12604b0105250cb910d8613b7bc2d34e95e634367f005bf31d4caa11d9b1591b",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 175,
+      "hasStructuralAnalysis": true
+    },
+    "docs/15-case-plans/CASE-VETTING-CHECKLIST.md": {
+      "filePath": "docs/15-case-plans/CASE-VETTING-CHECKLIST.md",
+      "contentHash": "e2052a649eaa83d9ec3b90910f45278cafa6d68608a560e7329d13480e95b47c",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 72,
       "hasStructuralAnalysis": true
     },
     "docs/README.md": {

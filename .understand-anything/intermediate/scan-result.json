@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13418,
+      "sizeLines": 13448,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3913,
+      "sizeLines": 3931,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15798,
+      "sizeLines": 15831,
       "fileCategory": "config"
     },
     {
@@ -1138,13 +1138,19 @@
     {
       "path": "docs/00-ssot/SSOT-Case-Authoring.md",
       "language": "markdown",
-      "sizeLines": 84,
+      "sizeLines": 90,
       "fileCategory": "docs"
     },
     {
       "path": "docs/00-ssot/SSOT-Case-Progression.md",
       "language": "markdown",
       "sizeLines": 62,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/00-ssot/SSOT-Case-Tier-System.md",
+      "language": "markdown",
+      "sizeLines": 225,
       "fileCategory": "docs"
     },
     {
@@ -1162,7 +1168,7 @@
     {
       "path": "docs/00-ssot/SSOT-Index.md",
       "language": "markdown",
-      "sizeLines": 43,
+      "sizeLines": 45,
       "fileCategory": "docs"
     },
     {
@@ -2818,7 +2824,13 @@
     {
       "path": "docs/01-work-packages/WP-268-codex-sandbox-helper-diagnosis-and-resolution.md",
       "language": "markdown",
-      "sizeLines": 184,
+      "sizeLines": 288,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/01-work-packages/WP-269-sequel-city-tier-system-and-case-authoring-template.md",
+      "language": "markdown",
+      "sizeLines": 212,
       "fileCategory": "docs"
     },
     {
@@ -3370,7 +3382,7 @@
     {
       "path": "docs/14-progression-design/Detective-Rank-and-Reward-System-Guide.md",
       "language": "markdown",
-      "sizeLines": 573,
+      "sizeLines": 340,
       "fileCategory": "docs"
     },
     {
@@ -3389,6 +3401,18 @@
       "path": "docs/15-case-plans/Case-001-Existing-Data-Inventory.md",
       "language": "markdown",
       "sizeLines": 255,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/15-case-plans/CASE-AUTHORING-TEMPLATE.md",
+      "language": "markdown",
+      "sizeLines": 174,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/15-case-plans/CASE-VETTING-CHECKLIST.md",
+      "language": "markdown",
+      "sizeLines": 71,
       "fileCategory": "docs"
     },
     {
@@ -3896,14 +3920,14 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 649,
+  "totalFiles": 653,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 649,
+    "filesScanned": 653,
     "byCategory": {
       "config": 18,
-      "docs": 398,
+      "docs": 402,
       "data": 33,
       "code": 144,
       "markup": 2,
@@ -3911,7 +3935,7 @@
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 398,
+      "markdown": 402,
       "csv": 24,
       "python": 15,
       "unknown": 1,

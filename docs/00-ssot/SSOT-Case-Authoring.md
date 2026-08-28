@@ -6,7 +6,7 @@ Playable cases must be produced from a repeatable authored contract before they 
 
 ## Document Scope
 
-This document owns the scalable case-production contract for future Sequel City Web Detective cases. Runtime layering is owned by `SSOT-Architecture.md`. Database tables and spoiler-control rules are owned by `SSOT-Database-Schema.md`. Progression authority is owned by `SSOT-Case-Progression.md`. Investigation state ownership is owned by `SSOT-Investigation-State-Architecture.md`.
+This document owns the scalable case-production contract for future Sequel City Web Detective cases. Runtime layering is owned by `SSOT-Architecture.md`. Database tables and spoiler-control rules are owned by `SSOT-Database-Schema.md`. Progression authority is owned by `SSOT-Case-Progression.md`. Investigation state ownership is owned by `SSOT-Investigation-State-Architecture.md`. Case difficulty tiers, Foundations mapping, and tier-axis compliance are owned by `SSOT-Case-Tier-System.md`.
 
 ## Authoring Contract
 
@@ -15,10 +15,12 @@ Every future playable case must define these authored sections before release wo
 | Section | Purpose |
 |---|---|
 | Case identity | Stable case id and public case number/name |
+| Tier classification | Declared tier or Foundations/on-ramp label, with evidence for story steps, SQL scope, people/entities, clues/evidence, and interpretation complexity |
 | Release status | Whether the case is released, gated, or locked, including any release-gate behavior |
 | Public dossier | Non-spoiler metadata used by the case library and briefing |
 | Evidence requirements | Database table families the case depends on |
 | SQL milestones | Learner objectives, table-family references, and deterministic validation ownership |
+| Completion contract | Completion criteria, completion signal, terminal SQL result evidence, and whether the case has one deterministic conclusion or an auditable Tier 5 evaluation framework |
 | State contract | Common learner-owned state and case-specific learner-owned state |
 | Persistence/reset semantics | Storage strategy, version expectations, and clear-progress behavior |
 | Investigation threads | Authored thread ownership and seed responsibility |
@@ -27,16 +29,18 @@ Every future playable case must define these authored sections before release wo
 
 ## Full-Case Plan
 
-The reusable authoring contract is necessary but not sufficient for building a complete playable case. Before broad implementation of a new playable case, create a full case plan artifact under `docs/15-case-plans/` that defines the intended end state, evidence path, SQL milestones, expected query shapes, assessed SQL concepts, fixture/data needs, red herrings, complexity budget, guidance pacing, persistence/reset expectations, suspect verification expectations, automated playthrough criteria, and future implementation sequence.
+The reusable authoring contract is necessary but not sufficient for building a complete playable case. Before broad implementation of a new playable case, create a full case plan artifact under `docs/15-case-plans/` that defines the intended end state, declared tier, tier-axis budget, evidence path, SQL milestones, expected query shapes, assessed SQL concepts, fixture/data needs, distractor/red-herring rules, complexity budget, completion criteria, completion signal, guidance pacing, persistence/reset expectations, suspect verification expectations, automated playthrough criteria, and future implementation sequence.
 
 A full case plan is still authoring documentation. It does not release a case, create database rows, expose answer keys, render Query Lab, advance milestones, persist progress, verify suspects, or become runtime authority. Runtime progression must still be implemented later through backend-approved read-only SQL results and deterministic validators.
+
+Use `docs/15-case-plans/CASE-AUTHORING-TEMPLATE.md` for new case plans and `docs/15-case-plans/CASE-VETTING-CHECKLIST.md` before implementation or release review.
 
 ## Production Sequence
 
 Future cases should be built in production-sized packages rather than isolated skeleton polish:
 
 1. Fill the case-authoring contract.
-2. Create a full case plan that defines the complete playable path and complexity budget.
+2. Create a full case plan that defines the complete playable path, declared tier, five-axis tier compliance, and completion contract.
 3. Inventory existing relational scaffolding before authoring case data.
 4. Add database-backed evidence data in coherent milestone bundles through the fresh-build creation/seed scripts.
 5. Add deterministic result-pattern validation for those milestones.
@@ -44,7 +48,7 @@ Future cases should be built in production-sized packages rather than isolated s
 7. Add learner-owned persistence and reset semantics for that case.
 8. Add investigation threads, evidence-board behavior, suspect verification, database rebuild/version enforcement, and release unlock through separate scoped packages.
 
-Each package must remain independently auditable. A filled authoring contract does not release a case, render Query Lab, create database rows, advance milestones, persist progress, or expose suspect verification.
+Each package must remain independently auditable. To reduce churn, implementation packages should follow the tier-system bundle guidance: Foundations and Tier 1 may use whole-case or large case-slice packages when practical, Tiers 2 and 3 should bundle two to three coherent story steps when possible, and Tiers 4 and 5 should bundle by investigation thread or evidence web rather than single-row polish. A filled authoring contract does not release a case, render Query Lab, create database rows, advance milestones, persist progress, or expose suspect verification.
 
 Case 001 has completed the first three pre-release production-sequence surfaces for its opening SQL milestone: a filled authoring definition, one base seed `CrimeSceneReport` fixture for the public clocktower incident report, and a deterministic backend service-level result-pattern validator for `case-001-clocktower-report-located`. It also has a gated backend integration-boundary consumer that can call that validator only when an explicit Case 001 skeleton-gate input is enabled, a query execution transport contract that can return its non-spoiler metadata only for explicit enabled Case 001 milestone opt-in requests, and a gated skeleton-local frontend feedback slice that can display non-spoiler report-location feedback from that metadata. Case 001 now also has a full author-only case plan at `docs/15-case-plans/Case-001-Clocktower-Poisoning-Plan.md` to guide future bundled evidence, validator, guidance, persistence, verification, and release work. These surfaces do not release Case 001, render the normal Query Lab, advance runtime milestones, persist progress, expose suspect verification, or make authoring metadata runtime authority. The validator boundary remains unwired from runtime progression until a later scoped package connects approved SQL results to milestone state.
 
@@ -68,6 +72,8 @@ SQL milestones must use backend-approved read-only SQL results and deterministic
 - free-text guesses
 
 Every SQL milestone must reference at least one declared evidence table family. A milestone cannot point to an undeclared table family, inferred schema, hidden answer-key row, or restricted data source.
+
+Completion criteria and completion signals must be declared in the case plan before implementation. Tiers 1 through 4 require one deterministic completion outcome. Tier 5 may allow multiple defensible conclusions only when the case declares an auditable evaluation framework and required SQL result evidence.
 
 ## State And Persistence
 
