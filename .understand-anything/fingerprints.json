@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "ec005bdebd72810105e0dcc6914c4fb687548cf7",
-  "generatedAt": "2026-08-28T16:18:34.455Z",
+  "gitCommitHash": "cb5cec2d4680039c1d75fa0c5ef3dbcb6f221396",
+  "generatedAt": "2026-08-30T03:06:18.579Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "c61747bf52ea3537cd7897ce62082a832ea44d8570e1e9269966bd31710e56da",
+      "contentHash": "06111e745b79543eb88bf4ab166fe08fc57755558b7fcb6d3c517b0a5e8e2133",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13489,
+      "totalLines": 13509,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "8b3f22d366e15634b3c70e22ea86e5b7b2094139d181dffc6064e09885a44d50",
+      "contentHash": "c24830582711bec296cbac74cd4960236f9d89b2d56b732c2ae95a28008a0acf",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3968,
+      "totalLines": 3974,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "effb3dc8dc498742eca1a92cbd8cef70df73cd4f2c43b2a00f2949bbd025745c",
+      "contentHash": "f2b7f8a7982e519dde0e97153dc94d2377989891785cc10cfb2f7116e78d118b",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15898,
+      "totalLines": 15909,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "8fe48e0e815aa59cc79c8218a167e91abcfa492bbfd06025e6ae79c576e4fe02",
+      "contentHash": "f0ffbfa99bee38a8a35a218fe4e061be1851dd5fbbe06ec3deac22174cab43c4",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -8135,12 +8135,12 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "b94dacd1d0a0e82d6131a36d9712e19308178d7cbb0d5f7bfd49b3fa6152b7d3",
+      "contentHash": "0d525f3166859895f74ac5a0dbbb5abbee602fd7b1aaedd251cf795d06cb4de1",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 86,
+      "totalLines": 88,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-AI-Agent-Boundaries.md": {
@@ -10995,12 +10995,22 @@
     },
     "docs/01-work-packages/WP-271-streamlined-tier-1-case-production-workflow.md": {
       "filePath": "docs/01-work-packages/WP-271-streamlined-tier-1-case-production-workflow.md",
-      "contentHash": "73034d44ff710d9425162c9efc7ff0d032ce674da06aa9e27f58eb02347e60a7",
+      "contentHash": "60b9d408ba3dfebb20d09b2392fb08878f8954965829f0567dd01890e28f655a",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 195,
+      "totalLines": 285,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-272-case-001-tier-1-foundations-shaping-plan.md": {
+      "filePath": "docs/01-work-packages/WP-272-case-001-tier-1-foundations-shaping-plan.md",
+      "contentHash": "24ba0b7d5c21a6ef6dda21600f97703a7cabbad0c6e89cc80ddfed6a40e1568d",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 206,
       "hasStructuralAnalysis": true
     },
     "docs/02-runtime/Backend-Setup-and-Validation.md": {
@@ -11945,12 +11955,12 @@
     },
     "docs/15-case-plans/Case-001-Clocktower-Poisoning-Plan.md": {
       "filePath": "docs/15-case-plans/Case-001-Clocktower-Poisoning-Plan.md",
-      "contentHash": "2a9ca6884f0c23d9061254618bcf2668fbc75bbf346012ce470d1984b21f2a10",
+      "contentHash": "dc1552fa1dffd914f23806af350912e59e51a5079db646e9fc17b11ff834caf2",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 303,
+      "totalLines": 346,
       "hasStructuralAnalysis": true
     },
     "docs/15-case-plans/Case-001-Existing-Data-Inventory.md": {

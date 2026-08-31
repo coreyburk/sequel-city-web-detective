@@ -27,6 +27,7 @@ Handling rules:
 | Case name | `The Clocktower Poisoning` |
 | Public eyebrow | `Public Spectacle` |
 | Track | `Foundations` |
+| Release tier target | `Tier 1: Junior Data Analyst` onboarding slice |
 | Release status | Archive Locked until a release WP explicitly enables it |
 | Existing gate | `VITE_ENABLE_CASE_001_PLAYABLE_SKELETON === "true"` for dev/test skeleton only |
 | Existing first milestone | `case-001-clocktower-report-located` |
@@ -39,64 +40,79 @@ Public dossier alignment:
 
 ## Intended Learner Experience
 
-The learner begins with a public event that appears over-witnessed. The case teaches that public visibility is not the same as reliable evidence. The learner should move from broad public records to linked interviews, then compare witness claims against event and identity records until one person has both access and opportunity.
+The learner begins with a public event that appears over-witnessed. The Tier 1/Foundations release slice teaches that public visibility is not the same as database evidence. The learner should move from one public report to the small set of linked interviews and then stop with a clear evidence summary.
 
 The case should feel like an early detective exercise:
 
 - start with a clear public report
-- follow a small number of table relationships
-- compare crowd claims to records
-- narrow a suspect without brute-force searching
-- verify a single culprit through the database-backed verification path
+- follow one report-to-interview relationship
+- identify a small, direct evidence set
+- receive deterministic feedback without suspect guessing
+- finish the onboarding slice with confidence before higher-complexity cases
 
 Case 001 should not require a mastermind branch. That keeps it aligned with `Foundations` and makes it a useful onboarding case before Case 004.
 
 ## Playable End State
 
-Case 001 is playable when a learner can:
+Case 001's Tier 1/Foundations release slice is playable when a learner can:
 
 1. Open the released case from the case library.
 2. Read the briefing and inspect schema metadata.
-3. Use Query Lab to run the six planned SQL milestones.
+3. Use Query Lab to run the two active SQL milestones.
 4. Receive deterministic, non-spoiler feedback after each milestone.
-5. Log or pin the relevant evidence for each milestone.
+5. Log or pin the public report and linked interview evidence.
 6. Follow authored Samuel guidance without receiving hidden answer values.
-7. Submit the final culprit through the backend verification flow.
-8. Receive a database-backed correct verdict and close the case.
-9. Reset/clear only learner-owned Case 001 progress.
-10. Replay the case from a clean state with deterministic results.
+7. Complete the onboarding slice through SQL-result evidence, not suspect submission.
+8. Reset/clear only learner-owned Case 001 progress when reset support is later scoped.
+9. Replay the slice from a clean state with deterministic results.
 
-Solve condition:
+Tier 1 completion condition:
 
-- The learner identifies the single culprit who had clockroom access after the toast, appears in the ceremony access trail, has a matching identity/vehicle record, and is tied by interview evidence to the poisoning opportunity.
-- The final suspect is verified only through the backend/database verification path for `case-001`.
+- The learner locates the public clocktower incident report and then retrieves the small linked interview set for that report.
+- The completion signal is backend-approved SQL result evidence showing the expected public report row and expected linked interview rows.
+- Query text, UI state, localStorage, AI output, prompt text, free-text guesses, and final suspect submission are not completion authority.
 
-Author-only final-solve note:
+Deferred expansion note:
 
-- The exact culprit person row, final verification answer, and any answer-key values are intentionally not assigned in this planning package. They must be assigned in a future fixture/answer-key WP that updates this plan or records a linked implementation note.
+- The prior M3-M6 culprit-narrowing path is no longer the active Tier 1/Foundations release path. It is split into later expansion, sequel, or higher-tier planning work.
+- The exact culprit person row, final verification answer, and any answer-key values are intentionally not assigned in this plan. They must be assigned only by a future scoped fixture/answer-key WP if the deferred expansion is revived.
+
+## Tier 1 Foundations Compliance
+
+| Axis | Tier 1/Foundations gate | Case 001 release slice |
+|---|---|---|
+| Story steps | 1 to 2 linear steps | 2 steps: locate the public report, then retrieve linked interviews |
+| SQL scope | 1 to 2 tables; `SELECT`, `WHERE`, `ORDER BY`, simple `COUNT` | `CrimeSceneReport` and `InterviewLog`; filtered lookup plus ordered linked rows |
+| People/entities | 2 to 3 meaningful people or entities | One public incident plus up to three interview participants as evidence context, not suspects |
+| Clues/evidence | 2 to 3 clear evidence items | Public report, linked interview set, and a direct records-vs-crowd observation |
+| Interpretation complexity | No ambiguity, no major red herrings, no unresolved contradictions | Direct evidence discovery only; no culprit choice, no major red herrings |
+
+Tier decision: Case 001 remains `Foundations` with a `Tier 1: Junior Data Analyst` release target. The oversized M3-M6 material is split out instead of reclassifying the onboarding case upward.
 
 ## Complexity Budget
 
 | Parameter | Limit |
 |---|---|
 | Track | Foundations |
-| SQL milestones | 6 |
-| Required table families | 6 |
-| Optional table families | `Employment` only if future review decides the culprit needs a civic-role tie-break |
+| Release tier target | Tier 1: Junior Data Analyst |
+| Active release-slice SQL milestones | 2 |
+| Deferred milestones | M3-M6 split out of the onboarding release path |
+| Required table families | 2: `CrimeSceneReport`, `InterviewLog` |
+| Optional table families | None for the release slice |
 | Query type | Read-only `SELECT` only |
-| Required filters | `WHERE` on every evidence milestone |
-| Sorting | `ORDER BY` allowed and expected once |
-| Joins | Introduced after initial single-table milestones |
-| Golden-path join limit | No more than two joins in a learner query |
+| Required filters | `WHERE` on both active evidence milestones |
+| Sorting | `ORDER BY` allowed and expected for linked interviews |
+| Joins | Not required for the release slice |
+| Golden-path join limit | 0 joins for the active release slice |
 | Nested queries | Not required |
 | CTEs/window functions | Not required |
 | Aggregation | Not required |
 | Mutation/temp/stored procedure SQL | Prohibited |
 | Restricted tables | Prohibited |
-| Major red herrings | 2 maximum |
-| Final suspects before verification | 1 primary culprit plus at most 1 plausible distractor |
+| Major red herrings | Prohibited |
+| Final suspects before verification | None in the Tier 1 release slice |
 
-The case should be shorter and cleaner than Case 004. It should assess early relational reasoning, not advanced SQL.
+The release slice should be shorter and cleaner than Case 004. It should assess basic evidence retrieval and report-linked interview discovery, not suspect narrowing or advanced relational reasoning.
 
 ## SQL Concept Coverage
 
@@ -104,41 +120,74 @@ The case should be shorter and cleaner than Case 004. It should assess early rel
 |---|---|---|
 | Basic projection | M1, M2 | Select useful columns instead of relying on hidden UI hints |
 | Single-table filtering | M1, M2 | Use known date, crime, city, and report identifiers |
-| Foreign-key following | M2, M3 | Move from `CrimeSceneReport.ReportID` to linked interviews and people |
+| Foreign-key following | M2 | Move from the located `CrimeSceneReport` row to linked interviews through `ReportID` |
 | Sorting | M2 | Stabilize transcript review order by `PersonID` or `LogID` |
-| Inner joins | M3, M4, M5 | Combine linked records across existing relationships |
-| Compound predicates | M4, M5 | Narrow with more than one condition |
-| Date/name filtering | M4 | Locate the ceremony event without scanning every event |
-| Attribute filtering | M5 | Use physical/vehicle details as evidence, not guesses |
-| Evidence confirmation | M6 | Retrieve final transcript support before suspect submission |
+
+Deferred concepts:
+
+| Concept | Former milestone coverage | Deferred disposition |
+|---|---|---|
+| Inner joins | M3, M4, M5 | Split out of the Tier 1/Foundations release path |
+| Compound predicates | M4, M5 | Split out of the Tier 1/Foundations release path |
+| Date/name filtering | M4 | Split out of the Tier 1/Foundations release path |
+| Attribute filtering | M5 | Deferred with `DriversLicense` narrowing |
+| Evidence confirmation before suspect submission | M6 | Deferred with final opportunity and verification work |
 
 ## Full Evidence Path
 
 1. Public report identifies the clocktower poisoning record in `CrimeSceneReport`.
-2. Linked `InterviewLog` rows for that report reveal the key witness claims:
-   - crowd believed the clockroom door stayed closed
-   - one record-backed access mark exists after the toast began
-   - the useful next step is to identify people connected to that access window
-3. `PersonsOfInterest` resolves witness and access-related PersonIDs into people records.
-4. `EventSchedule` and `EventRegistration` connect the civic ceremony to registered participants or staff.
-5. `DriversLicense` ties the narrowed person to a learner-visible descriptive clue from the transcript.
-6. A final `InterviewLog` query for the candidate supplies the opportunity statement needed before suspect verification.
-7. The learner submits the culprit through the backend verification endpoint.
+2. Linked `InterviewLog` rows for that report reveal a small, non-spoiler interview set.
+3. The learner completes the onboarding slice by recognizing that public crowd claims should be checked against linked records before making suspect claims.
+
+Deferred evidence path:
+
+- `PersonsOfInterest` identity resolution, `EventSchedule`/`EventRegistration` ceremony roster work, `DriversLicense` candidate narrowing, final opportunity transcript evidence, and suspect verification are no longer part of the Tier 1/Foundations release path.
+- Those surfaces may become a later expansion, sequel case, or higher-tier package only after a future product decision and scoped WP.
 
 ## SQL Milestones
 
-| # | Milestone id | Learner objective | Evidence table family | Expected query shape | SQL concept | Validator expectation | Future package type |
+| # | Milestone id | Learner objective | Evidence table family | Expected query shape | SQL concept | Validator expectation | Release-slice status |
 |---|---|---|---|---|---|---|---|
-| 1 | `case-001-clocktower-report-located` | Locate the public clocktower incident report. | `CrimeSceneReport` | `SELECT CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';` | Projection plus filtered lookup | Match existing public report row using `CrimeID`, `ReportDate`, `ReportCity`, and non-spoiler description tokens. | Already started; later progression wiring package |
-| 2 | `case-001-report-interviews-located` | Find interviews linked to the clocktower report. | `InterviewLog` | `SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = <clocktower ReportID> ORDER BY PersonID;` | Foreign-key follow plus sorting | Match the WP-259 3-row public interview bundle tied to the clocktower `ReportID`, including non-spoiler transcript tokens about the door claim and access timing. | Evidence-data plus validator package started in WP-259; runtime integration later |
-| 3 | `case-001-witness-identities-resolved` | Resolve relevant interview PersonIDs into people records. | `PersonsOfInterest`, `InterviewLog` | `SELECT p.PersonID, p.PersonName FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID WHERE i.ReportID = <clocktower ReportID>;` | First join | Match WP-259 witness/access-related people without requiring final culprit identification. | Validator plus clue-logging package started in WP-259; runtime integration later |
-| 4 | `case-001-ceremony-roster-narrowed` | Compare the clocktower ceremony roster with the access-window lead. | `EventSchedule`, `EventRegistration`, `PersonsOfInterest` | `SELECT e.EventID, e.EventName, r.EventPersonID, p.PersonName FROM EventSchedule e JOIN EventRegistration r ON r.EventID = e.EventID JOIN PersonsOfInterest p ON p.PersonID = r.EventPersonID WHERE e.EventDate = '<ceremony date>' AND e.EventName LIKE '%Clocktower%';` | Two joins plus compound event filter | Match the ceremony roster rows that include the eventual culprit and at least one plausible distractor. | Data bundle plus multi-table validator package |
-| 5 | `case-001-access-candidate-narrowed` | Use identity or vehicle details from evidence to narrow the access candidate. | `PersonsOfInterest`, `DriversLicense` | `SELECT p.PersonID, p.PersonName, d.* FROM PersonsOfInterest p JOIN DriversLicense d ON d.LicenseID = p.LicenseID WHERE <learner-visible attribute filters>;` | Attribute filtering after join | Match the candidate row or a two-person shortlist using only attributes previously exposed in interview/roster evidence. | Data bundle plus validator package |
-| 6 | `case-001-final-opportunity-confirmed` | Retrieve the candidate interview evidence needed before suspect submission. | `InterviewLog`, `PersonsOfInterest` | `SELECT i.PersonID, p.PersonName, i.LogTranscript FROM InterviewLog i JOIN PersonsOfInterest p ON p.PersonID = i.PersonID WHERE i.PersonID = <candidate PersonID> AND i.ReportID = <clocktower ReportID>;` | Evidence confirmation join | Match the candidate transcript containing non-spoiler opportunity tokens; validator must not reveal the final answer in feedback. | Final evidence, guidance, and verification-prep package |
+| 1 | `case-001-clocktower-report-located` | Locate the public clocktower incident report. | `CrimeSceneReport` | `SELECT CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';` | Projection plus filtered lookup | Match existing public report row using `CrimeID`, `ReportDate`, `ReportCity`, and non-spoiler description tokens. | Active Tier 1 release slice |
+| 2 | `case-001-report-interviews-located` | Find interviews linked to the clocktower report. | `InterviewLog` | `SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = <clocktower ReportID> ORDER BY PersonID;` | Foreign-key follow plus sorting | Match the WP-259 public interview bundle tied to the clocktower `ReportID`, including non-spoiler transcript tokens that support evidence review without asking for a culprit. | Active Tier 1 release slice |
+
+Deferred milestones split out of the Tier 1 release slice:
+
+| Former # | Milestone id | Deferred reason |
+|---|---|---|
+| 3 | `case-001-witness-identities-resolved` | Requires a join into `PersonsOfInterest` and starts identity resolution beyond the two-table Tier 1 slice. |
+| 4 | `case-001-ceremony-roster-narrowed` | Requires ceremony event/registration data and multi-table roster narrowing. |
+| 5 | `case-001-access-candidate-narrowed` | Requires `DriversLicense` attribute narrowing and candidate/distractor design. |
+| 6 | `case-001-final-opportunity-confirmed` | Requires final opportunity transcript, suspect-verification prep, and answer-boundary planning. |
+
+## Completion Contract
+
+Completion criteria:
+
+- The learner must produce backend-approved SQL results that locate the public `CrimeSceneReport` row for Case 001.
+- The learner must produce backend-approved SQL results that retrieve the expected linked `InterviewLog` rows for that report.
+- The milestone validators must confirm result shape and non-spoiler token expectations without using query text as authority.
+
+Completion signal:
+
+- A deterministic milestone-complete state for `case-001-clocktower-report-located`.
+- A deterministic milestone-complete state for `case-001-report-interviews-located`.
+- A final onboarding-slice summary that says the learner has completed the Tier 1/Foundations evidence-discovery case slice.
+
+Terminal evidence requirements:
+
+- One exact public report result.
+- A small exact interview result set tied to that report.
+- No final suspect, answer-key row, free-text explanation, UI-only action, localStorage state, prompt text, AI output, or narrative assertion can complete the slice.
+
+Suspect verification relationship:
+
+- Suspect verification is intentionally deferred. Requiring final culprit submission would exceed the Tier 1/Foundations release-slice scope.
+- A future expansion or sequel may add suspect verification through a separate scoped WP with restricted answer-key data and fresh-build seed updates.
 
 ## Database Fixture And Data Plan
 
-WP-259 adds the first M2-M3 evidence bundle. Future data WPs should continue adding coherent milestone bundles rather than isolated one-row polish.
+WP-259 added the first interview/person-linkage evidence bundle when the case was still being planned as a larger path. Under the reduced Tier 1/Foundations release slice, the M2 interview evidence remains useful, while M3 identity-resolution meaning is deferred. Future data WPs should implement coherent Tier 1 release-slice needs rather than isolated one-row polish or M5/M6 expansion work.
 
 ### Existing Data And Rebuild Policy
 
@@ -148,9 +197,9 @@ The current existing-data inventory is recorded in `docs/15-case-plans/Case-001-
 
 Future Case 001 data WPs must follow these rules:
 
-- Inventory existing `PersonsOfInterest`, `DriversLicense`, `Employment`, `EventSchedule`, and `EventRegistration` rows first.
+- Inventory existing rows first when they are in scope.
 - Reuse existing related people, places, events, driver-license, and employment records when they support a fair evidence path.
-- Expect to author, replace, or modify `CrimeSceneReport` and `InterviewLog` content because those tables carry the story thread.
+- Expect to author, replace, or modify `CrimeSceneReport` and `InterviewLog` content because those tables carry the Tier 1 release-slice story thread.
 - Document which rows are reused unchanged, modified for story fit, newly inserted, or intentionally avoided.
 - Preserve referential integrity and avoid breaking Case 004 data, tests, or answer paths.
 - Avoid relying on random coincidental data as mystery logic.
@@ -169,48 +218,46 @@ Case story/data authoring must update fresh database creation scripts, not migra
 | Table family | Public evidence needed | Author-only/verification data | Notes |
 |---|---|---|---|
 | `CrimeSceneReport` | Existing or modified public report row for the clocktower poisoning. | None for M1. | Story-bearing table. Future WPs may modify the base seed report text and must keep validator expectations aligned with the fresh-build script. Record generated `ReportID` expectations through tests rather than hard-coding a fragile identity value. |
-| `InterviewLog` | Clocktower report interviews: crowd claim, access timing lead, candidate opportunity transcript. | Final transcript tokens that support culprit verification. | Story-bearing table. Expect authored or modified transcript rows. Transcript wording must be fair: it can point to access/opportunity, but should not say "this person is guilty." |
-| `PersonsOfInterest` | Witness rows, access-related participant rows, final candidate row, one distractor row. | Final culprit PersonID used by verification. | Prefer reusing existing related people when names/relationships work; add or modify only when the existing row set cannot support a fair path. |
-| `DriversLicense` | Candidate/distractor descriptive details used for narrowing. | None unless final verification depends on LicenseID. | Prefer existing license rows linked to reused people. Attribute clues must be introduced in interview evidence before they are required in SQL. |
-| `EventSchedule` | Clocktower ceremony event row with date/name. | None. | Prefer an existing event row if it can be renamed or reused cleanly in the base seed script; otherwise author a small ceremony row. Event name should be discoverable with a simple date and `LIKE '%Clocktower%'` or equivalent filter. |
-| `EventRegistration` | Ceremony registrations connecting people to the event. | Culprit's registration row is solution-supporting but still ordinary evidence. | Prefer existing registration relationships when coherent; keep event roster small enough that the learner is narrowing, not paging through noise. |
-| `Employment` | Not planned for the core path. | Optional future tie-break only. | Reuse existing employment relationship only if review finds the candidate/distractor distinction too weak. |
-| `CaseAnswerKey` | None. | `case-001` final culprit verification row. | Must remain restricted and added only by a scoped verification/answer-key WP through the fresh-build data path, not a case-story migration. |
+| `InterviewLog` | Clocktower report interviews for M2. | None for the Tier 1 release slice. | Story-bearing table. Expect authored or modified transcript rows. Transcript wording must support evidence review without naming a culprit or forcing identity resolution. |
+| `PersonsOfInterest` | Deferred from the active release slice. | Future identity-resolution expansion only. | Existing person rows can remain relational context in data, but the Tier 1 path must not require a join into this table. |
+| `DriversLicense` | Deferred from the active release slice. | Future candidate/distractor narrowing only. | M5 is split out. Do not implement driver-license narrowing for the onboarding release slice. |
+| `EventSchedule` | Deferred from the active release slice. | Future ceremony-roster expansion only. | M4 is split out. Do not require event filtering for the onboarding release slice. |
+| `EventRegistration` | Deferred from the active release slice. | Future ceremony-roster expansion only. | M4 is split out. Do not expose a noisy roster in the onboarding release slice. |
+| `Employment` | Not planned for the release slice. | Optional future expansion tie-break only. | Do not introduce employment as an onboarding clue. |
+| `CaseAnswerKey` | None. | Deferred suspect-verification expansion only. | Must remain restricted and added only by a scoped verification/answer-key WP if future expansion revives culprit verification. |
 
 ## Red Herrings And Fairness
 
-Major red herring 1: crowd certainty.
+The Tier 1/Foundations release slice must not contain major red herrings. The earlier larger-case red-herring plan is superseded for the onboarding release path.
 
-- Claim: many witnesses believe the clockroom door stayed closed.
-- Purpose: teach that repeated witness claims are not the same as record evidence.
-- Fairness rule: the access-timing record must be discoverable before the learner is asked to distrust the crowd claim.
-- Resolution: interview and event/access evidence show the public view missed a private movement window.
+Allowed evidence tension:
 
-Major red herring 2: ceremony-program timing.
+- The public crowd perception may be presented as context, but the learner must not be asked to resolve ambiguity or identify a liar.
+- Linked interviews may show that public witness confidence is incomplete, but the disqualifying record evidence must be directly visible in the M2 result set.
+- Any distractor language must be immediately resolvable by the public report or linked interviews.
 
-- Claim: the bell test and ceremony program may look suspicious because they frame the public spectacle.
-- Purpose: keep the clocktower setting engaging without making every mechanical detail meaningful.
-- Fairness rule: the bell test must have a clean record; it can establish timing but cannot be necessary for final suspect verification.
-- Resolution: the useful conflict is toast-to-access timing, not the routine bell test.
+Deferred red-herring material:
 
-Minor distractors may exist in roster or identity results, but they must be ruled out by a visible evidence mismatch. The case should not rely on random extra rows or broad database noise as a difficulty substitute.
+- Ceremony-program timing, access-window suspicion, candidate/distractor comparison, and final opportunity interpretation are split out of the Tier 1 release slice.
+- If revived later, that material must be replanned under the appropriate tier and cannot be smuggled back into the onboarding path.
 
 ## Guidance And Samuel Pacing
 
-Samuel guidance should move in six beats:
+Samuel guidance for the Tier 1/Foundations release slice should move in two beats:
 
 1. Start with the public report, not the crowd rumor.
 2. Use the report identifier to find linked interviews.
-3. Turn PersonIDs into people only after reading the transcript lead.
-4. Compare the ceremony roster against the access-window clue.
-5. Use attribute evidence to narrow the candidate without guessing.
-6. Confirm opportunity in transcript evidence before suspect verification.
+
+Deferred guidance beats:
+
+- Turning PersonIDs into people, comparing the ceremony roster, using driver-license attributes, and confirming final opportunity are not part of the active release slice.
+- Those beats may be reused only in a future expansion/sequel plan.
 
 Guidance may reference:
 
 - table names
 - column names
-- already returned ReportID, PersonID, EventID, and LicenseID values
+- already returned report and interview values from the active M1-M2 slice
 - general SQL shape
 - the difference between public sightlines and record-backed evidence
 
@@ -239,17 +286,19 @@ Persistence remains presentation convenience. It is not evidence authority and c
 
 ## Suspect Verification And Final Solve
 
-Case 001 should use backend/database-backed suspect verification before release.
+Suspect verification is deferred from the Tier 1/Foundations release slice.
 
-Expected final flow:
+The active release slice should not ask the learner to name a culprit. It completes when deterministic SQL result evidence proves the learner located the public report and linked interviews.
 
-1. Learner retrieves final candidate opportunity evidence through M6.
-2. UI enables or emphasizes suspect submission.
+Deferred future flow, if revived:
+
+1. Learner retrieves final candidate opportunity evidence through a future expansion milestone.
+2. UI enables or emphasizes suspect submission only after the required evidence is earned.
 3. Learner submits the candidate's person/name value.
 4. Backend verifies against `case-001` answer data.
 5. UI shows a verdict and final case closeout copy.
 
-Verification package requirements:
+Future verification package requirements:
 
 - Add `case-001` answer-key data behind existing restricted boundaries.
 - Preserve `Solution` and `CaseAnswerKey` spoiler-control rules.
@@ -261,15 +310,15 @@ Verification package requirements:
 
 Before release, Case 001 should have:
 
-- Unit tests for each deterministic result-pattern validator.
+- Unit tests for the two active deterministic result-pattern validators.
 - Route/service tests proving gated and later released metadata transport behavior.
 - Negative validator tests for broad/no-match/wrong-row queries.
 - Restricted-table tests proving answer-key and solution tables remain blocked.
 - Browser tests for default locked behavior.
 - Browser tests for released Case 001 entry when the release WP enables it.
-- A golden-path playthrough test that runs all six milestone query shapes against local API/database setup.
+- A golden-path playthrough test that runs the two active milestone query shapes against local API/database setup.
 - A reset/restore browser test after persistence is implemented.
-- A final suspect verification positive/negative test.
+- Final suspect verification positive/negative tests only if a future expansion/release plan revives suspect submission.
 
 Golden-path validation should assert progression metadata, not brittle raw row rendering, unless the scoped UI package intentionally renders rows.
 
@@ -277,26 +326,20 @@ Golden-path validation should assert progression metadata, not brittle raw row r
 
 Future WPs should be larger than one-row polish but still auditable:
 
-1. Case 001 existing-data inventory package: inspect current relational scaffolding and choose which people, license, employment, event, and registration rows can be reused, modified, or avoided without relying on random story coincidences.
-2. Case 001 evidence bundle 1: update the fresh-build seed script with linked `InterviewLog` and `PersonsOfInterest` story data for M2-M3 plus validators and tests; do not add migrations.
-3. Case 001 evidence bundle 2: update the fresh-build seed script with ceremony `EventSchedule`/`EventRegistration` story data for M4 plus validator and tests; do not add migrations.
-4. Case 001 evidence bundle 3: update the fresh-build seed script with candidate/distractor `DriversLicense` links and final transcript data for M5-M6 plus validators and tests; do not add migrations.
-5. Case 001 database rebuild/version package: define the expected fresh-build database content/version check and block normal Case 001 play when the local database does not match; provide an explicit drop/recreate path before release.
-6. Case 001 backend progression integration: wire validators into deterministic milestone state for Case 001, still gated.
-7. Case 001 Query Lab/UI integration: render normal query/results/progression surfaces behind the existing gate.
-8. Case 001 guidance/thread/evidence-board package: add Samuel pacing, authored threads, and learner clue logging.
-9. Case 001 persistence/reset package: add case-id keyed restore and clear-progress behavior, including reset/ignore behavior when browser progress is stale against the database version.
-10. Case 001 verification package: add restricted answer-key data and final suspect verification through the fresh-build data path.
-11. Case 001 release-readiness smoke package: run full live-stack golden-path playthrough against a freshly rebuilt database and fix blockers.
-12. Case 001 release unlock package: enable released entry only after the preceding criteria pass.
+1. Case 001 Tier 1 release-slice implementation bundle: finish the M1-M2 data/validator/progression/UI feedback path behind the existing gate, using only `CrimeSceneReport` and `InterviewLog` evidence. Include database seed-script version/change-date updates if seed content changes.
+2. Case 001 Tier 1 guidance/evidence-board bundle: add two-beat Samuel pacing and learner-owned clue logging for the public report and linked interviews.
+3. Case 001 Tier 1 persistence/reset bundle: add case-id keyed restore and clear-progress behavior for the reduced slice only.
+4. Case 001 Tier 1 release-readiness smoke package: run the two-milestone live-stack golden-path playthrough against the expected database state and fix blockers.
+5. Case 001 release unlock package: enable released entry only after the Tier 1 release-slice criteria pass.
+6. Deferred expansion/sequel planning package: decide whether M3-M6 identity resolution, ceremony roster, `DriversLicense` narrowing, final opportunity transcript, suspect verification, answer-key data, and database rebuild/version enforcement should become a separate higher-tier Case 001 expansion or a new case.
 
-If this sequence proves too coarse during implementation, split by milestone pair rather than by single row.
+M5/M6 is no longer the next high-ROI implementation bundle for the onboarding release slice. Do not resume M5/M6 implementation until a future WP deliberately scopes the deferred expansion.
 
 ## Unresolved Authoring Assumptions
 
-- Exact culprit identity is intentionally unassigned in this package.
-- Exact PersonIDs, LicenseIDs, EventIDs, and ReportID should be assigned by future data WPs after existing relational rows are inventoried, then reflected in validator tests.
-- The plan assumes Case 001 is a single-culprit Foundations case without a mastermind branch. Adding a mastermind would require a revised complexity budget and should be treated as a separate product decision.
+- Exact culprit identity is intentionally unassigned and not needed for the Tier 1/Foundations release slice.
+- Exact PersonIDs, LicenseIDs, EventIDs, and deferred ReportID-dependent expansion values should be assigned only by future data WPs if the deferred expansion is revived.
+- The plan assumes Case 001 is a Tier 1/Foundations evidence-discovery onboarding case without culprit submission or a mastermind branch. Adding either would require a revised product decision and a new tier assessment.
 - The existing schema is sufficient for the planned path. If future review requires a dedicated access-log table, that would be a schema-changing WP and should not be smuggled into an evidence fixture package.
-- `Employment` is not part of the core path unless future playtesting shows the candidate/distractor distinction needs one more fair tie-break.
-- The local database rebuild/version enforcement mechanism is intentionally unimplemented in this planning package and must be scoped before Case 001 release.
+- `Employment` is not part of the release slice.
+- The local database rebuild/version enforcement mechanism is intentionally unimplemented in this planning package and belongs only to a future deferred expansion or release-readiness package if required by database content changes.

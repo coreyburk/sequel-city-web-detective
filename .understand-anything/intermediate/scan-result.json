@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13488,
+      "sizeLines": 13508,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3955,
+      "sizeLines": 3967,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15875,
+      "sizeLines": 15897,
       "fileCategory": "config"
     },
     {
@@ -1120,7 +1120,7 @@
     {
       "path": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
       "language": "markdown",
-      "sizeLines": 85,
+      "sizeLines": 87,
       "fileCategory": "docs"
     },
     {
@@ -2836,7 +2836,13 @@
     {
       "path": "docs/01-work-packages/WP-271-streamlined-tier-1-case-production-workflow.md",
       "language": "markdown",
-      "sizeLines": 194,
+      "sizeLines": 284,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/01-work-packages/WP-272-case-001-tier-1-foundations-shaping-plan.md",
+      "language": "markdown",
+      "sizeLines": 205,
       "fileCategory": "docs"
     },
     {
@@ -3406,7 +3412,7 @@
     {
       "path": "docs/15-case-plans/Case-001-Clocktower-Poisoning-Plan.md",
       "language": "markdown",
-      "sizeLines": 302,
+      "sizeLines": 345,
       "fileCategory": "docs"
     },
     {
@@ -3932,14 +3938,14 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 655,
+  "totalFiles": 656,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 655,
+    "filesScanned": 656,
     "byCategory": {
       "config": 18,
-      "docs": 404,
+      "docs": 405,
       "data": 33,
       "code": 144,
       "markup": 2,
@@ -3947,7 +3953,7 @@
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 404,
+      "markdown": 405,
       "csv": 24,
       "python": 15,
       "unknown": 1,
