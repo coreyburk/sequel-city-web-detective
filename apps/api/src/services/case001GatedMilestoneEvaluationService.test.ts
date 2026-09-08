@@ -143,7 +143,7 @@ const testCases: TestCase[] = [
     }
   },
   {
-    name: "evaluates the Case 001 witness identities validator when the skeleton gate is enabled",
+    name: "reports the deferred Case 001 witness identities milestone as unsupported",
     run: () => {
       const result =
         case001GatedMilestoneEvaluationService.evaluateCase001GatedMilestone({
@@ -155,23 +155,23 @@ const testCases: TestCase[] = [
 
       assert.deepEqual(result, {
         caseId: "case-001",
-        milestoneId: "case-001-witness-identities-resolved",
-        evidenceTableFamily: "PersonsOfInterest",
+        milestoneId: "case-001-clocktower-report-located",
+        evidenceTableFamily: "CrimeSceneReport",
         gate: {
           name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
           enabledValue: "true",
           isEnabled: true
         },
-        evaluated: true,
-        matched: true,
-        matchedRowCount: 3,
-        runtimeStatus: "evaluated-no-progression",
+        evaluated: false,
+        matched: false,
+        matchedRowCount: 0,
+        runtimeStatus: "unsupported-milestone",
         milestoneAdvanced: false
       });
     }
   },
   {
-    name: "evaluates the Case 001 ceremony roster validator when the skeleton gate is enabled",
+    name: "reports the deferred Case 001 ceremony roster milestone as unsupported",
     run: () => {
       const result =
         case001GatedMilestoneEvaluationService.evaluateCase001GatedMilestone({
@@ -183,17 +183,17 @@ const testCases: TestCase[] = [
 
       assert.deepEqual(result, {
         caseId: "case-001",
-        milestoneId: "case-001-ceremony-roster-narrowed",
-        evidenceTableFamily: "EventRegistration",
+        milestoneId: "case-001-clocktower-report-located",
+        evidenceTableFamily: "CrimeSceneReport",
         gate: {
           name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
           enabledValue: "true",
           isEnabled: true
         },
-        evaluated: true,
-        matched: true,
-        matchedRowCount: 4,
-        runtimeStatus: "evaluated-no-progression",
+        evaluated: false,
+        matched: false,
+        matchedRowCount: 0,
+        runtimeStatus: "unsupported-milestone",
         milestoneAdvanced: false
       });
     }

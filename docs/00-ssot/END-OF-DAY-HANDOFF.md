@@ -2,87 +2,73 @@
 
 ## Purpose
 
-Use this file to transfer current working context between development sessions and machines.
-
-This is the live handoff artifact. Refresh it from `docs/00-ssot/END-OF-DAY-HANDOFF-TEMPLATE.md` before each handoff commit so older state does not remain in place.
+Transfer current working context between sessions and machines. Refresh this live handoff before each accepted work-package closeout commit.
 
 ## Current State
 
-- Date: 2026-08-30
-- Machine: `BurkG7`, current Codex desktop workspace at `D:\GitHub-Repos\SequelCityWeb`
-- Peer Machine: unspecified
+- Date: 2026-09-08
+- Workspace: `D:\GitHub-Repos\SequelCityWeb`, Codex desktop
 - Branch: `main`, tracking `origin/main`
-- Repo status before WP-272 closeout commit: dirty only with accepted WP-272 case-plan/work-package/handoff/Understand graph changes
-- Current HEAD before WP-272 closeout commit: `cb5cec2`
 - Remote: `origin` -> `https://github.com/coreyburk/sequel-city-web.git`
-- Codex sandbox status: repaired after WP-268 closeout; normal sandboxed commands are expected to work
-- Understand graph baseline after WP-272 refresh: refreshed during WP-272 with `filesScanned=656`, graph assembly `nodes=1064`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 656 files`
-- Paused draft: WP-270 Case 001 tier/reclassification planning draft is still preserved in `stash@{0}` and was intentionally not modified by WP-272
+- HEAD before WP-273 closeout commit: `6cd8fcffa7295d2b921d8fac579a77477a6c1a56` (accepted WP-272)
+- Repo status before closeout commit: only accepted WP-273 implementation, tests, graph artifacts, work package, and handoff changes.
+- Understand graph refreshed during implementation: 657 files, 1058 nodes, 401 edges, 6 layers, 7 tour steps; recorded baseline `6cd8fcf`.
+- `git stash list` is empty as of closeout; the previous handoff's WP-270 stash reference is no longer current.
 
 ## Active Work Package
 
-- Current WP: `WP-272-case-001-tier-1-foundations-shaping-plan.md`
-- Status: accepted after PASS audit and human closeout request; ready for closeout commit/push
-- Final Decision: accepted on 2026-08-30
+- Current WP: `WP-273-case-001-tier-1-m1-m2-release-slice-implementation-bundle.md`
+- Status: accepted by the human after recorded PASS audit; prepared for closeout commit and push.
+- Final Decision: Accepted on 2026-09-08; human explicitly authorized closeout.
+- Recent accepted packages: WP-271 case-production workflow, WP-272 Tier 1 shaping plan, WP-273 gated M1-M2 implementation.
 
 ## Completed This Session
 
-- Implemented, audited, accepted, and closed out WP-272 as a documentation/case-plan-only shaping package.
-- Updated `docs/15-case-plans/Case-001-Clocktower-Poisoning-Plan.md` so Case 001 remains `Foundations` with a `Tier 1: Junior Data Analyst` onboarding release target.
-- Reduced the active Case 001 release slice to M1-M2: public `CrimeSceneReport` lookup and linked `InterviewLog` retrieval.
-- Added Tier 1 Foundations compliance evidence for story steps, SQL scope, people/entities, clues/evidence, and interpretation complexity.
-- Added a deterministic completion contract based on SQL result evidence, excluding query text, UI state, localStorage, AI output, prompt text, free-text guesses, and final suspect verification as completion authority.
-- Split M3-M6, `DriversLicense` narrowing, ceremony roster work, final opportunity transcript, suspect verification, answer-key data, database rebuild/version enforcement, and release unlock into deferred expansion/sequel scope.
-- Updated the Case 001 future WP sequence so the next implementation target is the Tier 1 release-slice bundle, not M5/M6.
-- Refreshed tracked Understand graph artifacts after the Case 001 plan change.
-- Preserved documentation-only scope: no app, database, migration, package, lockfile, script, `.codex`, runtime AI, answer-key, suspect-verification, release-gate, WP-270, or Case 001 implementation behavior changed.
+- Reviewed WP-273 audit, validation evidence, and changed-file scope.
+- Recorded human acceptance and checked off acceptance criteria with the documented live-smoke limitation retained.
+- Refreshed this handoff for the accepted implementation: backend and frontend active Case 001 milestones now contain only M1 report lookup and M2 report-linked interviews.
+- Implementation includes two-step guidance and completion feedback, deferred M3/M4 rejection coverage, updated unit/integration/browser tests, and refreshed Understand graph artifacts.
+- Existing database seed content already matched M1-M2 expectations; no seed changes were needed.
 
 ## Verification Summary
 
-Verification performed for WP-272:
+Recorded implementation/audit evidence (not rerun during documentation closeout):
 
-- PASS: targeted `rg` checks confirmed the Case 001 plan includes the Tier 1 release target, Tier 1 Foundations compliance section, all five tier axes, two active SQL milestones, active M1-M2 release-slice status, deterministic SQL-result completion contract, deferred M3-M6 scope, prohibited major red herrings, and revised future WP sequence.
-- PASS: targeted negative `rg` checks found no remaining old active-release claims for `six planned SQL milestones`, `Use Query Lab to run the six`, `SQL milestones | 6`, `Required table families | 6`, `Major red herring 1`, `Major red herring 2`, `2 maximum`, `all six milestone query shapes`, `Case 001 evidence bundle 3`, or `M5-M6 plus validators`.
-- PASS: `scripts/check-understand-refresh-readiness.ps1` before graph refresh reported `READY`.
-- PASS: `scripts/refresh-understand-graph.ps1`; graph rebuilt with `filesScanned=656`, `nodes=1064`, `edges=408`, `layers=6`, `tourSteps=7`, and `Fingerprints baseline: 656 files`.
-- PASS: `scripts/check-understand-refresh-readiness.ps1` after graph refresh reported `READY`.
-- PASS: `scripts/get-work-package-status.ps1 WP-272` reported no out-of-scope dirty files before Code Results were recorded.
-- PASS: `scripts/get-work-package-validation-plan.ps1 WP-272` reported `ValidationEvidenceRecorded` after implementation.
-- PASS: `git diff --check`; only Git LF-to-CRLF working-copy warnings were emitted.
-- PASS: WP-272 audit recorded `Verdict: PASS`.
-- PASS: `scripts/check-work-package-closeout.ps1 WP-272` reported `ReadyForAcceptance` before final decision.
-- NOT RUN: runtime app/API/database tests; intentionally not applicable because WP-272 is documentation/case-plan-only and does not modify runtime code, database scripts, migrations, packages, lockfiles, scripts, answer-key data, suspect verification behavior, or release gates.
+- PASS: API and web test suites, root build, and web build.
+- PASS: targeted active-source checks for M1-M2 alignment and absence of active M3/M4 routes.
+- PASS: Understand readiness before/after refresh and graph regeneration.
+- PASS: recorded audit; no scope violations or implementation defects reported.
+- SKIPPED: opt-in live browser smoke because `http://127.0.0.1:3001/api/health/full` refused the connection (`ECONNREFUSED`). Live end-to-end behavior remains unverified.
+
+Closeout checks:
+
+- Work-package lifecycle helpers confirm acceptance, validation evidence, and no out-of-scope dirty files.
+- Closeout preflight reports `ReadyForFinalization` after acceptance.
+- `git diff --check` passed during audit review; final documentation checks accompany the commit preview.
 
 ## Open Issues / Risks
 
-- Case 004 remains the only normal released playable/restorable case.
-- Case 004 remains provisionally classified as `Tier 3: Data Inspector` until an end-to-end case audit validates its full playable path, final query complexity, and observed learner friction.
-- Case 001 remains locked and unreleased by default unless `VITE_ENABLE_CASE_001_PLAYABLE_SKELETON` is exactly `"true"`.
-- Case 001 is now planned as a Tier 1/Foundations onboarding release slice with only M1-M2 active for release.
-- Case 001 still needs a scoped implementation bundle to finish the M1-M2 data/validator/progression/UI feedback path behind the existing gate.
-- Case 001 still needs later scoped guidance/evidence-board, persistence/reset, release-readiness smoke, and release unlock packages for the reduced slice.
-- M3-M6, M5/M6, suspect verification, answer-key data, and database rebuild/version enforcement are deferred expansion/sequel scope and must not be treated as the next onboarding implementation target.
-- WP-270 remains in `stash@{0}` as a superseded draft. It should be dropped or archived in a deliberate cleanup step after WP-272 is committed and pushed.
+- Case 001 remains gated and unreleased by default; only the explicit playable-skeleton gate enables it.
+- Case 001 needs subsequent guidance/evidence-board, persistence/reset, release-readiness smoke, and release-unlock packages.
+- M3-M6, suspect verification, answer-key content, and higher-tier expansion remain outside the onboarding release slice.
+- Audit notes two nonblocking metadata inconsistencies: a browser annotation still names WP-254, and the M1 authoring boundary retains its older runtime-status label. These do not affect active runtime behavior according to the audit.
+- Case 004 behavior is preserved and remains the normal released playable/restorable case. Its Tier 3 classification remains provisional pending a full case audit.
 
 ## Next Recommended Step
 
-1. Pull latest `main` on any other machine/session.
-2. Create the next WP for the Case 001 Tier 1 release-slice implementation bundle: finish M1-M2 data/validator/progression/UI feedback behind the existing gate using only `CrimeSceneReport` and `InterviewLog` evidence.
-3. After WP-272 is safely pushed, clean up the superseded WP-270 stash deliberately rather than leaving it as a confusing future draft.
+1. Confirm the WP-273 closeout commit is on `origin/main`; pull it on other machines.
+2. Plan the next scoped Case 001 guidance/evidence-board package for the accepted M1-M2 Tier 1 slice.
+3. Retain the live-smoke limitation for release-readiness work; validate against an available local API/database before any release claim.
 
 ## Resume Prompt (Copy/Paste)
 
-Continue from `docs/00-ssot/END-OF-DAY-HANDOFF.md`. Confirm the WP-272 closeout commit and push are present on `main`. Treat WP-272 as accepted: it reshapes Case 001 as a Tier 1/Foundations onboarding release slice, reduces the active release path to M1-M2, defers M3-M6/M5-M6/suspect verification/answer-key/release unlock complexity, and refreshes Understand graph artifacts while preserving documentation-only scope. The next high-ROI work is the Case 001 Tier 1 M1-M2 release-slice implementation bundle behind the existing gate. WP-270 remains a superseded draft in `stash@{0}` and should be cleaned up deliberately after the closeout commit is safely pushed.
+Continue from `docs/00-ssot/END-OF-DAY-HANDOFF.md`. Verify WP-273 closeout on main. WP-273 is accepted and implements the gated Case 001 M1-M2 Tier 1 slice with passing recorded API/web tests, builds, and audit. Live smoke was skipped because the local API was unavailable. Plan the next scoped guidance/evidence-board package while preserving the gate and keeping persistence/reset, release unlock, and M3-M6 outside that package unless explicitly scoped.
 
 ## Update Checklist
 
-Before committing the live handoff, confirm:
-
-- date is current
-- branch and remote are current
-- repo status is current
-- current WP and status are current
-- verification results are current
-- audit status is current
-- open risks reflect actual observed state
-- next recommended step is actionable
+- Current date, branch, remote, precommit HEAD, and scope recorded.
+- Human acceptance and audit outcome recorded.
+- Recorded validation distinguished from fresh closeout checks.
+- Live-smoke limitation and nonblocking notes retained.
+- Stale active-WP and stash references removed.
+- Next step reflects the completed M1-M2 implementation.

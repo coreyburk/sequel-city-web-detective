@@ -222,51 +222,9 @@ export const CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY = {
   runtimeStatus: "gated-non-progressing"
 } as const;
 
-export const CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY = {
-  id: "case-001-witness-identities-resolved",
-  title: "Witness Identities Resolved",
-  learnerObjective:
-    "Join report-linked interview records to people records without treating witness identities as a final suspect answer.",
-  progressionSource: "backend-approved-read-only-sql-results",
-  initialTableFamily: ["PersonsOfInterest"],
-  validationOwner: "deterministic-backend-result-pattern",
-  invalidProgressionAuthorities: [
-    "ui-state",
-    "skeleton-selections",
-    "localStorage",
-    "ai",
-    "free-text-guesses"
-  ],
-  releaseGateBehavior:
-    "Declared for the gated Case 001 skeleton only; it does not make Case 001 a released playable case.",
-  runtimeStatus: "gated-non-progressing"
-} as const;
-
-export const CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY = {
-  id: "case-001-ceremony-roster-narrowed",
-  title: "Ceremony Roster Narrowed",
-  learnerObjective:
-    "Join the clocktower ceremony event to its registration roster and people records without treating roster membership as a final suspect answer.",
-  progressionSource: "backend-approved-read-only-sql-results",
-  initialTableFamily: ["EventSchedule", "EventRegistration", "PersonsOfInterest"],
-  validationOwner: "deterministic-backend-result-pattern",
-  invalidProgressionAuthorities: [
-    "ui-state",
-    "skeleton-selections",
-    "localStorage",
-    "ai",
-    "free-text-guesses"
-  ],
-  releaseGateBehavior:
-    "Declared for the gated Case 001 skeleton only; it does not make Case 001 a released playable case.",
-  runtimeStatus: "gated-non-progressing"
-} as const;
-
 export const CASE_001_SQL_MILESTONE_BOUNDARIES = [
   CASE_001_FIRST_SQL_MILESTONE_BOUNDARY,
-  CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY,
-  CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY,
-  CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY
+  CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY
 ] as const;
 
 export type Case001SqlMilestoneBoundary =
@@ -330,52 +288,9 @@ export const CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE: Case001SqlFeedbackSlice 
     "This skeleton feedback does not render transcripts, log clues, persist progress, or advance Case 001."
 } as const;
 
-export const CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE: Case001SqlFeedbackSlice = {
-  milestoneId: CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id,
-  title: "Witness Identity Check",
-  prompt:
-    "Use the interview PersonID values you observed to inspect PersonsOfInterest. Use Pinned Facts and query-assist tokens for exact values before writing the relationship query.",
-  inputLabel: "Identity query",
-  starterSql:
-    "SELECT * FROM PersonsOfInterest;",
-  submitLabel: "Check Identity Query",
-  emptyQueryMessage: "Enter a read-only SQL query before checking witness identities.",
-  loadingMessage: "Checking the query against the gated Case 001 witness boundary.",
-  matchedMessage:
-    "Witness identities resolved. The backend recognized the report-linked people lookup, but no case progress was saved or advanced.",
-  noMatchMessage:
-    "No witness-identity milestone match yet. Keep the query tied to report-linked InterviewLog PersonIDs and PersonsOfInterest.",
-  missingMetadataMessage:
-    "The query ran, but no gated Case 001 witness metadata was returned.",
-  nonProgressingMessage:
-    "This skeleton feedback does not render names, log clues, persist progress, or verify a suspect."
-} as const;
-
-export const CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE: Case001SqlFeedbackSlice = {
-  milestoneId: CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id,
-  title: "Ceremony Roster Check",
-  prompt:
-    "Use the named witness/access identities to inspect the ceremony records. Start with EventSchedule, then relate the clocktower ceremony EventID to EventRegistration and PersonsOfInterest.",
-  inputLabel: "Roster query",
-  starterSql: "SELECT * FROM EventSchedule;",
-  submitLabel: "Check Roster Query",
-  emptyQueryMessage: "Enter a read-only SQL query before checking the ceremony roster.",
-  loadingMessage: "Checking the query against the gated Case 001 ceremony-roster boundary.",
-  matchedMessage:
-    "Ceremony roster narrowed. The backend recognized the clocktower ceremony roster relationship, but no case progress was saved or advanced.",
-  noMatchMessage:
-    "No ceremony-roster milestone match yet. Keep the query tied to EventSchedule, EventRegistration, and PersonsOfInterest rows for the clocktower ceremony.",
-  missingMetadataMessage:
-    "The query ran, but no gated Case 001 ceremony-roster metadata was returned.",
-  nonProgressingMessage:
-    "This skeleton feedback does not render roster rows, log clues, persist progress, or verify a suspect."
-} as const;
-
 export const CASE_001_SQL_FEEDBACK_SLICES = [
   CASE_001_FIRST_SQL_FEEDBACK_SLICE,
-  CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE,
-  CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE,
-  CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE
+  CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE
 ] as const;
 
 export const CASE_001_MILESTONES: CaseMilestone[] = [
@@ -392,23 +307,6 @@ export const CASE_001_MILESTONES: CaseMilestone[] = [
     cluePrompt:
       "Follow the clocktower report into InterviewLog and inspect the public witness bundle.",
     matches: (sql) => sql.includes("interviewlog")
-  },
-  {
-    id: CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id,
-    title: CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.title,
-    cluePrompt:
-      "Join report-linked interviews to PersonsOfInterest so the witness/access identities are named.",
-    matches: (sql) => sql.includes("interviewlog") && sql.includes("personsofinterest")
-  },
-  {
-    id: CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id,
-    title: CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.title,
-    cluePrompt:
-      "Join the clocktower ceremony event to EventRegistration and PersonsOfInterest so the roster can be compared against the access lead.",
-    matches: (sql) =>
-      sql.includes("eventschedule") &&
-      sql.includes("eventregistration") &&
-      sql.includes("personsofinterest")
   }
 ];
 
@@ -440,34 +338,6 @@ export const CASE_001_SAMUEL_STEPS: SamuelBriefingStep[] = [
     successSignal:
       "The report-linked interview rows are visible in Query Results.",
     queryDraft: CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE.starterSql
-  },
-  {
-    id: CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id,
-    label: "Step 3",
-    title: "Resolve the interview identities.",
-    guidance:
-      "Turn report-linked interview PersonIDs into names before drawing conclusions about access or opportunity. Use PersonsOfInterest and the PersonID values you actually observed.",
-    observationPrompt:
-      "A named witness/access list is easier to test than disconnected transcript fragments. Keep the InterviewLog-to-PersonsOfInterest relationship explicit.",
-    nextStep:
-      "Inspect PersonsOfInterest, then relate it back to the InterviewLog PersonIDs tied to the report.",
-    successSignal:
-      "The report-linked names are visible in Query Results.",
-    queryDraft: CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE.starterSql
-  },
-  {
-    id: CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id,
-    label: "Step 4",
-    title: "Compare the ceremony roster.",
-    guidance:
-      "Use the named witness/access identities as anchors, then inspect EventSchedule for the clocktower ceremony and carry the returned EventID into EventRegistration.",
-    observationPrompt:
-      "Roster membership is not a confession. It only tells you which named people belong in the same ceremony access trail.",
-    nextStep:
-      "Inspect EventSchedule for the clocktower ceremony, then relate that EventID through EventRegistration to PersonsOfInterest.",
-    successSignal:
-      "The clocktower ceremony roster relationship is visible in Query Results.",
-    queryDraft: CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE.starterSql
   }
 ];
 
@@ -485,15 +355,7 @@ export function buildCase001MilestoneEvaluationRequest(
   const normalizedSql = normalizeSql(sql);
   let milestoneId: Case001SqlMilestoneId | null = null;
 
-  if (
-    normalizedSql.includes("eventschedule") &&
-    normalizedSql.includes("eventregistration") &&
-    normalizedSql.includes("personsofinterest")
-  ) {
-    milestoneId = CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id;
-  } else if (normalizedSql.includes("personsofinterest") && normalizedSql.includes("interviewlog")) {
-    milestoneId = CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id;
-  } else if (normalizedSql.includes("interviewlog")) {
+  if (normalizedSql.includes("interviewlog")) {
     milestoneId = CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id;
   } else if (normalizedSql.includes("crimescenereport")) {
     milestoneId = CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id;

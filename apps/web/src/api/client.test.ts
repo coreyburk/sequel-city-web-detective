@@ -168,7 +168,7 @@ describe("api client", () => {
     );
   });
 
-  it("accepts M2 and M3 Case 001 milestone metadata response shapes", async () => {
+  it("accepts the M2 Case 001 milestone metadata response shape", async () => {
     const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
       new Response(
         JSON.stringify({
@@ -176,8 +176,8 @@ describe("api client", () => {
           data: { columns: [], rows: [], rowCount: 0 },
           caseMilestoneEvaluation: {
             caseId: "case-001",
-            milestoneId: "case-001-witness-identities-resolved",
-            evidenceTableFamily: "PersonsOfInterest",
+            milestoneId: "case-001-report-interviews-located",
+            evidenceTableFamily: "InterviewLog",
             gate: {
               name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
               enabledValue: "true",
@@ -203,11 +203,11 @@ describe("api client", () => {
     );
 
     const response = await executeQuery(
-      "SELECT p.PersonID FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID",
+      "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975",
       {
         caseMilestoneEvaluation: {
           caseId: "case-001",
-          milestoneId: "case-001-witness-identities-resolved",
+          milestoneId: "case-001-report-interviews-located",
           isSkeletonGateEnabled: true
         }
       }
@@ -218,8 +218,8 @@ describe("api client", () => {
       throw new Error("Expected query execution success.");
     }
     expect(response.caseMilestoneEvaluation).toMatchObject({
-      milestoneId: "case-001-witness-identities-resolved",
-      evidenceTableFamily: "PersonsOfInterest",
+      milestoneId: "case-001-report-interviews-located",
+      evidenceTableFamily: "InterviewLog",
       milestoneAdvanced: false
     });
     expect(fetchSpy).toHaveBeenCalledWith(
@@ -227,10 +227,10 @@ describe("api client", () => {
       expect.objectContaining({
         method: "POST",
         body: JSON.stringify({
-          sql: "SELECT p.PersonID FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID",
+          sql: "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975",
           caseMilestoneEvaluation: {
             caseId: "case-001",
-            milestoneId: "case-001-witness-identities-resolved",
+            milestoneId: "case-001-report-interviews-located",
             isSkeletonGateEnabled: true
           }
         })

@@ -7,7 +7,7 @@ const API_BASE_URL = process.env.VITE_API_BASE_URL ?? "http://127.0.0.1:3001";
 const EXPLORATORY_STARTER_SQL = "SELECT * FROM CrimeSceneReport;";
 const M1_TARGET_SQL =
   "SELECT CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';";
-const OLD_M2_ANSWER_PREFILL_SQL =
+const M2_TARGET_SQL =
   "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;";
 
 type PreflightResult =
@@ -34,7 +34,7 @@ async function getResponseJson(response: { json: () => Promise<unknown> }): Prom
 }
 
 function formatBlocker(message: string): string {
-  return `WP-254 live smoke blocker: ${message}`;
+  return `WP-273 live smoke blocker: ${message}`;
 }
 
 async function classifyLiveStackReadiness(
@@ -77,10 +77,10 @@ async function classifyLiveStackReadiness(
     queryResponse = await apiRequest.post(queryUrl, {
       timeout: 10000,
       data: {
-        sql: M1_TARGET_SQL,
+        sql: M2_TARGET_SQL,
         caseMilestoneEvaluation: {
           caseId: "case-001",
-          milestoneId: "case-001-clocktower-report-located",
+          milestoneId: "case-001-report-interviews-located",
           isSkeletonGateEnabled: true
         }
       }
@@ -121,7 +121,7 @@ async function classifyLiveStackReadiness(
     return {
       status: "blocked",
       message: formatBlocker(
-        "Case 001 public clocktower CrimeSceneReport fixture was not detected by the milestone validator. Apply pending database migrations or rebuild the local database from the current base scripts, then rerun."
+        "Case 001 public clocktower InterviewLog fixture was not detected by the milestone validator. Apply pending database migrations or rebuild the local database from the current base scripts, then rerun."
       )
     };
   }
@@ -139,7 +139,7 @@ async function classifyLiveStackReadiness(
 }
 
 test.describe("Case 001 gated live-stack smoke", () => {
-  test("enters the gated shared shell and displays first SQL results with non-progressing feedback", async ({
+  test("enters the gated shared shell and completes the M1-M2 SQL slice with non-progressing feedback", async ({
     page
   }) => {
     test.skip(
@@ -203,7 +203,7 @@ test.describe("Case 001 gated live-stack smoke", () => {
     });
     await expect(page.getByText(/Public report located/i)).toBeVisible();
     await expect(page.getByLabel("SQL query input")).toHaveValue("SELECT * FROM InterviewLog;");
-    await expect(page.getByLabel("SQL query input")).not.toHaveValue(OLD_M2_ANSWER_PREFILL_SQL);
+    await expect(page.getByLabel("SQL query input")).not.toHaveValue(M2_TARGET_SQL);
     await expect(page.getByText(/proved ReportID from the clocktower report row/i).first()).toBeVisible();
     await expect(page.getByRole("table")).toBeVisible();
     await expect(page.getByText(/Public clocktower ceremony report/i)).toBeVisible();
@@ -212,11 +212,37 @@ test.describe("Case 001 gated live-stack smoke", () => {
     await expect(page.getByText(/matchedRowCount/i)).toHaveCount(0);
     await expect(page.getByText(/milestoneAdvanced/i)).toHaveCount(0);
 
+    await page.getByLabel("SQL query input").fill(M2_TARGET_SQL);
+    const interviewResponsePromise = page.waitForResponse(
+      (response) => response.url().includes("/api/query/execute") && response.status() === 200
+    );
+    await page.getByRole("button", { name: "Run Query" }).click();
+    const interviewQueryResponse = await interviewResponsePromise;
+    const interviewResponseBody = await interviewQueryResponse.json();
+
+    expect(interviewResponseBody.caseMilestoneEvaluation).toMatchObject({
+      caseId: "case-001",
+      milestoneId: "case-001-report-interviews-located",
+      matched: true,
+      runtimeStatus: "evaluated-no-progression",
+      milestoneAdvanced: false
+    });
+    await expect(page.getByText(/Report-linked interviews located/i)).toBeVisible();
+    await expect(page.getByRole("table")).toBeVisible();
+    await expect(page.getByText(/clocktower/i).first()).toBeVisible();
+    await expect(page.getByLabel("SQL query input")).toHaveValue(M2_TARGET_SQL);
+    await expect(page.getByLabel("SQL query input")).not.toHaveValue("SELECT * FROM PersonsOfInterest;");
+    await expect(page.getByText(/matchedRowCount/i)).toHaveCount(0);
+    await expect(page.getByText(/milestoneAdvanced/i)).toHaveCount(0);
+
     await page.getByRole("button", { name: "Evidence Board" }).click();
     await expect(page.getByRole("heading", { name: "Evidence Notebook" })).toBeVisible();
-    await expect(page.getByText("Completed milestones: 1 / 4")).toBeVisible();
+    await expect(page.getByText("Completed milestones: 2 / 2")).toBeVisible();
     await expect(
       page.getByRole("listitem").filter({ hasText: "Clocktower incident report located" }).first()
+    ).toBeVisible();
+    await expect(
+      page.getByRole("listitem").filter({ hasText: "Report-linked interviews located" }).first()
     ).toBeVisible();
 
     const case001StorageKeys = await page.evaluate(() =>

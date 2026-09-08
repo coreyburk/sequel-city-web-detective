@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13508,
+      "sizeLines": 13510,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3967,
+      "sizeLines": 3979,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15897,
+      "sizeLines": 15919,
       "fileCategory": "config"
     },
     {
@@ -382,7 +382,7 @@
     {
       "path": "apps/api/src/routes/queryRoutes.test.ts",
       "language": "typescript",
-      "sizeLines": 482,
+      "sizeLines": 454,
       "fileCategory": "code"
     },
     {
@@ -418,19 +418,19 @@
     {
       "path": "apps/api/src/services/case001GatedMilestoneEvaluationService.ts",
       "language": "typescript",
-      "sizeLines": 249,
+      "sizeLines": 223,
       "fileCategory": "code"
     },
     {
       "path": "apps/api/src/services/case001ResultPatternService.test.ts",
       "language": "typescript",
-      "sizeLines": 615,
+      "sizeLines": 384,
       "fileCategory": "code"
     },
     {
       "path": "apps/api/src/services/case001ResultPatternService.ts",
       "language": "typescript",
-      "sizeLines": 372,
+      "sizeLines": 201,
       "fileCategory": "code"
     },
     {
@@ -490,7 +490,7 @@
     {
       "path": "apps/api/src/services/queryExecutionService.test.ts",
       "language": "typescript",
-      "sizeLines": 749,
+      "sizeLines": 721,
       "fileCategory": "code"
     },
     {
@@ -640,13 +640,13 @@
     {
       "path": "apps/web/src/api/types.ts",
       "language": "typescript",
-      "sizeLines": 246,
+      "sizeLines": 242,
       "fileCategory": "code"
     },
     {
       "path": "apps/web/src/App.test.tsx",
       "language": "typescript",
-      "sizeLines": 4445,
+      "sizeLines": 4427,
       "fileCategory": "code"
     },
     {
@@ -766,7 +766,7 @@
     {
       "path": "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx",
       "language": "typescript",
-      "sizeLines": 462,
+      "sizeLines": 314,
       "fileCategory": "code"
     },
     {
@@ -946,13 +946,13 @@
     {
       "path": "apps/web/src/studentCase001.ts",
       "language": "typescript",
-      "sizeLines": 748,
+      "sizeLines": 610,
       "fileCategory": "code"
     },
     {
       "path": "apps/web/src/studentCaseModule.test.ts",
       "language": "typescript",
-      "sizeLines": 298,
+      "sizeLines": 292,
       "fileCategory": "code"
     },
     {
@@ -970,7 +970,7 @@
     {
       "path": "apps/web/src/useStudentCaseState.ts",
       "language": "typescript",
-      "sizeLines": 4667,
+      "sizeLines": 4636,
       "fileCategory": "code"
     },
     {
@@ -994,7 +994,7 @@
     {
       "path": "apps/web/tests/browser/case-001-live-smoke.spec.ts",
       "language": "typescript",
-      "sizeLines": 227,
+      "sizeLines": 253,
       "fileCategory": "code"
     },
     {
@@ -1120,7 +1120,7 @@
     {
       "path": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
       "language": "markdown",
-      "sizeLines": 87,
+      "sizeLines": 88,
       "fileCategory": "docs"
     },
     {
@@ -2842,7 +2842,13 @@
     {
       "path": "docs/01-work-packages/WP-272-case-001-tier-1-foundations-shaping-plan.md",
       "language": "markdown",
-      "sizeLines": 205,
+      "sizeLines": 279,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/01-work-packages/WP-273-case-001-tier-1-m1-m2-release-slice-implementation-bundle.md",
+      "language": "markdown",
+      "sizeLines": 261,
       "fileCategory": "docs"
     },
     {
@@ -3938,14 +3944,14 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 656,
+  "totalFiles": 657,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 656,
+    "filesScanned": 657,
     "byCategory": {
       "config": 18,
-      "docs": 405,
+      "docs": 406,
       "data": 33,
       "code": 144,
       "markup": 2,
@@ -3953,7 +3959,7 @@
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 405,
+      "markdown": 406,
       "csv": 24,
       "python": 15,
       "unknown": 1,

@@ -324,7 +324,7 @@ const testCases: AsyncTestCase[] = [
     }
   },
   {
-    name: "successful execution includes Case 001 M3 metadata for explicit enabled milestone opt-in",
+    name: "successful execution omits Case 001 M3 metadata for deferred milestone opt-in",
     run: async () => {
       const queryExecutionService =
         require("./queryExecutionService.ts") as typeof import("./queryExecutionService");
@@ -342,25 +342,11 @@ const testCases: AsyncTestCase[] = [
       );
 
       assert.equal(result.success, true);
-      assert.deepEqual(result.caseMilestoneEvaluation, {
-        caseId: "case-001",
-        milestoneId: "case-001-witness-identities-resolved",
-        evidenceTableFamily: "PersonsOfInterest",
-        gate: {
-          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
-          enabledValue: "true",
-          isEnabled: true
-        },
-        evaluated: true,
-        matched: true,
-        matchedRowCount: 3,
-        runtimeStatus: "evaluated-no-progression",
-        milestoneAdvanced: false
-      });
+      assert.equal("caseMilestoneEvaluation" in result, false);
     }
   },
   {
-    name: "successful execution includes Case 001 M4 metadata for explicit enabled milestone opt-in",
+    name: "successful execution omits Case 001 M4 metadata for deferred milestone opt-in",
     run: async () => {
       const queryExecutionService =
         require("./queryExecutionService.ts") as typeof import("./queryExecutionService");
@@ -378,21 +364,7 @@ const testCases: AsyncTestCase[] = [
       );
 
       assert.equal(result.success, true);
-      assert.deepEqual(result.caseMilestoneEvaluation, {
-        caseId: "case-001",
-        milestoneId: "case-001-ceremony-roster-narrowed",
-        evidenceTableFamily: "EventRegistration",
-        gate: {
-          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
-          enabledValue: "true",
-          isEnabled: true
-        },
-        evaluated: true,
-        matched: true,
-        matchedRowCount: 4,
-        runtimeStatus: "evaluated-no-progression",
-        milestoneAdvanced: false
-      });
+      assert.equal("caseMilestoneEvaluation" in result, false);
     }
   },
   {
@@ -528,7 +500,7 @@ const testCases: AsyncTestCase[] = [
         },
         {
           sql: "SELECT * FROM dbo.Solution",
-          milestoneId: "case-001-witness-identities-resolved"
+          milestoneId: "case-001-clocktower-report-located"
         }
       ];
 
@@ -607,7 +579,7 @@ const testCases: AsyncTestCase[] = [
         {
           caseMilestoneEvaluation: {
             caseId: "case-001",
-            milestoneId: "case-001-witness-identities-resolved",
+            milestoneId: "case-001-clocktower-report-located",
             isSkeletonGateEnabled: true
           },
           evaluateCase001Milestone: () => {

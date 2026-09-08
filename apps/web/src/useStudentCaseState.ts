@@ -25,8 +25,6 @@ import type {
 } from "./features/samuelReactions";
 import {
   CASE_001_BRIEF,
-  CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE,
-  CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY,
   CASE_001_ENTRY_ID,
   CASE_001_FIRST_SQL_MILESTONE_BOUNDARY,
   CASE_001_KNOWN_CASE_FACTS,
@@ -35,8 +33,6 @@ import {
   CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY,
   CASE_001_SAMUEL_STEPS,
   CASE_001_SQL_FEEDBACK_SLICES,
-  CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE,
-  CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY,
   buildCase001MilestoneEvaluationRequest,
   isCase001PlayableSkeletonEnabled,
   type Case001SqlMilestoneId
@@ -669,9 +665,7 @@ export function useStudentCaseState(
     Record<Case001SqlMilestoneId, boolean>
   >(() => ({
     [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
-    [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false,
-    [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false,
-    [CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id]: false
+    [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false
   }));
   const [samuelStage, setSamuelStage] = useState(() => persistedStudentState?.samuelStage ?? 0);
   const [notebookEntries, setNotebookEntries] = useState<EvidenceNotebookEntry[]>(
@@ -800,9 +794,7 @@ export function useStudentCaseState(
     setStudentSamuelReaction(null);
     setCase001CompletedMilestones({
       [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
-      [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false,
-      [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false,
-      [CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id]: false
+      [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false
     });
     resetStudentQueryRunner();
   }, [activeCaseId, mode]);
@@ -2652,9 +2644,7 @@ export function useStudentCaseState(
       setStudentSamuelReaction(null);
       setCase001CompletedMilestones({
         [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
-        [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false,
-        [CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id]: false,
-        [CASE_001_CEREMONY_ROSTER_MILESTONE_BOUNDARY.id]: false
+        [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false
       });
       resetStudentQueryRunner();
       return;
@@ -2748,8 +2738,6 @@ export function useStudentCaseState(
 
   function handleStudentEvidenceLog(row: QueryRow): StudentClueLogOutcome {
     if (getShellStudentCaseId(activeCaseId) === CASE_001_ENTRY_ID) {
-      const rowHasPersonName =
-        getRowValue(row, "PersonName") !== null || getRowValue(row, "personname") !== null;
       const rowHasTranscript =
         getRowValue(row, "LogTranscript") !== null || getRowValue(row, "logtranscript") !== null;
       const rowHasClocktowerReport =
@@ -2757,9 +2745,7 @@ export function useStudentCaseState(
         (getRowValue(row, "ReportDescription") !== null ||
           getRowValue(row, "reportdescription") !== null);
 
-      const milestoneId: Case001SqlMilestoneId | null = rowHasPersonName
-        ? CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id
-        : rowHasTranscript
+      const milestoneId: Case001SqlMilestoneId | null = rowHasTranscript
           ? CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id
           : rowHasClocktowerReport
             ? CASE_001_SQL_FEEDBACK_SLICES[0].milestoneId
@@ -2767,7 +2753,7 @@ export function useStudentCaseState(
 
       if (!milestoneId) {
         return rejectClue(
-          "That row is visible, but it is not one of the current Case 001 M1-M3 evidence rows."
+          "That row is visible, but it is not one of the current Case 001 M1-M2 evidence rows."
         );
       }
 
@@ -3810,14 +3796,6 @@ export function useStudentCaseState(
       return CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE.starterSql;
     }
 
-    if (milestoneId === CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id) {
-      return CASE_001_WITNESS_IDENTITIES_FEEDBACK_SLICE.starterSql;
-    }
-
-    if (milestoneId === CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id) {
-      return CASE_001_CEREMONY_ROSTER_FEEDBACK_SLICE.starterSql;
-    }
-
     return null;
   }
 
@@ -3840,17 +3818,11 @@ export function useStudentCaseState(
               detail: "Report-linked interviews located",
               sourceLabel: "Samuel Step 2"
             }
-          : milestoneId === CASE_001_WITNESS_IDENTITIES_MILESTONE_BOUNDARY.id
-            ? {
-                id: "case-001-witness-identities-resolved",
-                detail: "Witness identities resolved",
-                sourceLabel: "Samuel Step 3"
-              }
-            : {
-                id: "case-001-ceremony-roster-narrowed",
-                detail: "Clocktower ceremony roster narrowed",
-                sourceLabel: "Samuel Step 4"
-              };
+          : null;
+
+    if (!entry) {
+      return;
+    }
 
     upsertNotebookEntries([entry]);
     setHighlightedNotebookEntryId(entry.id);
@@ -4453,18 +4425,15 @@ export function useStudentCaseState(
     const case001QueryGuide = {
       title: "Clocktower Evidence Path",
       intro:
-        "Samuel's next step: inspect the current result rows, use pinned facts for exact values, and follow the report-to-interview-to-person relationship yourself.",
+        "Samuel's next step: inspect the current result rows, use pinned facts for exact values, and follow the report-to-interview relationship yourself.",
       clue: case001ActiveStep.nextStep,
       tokens: [
         "CrimeSceneReport",
         "InterviewLog",
-        "PersonsOfInterest",
-        "EventSchedule",
-        "EventRegistration",
         "ReportID",
-        "PersonID",
-        "EventID",
-        "EventPersonID",
+        "CrimeID",
+        "ReportDate",
+        "ReportCity",
         "Sequel City"
       ],
       footer:

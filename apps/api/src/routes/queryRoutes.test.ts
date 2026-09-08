@@ -179,7 +179,7 @@ const testCases: AsyncTestCase[] = [
     }
   },
   {
-    name: "route handler returns Case 001 M3 metadata for explicit enabled milestone opt-in",
+    name: "route handler omits Case 001 M3 metadata for deferred milestone opt-in",
     run: async () => {
       const queryRoutes =
         require("./queryRoutes.ts") as typeof import("./queryRoutes");
@@ -214,25 +214,11 @@ const testCases: AsyncTestCase[] = [
       );
 
       assert.equal(response.success, true);
-      assert.deepEqual(response.caseMilestoneEvaluation, {
-        caseId: "case-001",
-        milestoneId: "case-001-witness-identities-resolved",
-        evidenceTableFamily: "PersonsOfInterest",
-        gate: {
-          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
-          enabledValue: "true",
-          isEnabled: true
-        },
-        evaluated: true,
-        matched: true,
-        matchedRowCount: 3,
-        runtimeStatus: "evaluated-no-progression",
-        milestoneAdvanced: false
-      });
+      assert.equal("caseMilestoneEvaluation" in response, false);
     }
   },
   {
-    name: "route handler returns Case 001 M4 metadata for explicit enabled milestone opt-in",
+    name: "route handler omits Case 001 M4 metadata for deferred milestone opt-in",
     run: async () => {
       const queryRoutes =
         require("./queryRoutes.ts") as typeof import("./queryRoutes");
@@ -267,21 +253,7 @@ const testCases: AsyncTestCase[] = [
       );
 
       assert.equal(response.success, true);
-      assert.deepEqual(response.caseMilestoneEvaluation, {
-        caseId: "case-001",
-        milestoneId: "case-001-ceremony-roster-narrowed",
-        evidenceTableFamily: "EventRegistration",
-        gate: {
-          name: "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON",
-          enabledValue: "true",
-          isEnabled: true
-        },
-        evaluated: true,
-        matched: true,
-        matchedRowCount: 4,
-        runtimeStatus: "evaluated-no-progression",
-        milestoneAdvanced: false
-      });
+      assert.equal("caseMilestoneEvaluation" in response, false);
     }
   },
   {

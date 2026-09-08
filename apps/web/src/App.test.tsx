@@ -193,28 +193,6 @@ vi.mock("./components/QueryRunner", () => ({
             type="button"
             onClick={() =>
               onExecutionComplete?.({
-                sql: "SELECT p.PersonID, p.PersonName FROM PersonsOfInterest p JOIN InterviewLog i ON i.PersonID = p.PersonID WHERE i.ReportID = 10975 ORDER BY p.PersonID;",
-                response: {
-                  success: true,
-                  data: { columns: [], rows: [], rowCount: 3 },
-                  caseMilestoneEvaluation: {
-                    caseId: "case-001",
-                    milestoneId: "case-001-witness-identities-resolved",
-                    matched: true,
-                    runtimeStatus: "evaluated-no-progression",
-                    milestoneAdvanced: false
-                  }
-                },
-                error: null
-              })
-            }
-          >
-            Simulate Case 001 Identity Match
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              onExecutionComplete?.({
                 sql: "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID",
                 response: {
                   success: true,
@@ -2200,23 +2178,26 @@ describe("App", () => {
     fireEvent.click(screen.getByRole("button", { name: "Simulate Case 001 Interview Match" }));
 
     expect(screen.getByText(/Report-linked interviews located/i)).toBeInTheDocument();
-    expect(screen.getByText(/PersonID values you actually observed/i)).toBeInTheDocument();
-    expect(screen.getByText("Draft Query: SELECT * FROM PersonsOfInterest;")).toBeInTheDocument();
+    expect(screen.queryByText(/PersonID values you actually observed/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Draft Query: SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = 10975 ORDER BY PersonID;"
+      )
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Draft Query: SELECT * FROM PersonsOfInterest;")).not.toBeInTheDocument();
     expect(screen.queryByText(/Draft Query: .*JOIN InterviewLog/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Draft Query: .*WHERE i\.ReportID IN/i)).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("PersonsOfInterest");
-    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("PersonID");
-
-    fireEvent.click(screen.getByRole("button", { name: "Simulate Case 001 Identity Match" }));
-
-    expect(screen.getByText(/Witness identities resolved/i)).toBeInTheDocument();
-    expect(screen.getAllByText(/clocktower ceremony/i).length).toBeGreaterThan(0);
-    expect(screen.getByText("Draft Query: SELECT * FROM EventSchedule;")).toBeInTheDocument();
+    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("InterviewLog");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("ReportID");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).not.toHaveTextContent("PersonsOfInterest");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).not.toHaveTextContent("PersonID");
+    expect(screen.queryByText(/Witness identities resolved/i)).not.toBeInTheDocument();
+    expect(screen.queryByText("Draft Query: SELECT * FROM EventSchedule;")).not.toBeInTheDocument();
     expect(screen.queryByText(/Draft Query: .*JOIN EventRegistration/i)).not.toBeInTheDocument();
     expect(screen.queryByText(/Draft Query: .*WHERE e\.EventID = 2993/i)).not.toBeInTheDocument();
-    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("EventSchedule");
-    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("EventRegistration");
-    expect(screen.getByLabelText("Clocktower Evidence Path")).toHaveTextContent("EventID");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).not.toHaveTextContent("EventSchedule");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).not.toHaveTextContent("EventRegistration");
+    expect(screen.getByLabelText("Clocktower Evidence Path")).not.toHaveTextContent("EventID");
 
     fireEvent.click(screen.getByRole("button", { name: "Case File" }));
 
@@ -2226,9 +2207,10 @@ describe("App", () => {
     fireEvent.click(screen.getByRole("button", { name: "Evidence Board" }));
 
     expect(screen.getByRole("heading", { name: "Evidence Notebook" })).toBeInTheDocument();
-    expect(document.body).toHaveTextContent(/Completed milestones:\s*3\s*\/\s*4/);
+    expect(document.body).toHaveTextContent(/Completed milestones:\s*2\s*\/\s*2/);
     expect(screen.getByText("Clocktower Incident Report Located")).toBeInTheDocument();
     expect(screen.getByText("Clocktower Report Interviews Located")).toBeInTheDocument();
+    expect(screen.queryByText("Witness identities resolved")).not.toBeInTheDocument();
     expect(screen.queryByText("Suspect Theory Check")).not.toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Case Library" })).toBeInTheDocument();
     expect(screen.queryByText("Case 004 Briefing")).not.toBeInTheDocument();
