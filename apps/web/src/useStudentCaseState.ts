@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { getSchemaTables, verifySuspect } from "./api/client";
+import { executeQuery, getSchemaTables, verifySuspect } from "./api/client";
 import type {
   CaseVerificationSuccessResponse,
   QueryExecutionCaseMilestoneEvaluationRequest,
@@ -34,9 +34,17 @@ import {
   CASE_001_SAMUEL_STEPS,
   CASE_001_SQL_FEEDBACK_SLICES,
   buildCase001MilestoneEvaluationRequest,
-  isCase001PlayableSkeletonEnabled,
+  isCase001PlayableEnabled,
   type Case001SqlMilestoneId
 } from "./studentCase001";
+import {
+  CASE_001_M1,
+  CASE_001_M2,
+  clearCase001Progress,
+  readCase001Progress,
+  writeCase001Progress,
+  type Case001Progress
+} from "./studentCase001Progress";
 import {
   CASE_004_BRIEF,
   CASE_004_ENTRY_ID,
@@ -104,7 +112,7 @@ function getShellStudentCaseId(caseId: string | null | undefined): ShellStudentC
     return CASE_004_ENTRY_ID;
   }
 
-  if (caseId === CASE_001_ENTRY_ID && isCase001PlayableSkeletonEnabled()) {
+  if (caseId === CASE_001_ENTRY_ID && isCase001PlayableEnabled()) {
     return CASE_001_ENTRY_ID;
   }
 
@@ -667,6 +675,11 @@ export function useStudentCaseState(
     [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
     [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false
   }));
+  const [case001EvidenceQueries, setCase001EvidenceQueries] = useState<
+    Case001Progress["evidenceQueries"]
+  >({});
+  const [case001StorageReady, setCase001StorageReady] = useState(false);
+  const case001RestoreGeneration = useRef(0);
   const [samuelStage, setSamuelStage] = useState(() => persistedStudentState?.samuelStage ?? 0);
   const [notebookEntries, setNotebookEntries] = useState<EvidenceNotebookEntry[]>(
     () => persistedStudentState?.notebookEntries ?? []
@@ -776,27 +789,58 @@ export function useStudentCaseState(
       return;
     }
 
+    const saved = readCase001Progress();
+    const generation = ++case001RestoreGeneration.current;
     hydratedStudentCaseIdRef.current = CASE_001_ENTRY_ID;
     skipNextStudentCasePersistRef.current = true;
-    setStudentView("briefing");
+    setStudentView(saved.studentView);
     setSelectedStudentTable(null);
-    setStudentDraftQuery(CASE_001_SAMUEL_STEPS[0].queryDraft);
+    setStudentDraftQuery(saved.studentDraftQuery);
     setStudentLastQueryExecution(null);
     setStudentPreservedTranscriptExecution(null);
-    setNotebookEntries([]);
+    setNotebookEntries(saved.notebookEntries);
     setPendingEvidenceStep(null);
     setStudentEvidenceFeedback(null);
     setStudentEvidenceFeedbackTone("neutral");
     setStudentEvidenceFeedbackVersion(0);
     setStudentSceneFeedbackTone("neutral");
     setHighlightedNotebookEntryId(null);
-    setManualNotebookDraft("");
+    setManualNotebookDraft(saved.manualNotebookDraft);
     setStudentSamuelReaction(null);
     setCase001CompletedMilestones({
       [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]: false,
       [CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id]: false
     });
+    setCase001EvidenceQueries(saved.evidenceQueries);
     resetStudentQueryRunner();
+    void (async () => {
+      try {
+        for (const milestoneId of [CASE_001_M1, CASE_001_M2] as const) {
+          const sql = saved.evidenceQueries[milestoneId];
+          if (!sql || generation !== case001RestoreGeneration.current) break;
+          const response = await executeQuery(sql, {
+            caseMilestoneEvaluation: {
+              caseId: CASE_001_ENTRY_ID,
+              milestoneId,
+              isSkeletonGateEnabled: true
+            }
+          });
+          const evaluation = response.success ? response.caseMilestoneEvaluation : undefined;
+          if (
+            generation !== case001RestoreGeneration.current ||
+            !evaluation?.evaluated ||
+            !evaluation.matched ||
+            evaluation.caseId !== CASE_001_ENTRY_ID ||
+            evaluation.milestoneId !== milestoneId
+          ) break;
+          setCase001CompletedMilestones((current) => ({ ...current, [milestoneId]: true }));
+          upsertCase001MilestoneNotebookEntry(milestoneId);
+        }
+      } finally {
+        if (generation === case001RestoreGeneration.current) setCase001StorageReady(true);
+      }
+    })();
+    return () => { ++case001RestoreGeneration.current; };
   }, [activeCaseId, mode]);
 
   useEffect(() => {
@@ -911,6 +955,30 @@ export function useStudentCaseState(
     studentSuspectTheoryDraft,
     studentSuspectTheoryResult,
     studentSuspectTheoryError
+  ]);
+
+  useEffect(() => {
+    if (
+      mode !== "student" ||
+      getShellStudentCaseId(activeCaseId) !== CASE_001_ENTRY_ID ||
+      !case001StorageReady
+    ) return;
+    writeCase001Progress({
+      studentView,
+      studentDraftQuery: studentDraftQuery ?? "",
+      manualNotebookDraft,
+      notebookEntries,
+      evidenceQueries: case001EvidenceQueries
+    });
+  }, [
+    activeCaseId,
+    case001EvidenceQueries,
+    case001StorageReady,
+    manualNotebookDraft,
+    mode,
+    notebookEntries,
+    studentDraftQuery,
+    studentView
   ]);
 
   useEffect(() => {
@@ -2628,6 +2696,10 @@ export function useStudentCaseState(
 
   function resetStudentCaseProgress(): void {
     if (mode === "student" && getShellStudentCaseId(activeCaseId) === CASE_001_ENTRY_ID) {
+      ++case001RestoreGeneration.current;
+      clearCase001Progress();
+      setCase001StorageReady(false);
+      setCase001EvidenceQueries({});
       setStudentView("briefing");
       setSelectedStudentTable(null);
       setStudentDraftQuery(CASE_001_SAMUEL_STEPS[0].queryDraft);
@@ -2738,35 +2810,26 @@ export function useStudentCaseState(
 
   function handleStudentEvidenceLog(row: QueryRow): StudentClueLogOutcome {
     if (getShellStudentCaseId(activeCaseId) === CASE_001_ENTRY_ID) {
-      const rowHasTranscript =
-        getRowValue(row, "LogTranscript") !== null || getRowValue(row, "logtranscript") !== null;
-      const rowHasClocktowerReport =
-        rowContainsValue(row, "clocktower") &&
-        (getRowValue(row, "ReportDescription") !== null ||
-          getRowValue(row, "reportdescription") !== null);
-
-      const milestoneId: Case001SqlMilestoneId | null = rowHasTranscript
-          ? CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY.id
-          : rowHasClocktowerReport
-            ? CASE_001_SQL_FEEDBACK_SLICES[0].milestoneId
-            : null;
-
-      if (!milestoneId) {
-        return rejectClue(
-          "That row is visible, but it is not one of the current Case 001 M1-M2 evidence rows."
-        );
-      }
-
-      if (notebookEntries.some((entry) => entry.id === milestoneId)) {
-        return duplicateClue("Already logged. This Case 001 milestone is already pinned.");
-      }
-
-      setCase001CompletedMilestones((current) => ({
-        ...current,
-        [milestoneId]: true
-      }));
-      upsertCase001MilestoneNotebookEntry(milestoneId);
-      return logClue(getCase001FeedbackMessage(milestoneId));
+      const response = studentLastQueryExecution?.response;
+      const evaluation = response?.success ? response.caseMilestoneEvaluation : undefined;
+      const rowWasReturned = response?.success && response.data.rows.some(
+        (candidate) => JSON.stringify(candidate.values) === JSON.stringify(row.values)
+      );
+      if (
+        !evaluation?.evaluated ||
+        !evaluation.matched ||
+        evaluation.caseId !== CASE_001_ENTRY_ID ||
+        !case001CompletedMilestones[evaluation.milestoneId] ||
+        !rowWasReturned
+      ) return rejectClue("Run a matching Case 001 evidence query before logging this row.");
+      const detail = Object.entries(row.displayValues)
+        .map(([key, value]) => `${key}: ${value}`)
+        .join(" · ");
+      if (notebookEntries.some((entry) => entry.detail === detail)) return duplicateClue("Already logged.");
+      upsertNotebookEntries([
+        { id: `manual-case001-${Date.now()}`, detail, isManual: true, sourceLabel: "Query Results" }
+      ]);
+      return logClue("Evidence note saved. Notes do not change milestone completion.");
     }
 
     if (pendingEvidenceStep === "crime-type") {
@@ -3849,7 +3912,12 @@ export function useStudentCaseState(
       return;
     }
 
-    if (!evaluation.matched) {
+    if (
+      !evaluation.evaluated ||
+      !evaluation.matched ||
+      evaluation.caseId !== CASE_001_ENTRY_ID ||
+      (evaluation.milestoneId !== CASE_001_M1 && evaluation.milestoneId !== CASE_001_M2)
+    ) {
       setStudentEvidenceFeedback(
         "The query ran and results are visible, but this result set has not matched the active Case 001 milestone yet. Recheck the table relationship and narrow with proved values from the rows or Pinned Facts."
       );
@@ -3859,6 +3927,13 @@ export function useStudentCaseState(
     }
 
     const milestoneId = evaluation.milestoneId;
+    if (milestoneId === CASE_001_M2 && !case001CompletedMilestones[CASE_001_M1]) {
+      setStudentEvidenceFeedback("Locate the public report first, then follow its ReportID into the interviews.");
+      setStudentEvidenceFeedbackTone("advisory");
+      return;
+    }
+    setCase001StorageReady(true);
+    setCase001EvidenceQueries((current) => ({ ...current, [milestoneId]: payload.sql }));
     setCase001CompletedMilestones((current) => ({
       ...current,
       [milestoneId]: true

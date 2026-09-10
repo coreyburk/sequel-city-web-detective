@@ -280,19 +280,19 @@
     {
       "path": ".understand-anything/fingerprints.json",
       "language": "json",
-      "sizeLines": 13510,
+      "sizeLines": 13617,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/intermediate/scan-result.json",
       "language": "json",
-      "sizeLines": 3979,
+      "sizeLines": 4003,
       "fileCategory": "config"
     },
     {
       "path": ".understand-anything/knowledge-graph.json",
       "language": "json",
-      "sizeLines": 15919,
+      "sizeLines": 15942,
       "fileCategory": "config"
     },
     {
@@ -646,7 +646,7 @@
     {
       "path": "apps/web/src/App.test.tsx",
       "language": "typescript",
-      "sizeLines": 4427,
+      "sizeLines": 4409,
       "fileCategory": "code"
     },
     {
@@ -658,7 +658,7 @@
     {
       "path": "apps/web/src/caseAuthoring.test.ts",
       "language": "typescript",
-      "sizeLines": 284,
+      "sizeLines": 252,
       "fileCategory": "code"
     },
     {
@@ -868,7 +868,7 @@
     {
       "path": "apps/web/src/features/investigationThreads/useInvestigationThreads.ts",
       "language": "typescript",
-      "sizeLines": 271,
+      "sizeLines": 276,
       "fileCategory": "code"
     },
     {
@@ -946,7 +946,19 @@
     {
       "path": "apps/web/src/studentCase001.ts",
       "language": "typescript",
-      "sizeLines": 610,
+      "sizeLines": 597,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/studentCase001Progress.test.ts",
+      "language": "typescript",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "apps/web/src/studentCase001Progress.ts",
+      "language": "typescript",
+      "sizeLines": 57,
       "fileCategory": "code"
     },
     {
@@ -968,9 +980,15 @@
       "fileCategory": "markup"
     },
     {
+      "path": "apps/web/src/useStudentCaseState.case001.test.tsx",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
       "path": "apps/web/src/useStudentCaseState.ts",
       "language": "typescript",
-      "sizeLines": 4636,
+      "sizeLines": 4711,
       "fileCategory": "code"
     },
     {
@@ -994,7 +1012,7 @@
     {
       "path": "apps/web/tests/browser/case-001-live-smoke.spec.ts",
       "language": "typescript",
-      "sizeLines": 253,
+      "sizeLines": 267,
       "fileCategory": "code"
     },
     {
@@ -1120,7 +1138,7 @@
     {
       "path": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
       "language": "markdown",
-      "sizeLines": 88,
+      "sizeLines": 74,
       "fileCategory": "docs"
     },
     {
@@ -2848,7 +2866,13 @@
     {
       "path": "docs/01-work-packages/WP-273-case-001-tier-1-m1-m2-release-slice-implementation-bundle.md",
       "language": "markdown",
-      "sizeLines": 261,
+      "sizeLines": 329,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/01-work-packages/WP-274-case-001-tier-1-release-readiness-and-entry-bundle.md",
+      "language": "markdown",
+      "sizeLines": 145,
       "fileCategory": "docs"
     },
     {
@@ -3944,28 +3968,28 @@
       "fileCategory": "code"
     }
   ],
-  "totalFiles": 657,
+  "totalFiles": 661,
   "filteredByIgnore": 0,
   "estimatedComplexity": "very-large",
   "stats": {
-    "filesScanned": 657,
+    "filesScanned": 661,
     "byCategory": {
       "config": 18,
-      "docs": 406,
+      "docs": 407,
       "data": 33,
-      "code": 144,
+      "code": 147,
       "markup": 2,
       "script": 54
     },
     "byLanguage": {
       "yaml": 5,
-      "markdown": 406,
+      "markdown": 407,
       "csv": 24,
       "python": 15,
       "unknown": 1,
       "json": 11,
       "config": 1,
-      "typescript": 117,
+      "typescript": 120,
       "html": 1,
       "css": 1,
       "javascript": 2,

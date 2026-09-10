@@ -172,7 +172,8 @@ export type InvestigationThreadsApi = {
 };
 
 export function useInvestigationThreads(
-  knownNotebookEntryIds: ReadonlyArray<string>
+  knownNotebookEntryIds: ReadonlyArray<string>,
+  enabled = true
 ): InvestigationThreadsApi {
   const [threads, setThreads] = useState<InvestigationThread[]>(() => {
     const restored = readStorage();
@@ -183,7 +184,7 @@ export function useInvestigationThreads(
   const skipNextPersist = useRef(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
+    if (!enabled || typeof window === "undefined") {
       return;
     }
 
@@ -212,7 +213,7 @@ export function useInvestigationThreads(
         persistTimer.current = null;
       }
     };
-  }, [threads]);
+  }, [threads, enabled]);
 
   const knownIdSignature = useMemo(
     () => knownNotebookEntryIds.slice().sort().join("|"),
@@ -220,12 +221,15 @@ export function useInvestigationThreads(
   );
 
   useEffect(() => {
-    const knownSet = new Set(knownNotebookEntryIds);
-
-    setThreads((current) => pruneStaleEvidenceLinks(current, knownSet));
+    if (!enabled) return;
+    const timer = window.setTimeout(() => {
+      const knownSet = new Set(knownNotebookEntryIds);
+      setThreads((current) => pruneStaleEvidenceLinks(current, knownSet));
+    }, 0);
+    return () => window.clearTimeout(timer);
     // knownIdSignature drives the effect intentionally to avoid array identity churn.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [knownIdSignature]);
+  }, [knownIdSignature, enabled]);
 
   const setThreadStatus = useCallback((threadId: string, status: ThreadStatus) => {
     setThreads((current) => updateThreadStatus(current, threadId, status));
@@ -247,6 +251,7 @@ export function useInvestigationThreads(
   }, []);
 
   const resetThreads = useCallback(() => {
+    if (!enabled) return;
     if (persistTimer.current !== null && typeof window !== "undefined") {
       window.clearTimeout(persistTimer.current);
       persistTimer.current = null;
@@ -255,7 +260,7 @@ export function useInvestigationThreads(
     removeStorage();
     skipNextPersist.current = true;
     setThreads(buildCase004InitialThreads());
-  }, []);
+  }, [enabled]);
 
   return {
     threads,

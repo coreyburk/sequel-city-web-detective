@@ -8,6 +8,12 @@ import type {
 
 export const CASE_001_ENTRY_ID = "case-001";
 
+// WP-274: the Foundations M1-M2 slice is available through normal entry.
+export const CASE_001_RELEASED = true;
+export function isCase001PlayableEnabled(): boolean {
+  return CASE_001_RELEASED || isCase001PlayableSkeletonEnabled();
+}
+
 export const CASE_001_SKELETON_RELEASE_GATE = "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON";
 
 export const CASE_001_SKELETON_BRIEF = {
@@ -189,7 +195,7 @@ export const CASE_001_FIRST_SQL_MILESTONE_BOUNDARY = {
     "Use a read-only SQL query to locate the public clocktower incident report before following witness or access records.",
   progressionSource: "backend-approved-read-only-sql-results",
   initialTableFamily: ["CrimeSceneReport"],
-  validationOwner: "future-deterministic-backend-result-pattern",
+  validationOwner: "deterministic-backend-result-pattern",
   invalidProgressionAuthorities: [
     "ui-state",
     "skeleton-selections",
@@ -198,8 +204,8 @@ export const CASE_001_FIRST_SQL_MILESTONE_BOUNDARY = {
     "free-text-guesses"
   ],
   releaseGateBehavior:
-    "Declared for the gated Case 001 skeleton only; it does not make Case 001 a released playable case.",
-  runtimeStatus: "boundary-only-not-implemented"
+    "Available for the released Case 001 M1-M2 evidence path.",
+  runtimeStatus: "evaluated-no-progression"
 } as const;
 
 export const CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY = {
@@ -218,8 +224,8 @@ export const CASE_001_REPORT_INTERVIEWS_MILESTONE_BOUNDARY = {
     "free-text-guesses"
   ],
   releaseGateBehavior:
-    "Declared for the gated Case 001 skeleton only; it does not make Case 001 a released playable case.",
-  runtimeStatus: "gated-non-progressing"
+    "Available for the released Case 001 M1-M2 evidence path.",
+  runtimeStatus: "evaluated-no-progression"
 } as const;
 
 export const CASE_001_SQL_MILESTONE_BOUNDARIES = [
@@ -258,13 +264,13 @@ export const CASE_001_FIRST_SQL_FEEDBACK_SLICE: Case001SqlFeedbackSlice = {
   emptyQueryMessage: "Enter a read-only SQL query before checking the report record.",
   loadingMessage: "Checking the query against the gated Case 001 milestone boundary.",
   matchedMessage:
-    "Public report located. The backend recognized the clocktower incident report, but no case progress was saved or advanced.",
+    "Public report located. Use its ReportID to find the linked interviews.",
   noMatchMessage:
     "No milestone match yet. Narrow the query toward the public CrimeSceneReport row for the clocktower incident.",
   missingMetadataMessage:
     "The query ran, but no gated Case 001 milestone metadata was returned.",
   nonProgressingMessage:
-    "This skeleton feedback does not unlock the archive, persist progress, log evidence, or verify suspects."
+    "The API checks evidence; this case does not require suspect verification."
 } as const;
 
 export const CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE: Case001SqlFeedbackSlice = {
@@ -279,13 +285,13 @@ export const CASE_001_REPORT_INTERVIEWS_FEEDBACK_SLICE: Case001SqlFeedbackSlice 
   emptyQueryMessage: "Enter a read-only SQL query before checking report interviews.",
   loadingMessage: "Checking the query against the gated Case 001 interview boundary.",
   matchedMessage:
-    "Report-linked interviews located. The backend recognized the clocktower interview trail, but no case progress was saved or advanced.",
+    "Report-linked interviews located. Your two-step evidence review is complete. Review the report and interview notes on the Evidence Board.",
   noMatchMessage:
     "No interview milestone match yet. Keep the query tied to InterviewLog rows for the public clocktower report and use the proved ReportID when you narrow.",
   missingMetadataMessage:
     "The query ran, but no gated Case 001 interview metadata was returned.",
   nonProgressingMessage:
-    "This skeleton feedback does not render transcripts, log clues, persist progress, or advance Case 001."
+    "Keep your observations with the report and interview evidence. No suspect submission is required."
 } as const;
 
 export const CASE_001_SQL_FEEDBACK_SLICES = [
@@ -348,7 +354,7 @@ function normalizeSql(sql: string): string {
 export function buildCase001MilestoneEvaluationRequest(
   sql: string
 ): QueryExecutionCaseMilestoneEvaluationRequest | undefined {
-  if (!isCase001PlayableSkeletonEnabled()) {
+  if (!isCase001PlayableEnabled()) {
     return undefined;
   }
 
@@ -372,41 +378,22 @@ export function buildCase001MilestoneEvaluationRequest(
 
 export const CASE_001_AUTHORING_DEFINITION: PlayableCaseAuthoringDefinition = {
   caseId: CASE_001_ENTRY_ID,
-  release: {
-    status: "gated",
-    defaultPlayable: false,
-    releaseGate: {
-      behavior:
-        "Case 001 remains pre-release and may render only the development skeleton when the explicit skeleton gate is enabled.",
-      envName: CASE_001_SKELETON_RELEASE_GATE,
-      enabledValue: "true"
-    }
-  },
+  release: { status: "released", defaultPlayable: true, releaseGate: null },
   dossier: {
     caseNumber: CASE_001_SKELETON_BRIEF.caseNumber,
     caseName: CASE_001_SKELETON_BRIEF.caseName,
     track: "Foundations",
-    publicStatus: "Archive Locked",
+    publicStatus: "Open Case",
     caseShape: CASE_001_SKELETON_BRIEF.caseShape
   },
-  evidenceRequirements: [
-    {
-      tableFamily: "CrimeSceneReport",
-      source: "database",
-      requiredForMilestoneIds: [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]
-    }
-  ],
-  sqlMilestones: [
-    {
-      id: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id,
-      title: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.title,
-      learnerObjective: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.learnerObjective,
-      referencedTableFamilies: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.initialTableFamily,
-      progressionAuthority: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.progressionSource,
-      validationOwner: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.validationOwner,
-      runtimeStatus: "planned"
-    }
-  ],
+  evidenceRequirements: CASE_001_SQL_MILESTONE_BOUNDARIES.map(boundary => ({
+    tableFamily: boundary.initialTableFamily[0], source: "database", requiredForMilestoneIds: [boundary.id]
+  })),
+  sqlMilestones: CASE_001_SQL_MILESTONE_BOUNDARIES.map(boundary => ({
+    id: boundary.id, title: boundary.title, learnerObjective: boundary.learnerObjective,
+    referencedTableFamilies: boundary.initialTableFamily, progressionAuthority: boundary.progressionSource,
+    validationOwner: boundary.validationOwner, runtimeStatus: "implemented"
+  })),
   stateContract: {
     commonStateCategories: ["notebook", "pinned-facts", "query-draft", "visible-progress"],
     caseSpecificStateCategories: [
@@ -416,22 +403,22 @@ export const CASE_001_AUTHORING_DEFINITION: PlayableCaseAuthoringDefinition = {
     ]
   },
   persistence: {
-    strategy: "none",
-    version: null,
+    strategy: "case-id-keyed-local-storage",
+    version: 1,
     resetSemantics:
-      "Case 001 has no runtime progress persistence or clear-progress control in this package."
+      "Clear only Case 001 learner-owned browser state. Revalidate stored query references through the API before restoring milestone completion."
   },
   investigationThreads: {
-    owner: "future Case 001 investigation-thread module",
-    exportName: "buildCase001InitialThreads",
+    owner: "apps/web/src/studentCase001.ts",
+    exportName: "CASE_001_MILESTONES",
     responsibility:
-      "provide authored non-spoiler investigation-thread seeds only after Case 001 receives runtime thread scope"
+      "provide two linear evidence leads; no separate investigation-thread storage is needed"
   },
   guidance: {
-    owner: "future Case 001 guidance module",
-    exportName: "CASE_001_GUIDANCE",
+    owner: "apps/web/src/studentCase001.ts",
+    exportName: "CASE_001_SAMUEL_STEPS",
     responsibility:
-      "provide authored Samuel Tupleton guidance only after Case 001 receives runtime guidance scope"
+      "provide two-beat report and interview guidance without hidden answer values"
   },
   spoilerBoundary: {
     publicMetadataContainsSpoilers: false,

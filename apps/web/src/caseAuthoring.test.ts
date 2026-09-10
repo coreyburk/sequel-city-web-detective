@@ -61,7 +61,7 @@ function buildValidDefinition(): PlayableCaseAuthoringDefinition {
     },
     investigationThreads: {
       owner: "future Case 001 thread module",
-      exportName: "buildCase001InitialThreads",
+      exportName: "CASE_001_MILESTONES",
       responsibility: "provide authored non-spoiler thread seeds for Case 001"
     },
     guidance: {
@@ -201,48 +201,16 @@ describe("case authoring validation", () => {
 
   it("keeps the Case 001 authoring definition aligned with public dossier and release gates", () => {
     expect(CASE_001_AUTHORING_DEFINITION.caseId).toBe(CASE_001_ENTRY_ID);
-    expect(CASE_001_AUTHORING_DEFINITION.release).toEqual({
-      status: "gated",
-      defaultPlayable: false,
-      releaseGate: {
-        behavior:
-          "Case 001 remains pre-release and may render only the development skeleton when the explicit skeleton gate is enabled.",
-        envName: CASE_001_SKELETON_RELEASE_GATE,
-        enabledValue: "true"
-      }
-    });
-    expect(CASE_001_AUTHORING_DEFINITION.dossier).toEqual({
-      caseNumber: CASE_001_SKELETON_BRIEF.caseNumber,
-      caseName: CASE_001_SKELETON_BRIEF.caseName,
-      track: "Foundations",
-      publicStatus: "Archive Locked",
-      caseShape: CASE_001_SKELETON_BRIEF.caseShape
-    });
-    expect(PLAYABLE_STUDENT_CASE_MODULES).toEqual([CASE_004_PLAYABLE_MODULE]);
-    expect(PLAYABLE_STUDENT_CASE_MODULES.map((module) => module.caseId)).not.toContain(
-      CASE_001_ENTRY_ID
-    );
+    expect(CASE_001_AUTHORING_DEFINITION.release).toEqual({ status: "released", defaultPlayable: true, releaseGate: null });
+    expect(CASE_001_AUTHORING_DEFINITION.evidenceRequirements.map(item => item.tableFamily)).toEqual(["CrimeSceneReport", "InterviewLog"]);
+    expect(CASE_001_AUTHORING_DEFINITION.sqlMilestones).toHaveLength(2);
+    expect(CASE_001_AUTHORING_DEFINITION.sqlMilestones.every(item => item.runtimeStatus === "implemented" && item.progressionAuthority === "backend-approved-read-only-sql-results")).toBe(true);
   });
 
-  it("keeps the Case 001 authoring milestone aligned with the first SQL boundary", () => {
-    expect(CASE_001_AUTHORING_DEFINITION.evidenceRequirements).toEqual([
-      {
-        tableFamily: "CrimeSceneReport",
-        source: "database",
-        requiredForMilestoneIds: [CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id]
-      }
-    ]);
-    expect(CASE_001_AUTHORING_DEFINITION.sqlMilestones).toEqual([
-      {
-        id: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id,
-        title: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.title,
-        learnerObjective: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.learnerObjective,
-        referencedTableFamilies: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.initialTableFamily,
-        progressionAuthority: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.progressionSource,
-        validationOwner: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.validationOwner,
-        runtimeStatus: "planned"
-      }
-    ]);
+  it("aligns both implemented milestones with their evidence tables", () => {
+    expect(CASE_001_AUTHORING_DEFINITION.evidenceRequirements).toHaveLength(2);
+    expect(CASE_001_AUTHORING_DEFINITION.sqlMilestones[0]).toMatchObject({ id: CASE_001_FIRST_SQL_MILESTONE_BOUNDARY.id, runtimeStatus: "implemented" });
+    expect(CASE_001_AUTHORING_DEFINITION.sqlMilestones[1]).toMatchObject({ id: "case-001-report-interviews-located", referencedTableFamilies: ["InterviewLog"], runtimeStatus: "implemented" });
   });
 
   it("declares Case 001 state, persistence, thread, guidance, and spoiler boundaries without runtime implementation", () => {
@@ -258,15 +226,15 @@ describe("case authoring validation", () => {
       "case-001-thread-ids"
     ]);
     expect(CASE_001_AUTHORING_DEFINITION.persistence).toEqual({
-      strategy: "none",
-      version: null,
+      strategy: "case-id-keyed-local-storage",
+      version: 1,
       resetSemantics:
-        "Case 001 has no runtime progress persistence or clear-progress control in this package."
+        "Clear only Case 001 learner-owned browser state. Revalidate stored query references through the API before restoring milestone completion."
     });
     expect(CASE_001_AUTHORING_DEFINITION.investigationThreads.exportName).toBe(
-      "buildCase001InitialThreads"
+      "CASE_001_MILESTONES"
     );
-    expect(CASE_001_AUTHORING_DEFINITION.guidance.exportName).toBe("CASE_001_GUIDANCE");
+    expect(CASE_001_AUTHORING_DEFINITION.guidance.exportName).toBe("CASE_001_SAMUEL_STEPS");
     expect(CASE_001_AUTHORING_DEFINITION.spoilerBoundary).toEqual({
       publicMetadataContainsSpoilers: false,
       restrictedDataExposed: false,

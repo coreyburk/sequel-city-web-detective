@@ -31,6 +31,7 @@ vi.mock("./api/client", () => ({
       }
     }
   }),
+  executeQuery: vi.fn().mockResolvedValue({ success: false }),
   getSchemaTables: vi.fn(),
   verifySuspect: vi.fn()
 }));
@@ -156,6 +157,7 @@ vi.mock("./components/QueryRunner", () => ({
                   caseMilestoneEvaluation: {
                     caseId: "case-001",
                     milestoneId: "case-001-clocktower-report-located",
+                    evaluated: true,
                     matched: true,
                     runtimeStatus: "evaluated-no-progression",
                     milestoneAdvanced: false
@@ -178,6 +180,7 @@ vi.mock("./components/QueryRunner", () => ({
                   caseMilestoneEvaluation: {
                     caseId: "case-001",
                     milestoneId: "case-001-report-interviews-located",
+                    evaluated: true,
                     matched: true,
                     runtimeStatus: "evaluated-no-progression",
                     milestoneAdvanced: false
@@ -2007,7 +2010,7 @@ describe("App", () => {
     expect(screen.queryByRole("button", { name: "Reset Progress" })).not.toBeInTheDocument();
   });
 
-  it("opens a themed landing page for locked cases without entering the investigation", async () => {
+  it("opens the released Case 001 landing before entering the investigation", async () => {
     render(<App />);
 
     fireEvent.click(
@@ -2021,7 +2024,7 @@ describe("App", () => {
     expect(
       screen.getByText("One public death. Too many witnesses. Not enough clean timing.")
     ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Archive Locked" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Open Case File" })).toBeEnabled();
     expect(screen.queryByText("Development skeleton")).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Query Lab" })).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Reset Progress" })).not.toBeInTheDocument();
@@ -2091,36 +2094,15 @@ describe("App", () => {
     expect(window.localStorage.getItem(STUDENT_CASE_STORAGE_KEY)).toBeNull();
   });
 
-  it("does not let browser history restore Case 001 when the skeleton gate is disabled", async () => {
+  it("restores released Case 001 entry from browser history without a development flag", async () => {
     render(<App />);
-
-    act(() => {
-      window.dispatchEvent(
-        new PopStateEvent("popstate", {
-          state: {
-            "student-case-screen": "case",
-            "student-case-id": "case-001"
-          }
-        })
-      );
-    });
-
-    expect(
-      screen.getByRole("heading", { name: "Case 001: The Clocktower Poisoning" })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Archive Locked" })).toBeDisabled();
-    expect(screen.queryByText("Development skeleton")).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Query Lab" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Reset Progress" })).not.toBeInTheDocument();
-
-    await new Promise((resolve) => window.setTimeout(resolve, 180));
-
-    expect(window.localStorage.getItem(getStudentCaseStorageKey("case-001"))).toBeNull();
+    act(() => window.dispatchEvent(new PopStateEvent("popstate", { state: { "student-case-screen": "case", "student-case-id": "case-001" } })));
+    await waitFor(() => expect(screen.getByRole("button", { name: "Query Lab" })).toBeInTheDocument());
+    expect(screen.getByRole("button", { name: "Reset Progress" })).toBeInTheDocument();
     expect(window.localStorage.getItem(STUDENT_CASE_STORAGE_KEY)).toBeNull();
-    expect(window.localStorage.getItem(INVESTIGATION_THREADS_STORAGE_KEY)).toBeNull();
   });
 
-  it("opens gated Case 001 in the shared playable shell without persistence", async () => {
+  it("opens released Case 001 with isolated learner persistence", async () => {
     vi.stubEnv(CASE_001_SKELETON_RELEASE_GATE, "true");
 
     render(<App />);
@@ -2218,7 +2200,7 @@ describe("App", () => {
 
     await new Promise((resolve) => window.setTimeout(resolve, 180));
 
-    expect(window.localStorage.getItem(getStudentCaseStorageKey("case-001"))).toBeNull();
+    expect(window.localStorage.getItem(getStudentCaseStorageKey("case-001"))).not.toBeNull();
     expect(window.localStorage.getItem(STUDENT_CASE_STORAGE_KEY)).toBeNull();
     expect(window.localStorage.getItem(INVESTIGATION_THREADS_STORAGE_KEY)).toBeNull();
     expect(window.localStorage.getItem("sequel-city.text-size")).toBe("default");
@@ -2229,7 +2211,7 @@ describe("App", () => {
     );
     fireEvent.click(screen.getByRole("button", { name: "Open Case File" }));
 
-    expect(screen.getByText("Case 001 Briefing")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByRole("heading", { name: "Evidence Notebook" })).toBeInTheDocument());
     expect(screen.queryByLabelText("Case 001 checkpoint summary")).not.toBeInTheDocument();
   });
   it("never renders investigation trail UI in Student Mode after milestone progression", () => {

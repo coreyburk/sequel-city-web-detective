@@ -52,23 +52,23 @@ export const CASE_LIBRARY_ENTRIES: StudentCaseLibraryEntry[] = [
     caseNumber: "001",
     caseName: "The Clocktower Poisoning",
     eraNote: "Foundations",
-    statusLabel: "Archive Locked",
+    statusLabel: "Open Case",
     description:
       "A civic celebration turns lethal when a public clocktower ceremony ends with a poisoning in full view of the crowd.",
     summary: "A public poisoning case built for early timeline checks and clean clue narrowing.",
-    detail: "A future introductory file focused on first-pass filters, sequence, and proof discipline.",
-    isUnlocked: false,
+    detail: "A two-step Foundations file: locate the public report, then retrieve its linked interviews.",
+    isUnlocked: true,
     themeKey: "clocktower",
     landingEyebrow: "Public Spectacle",
     landingTagline: "One public death. Too many witnesses. Not enough clean timing.",
     landingAtmosphere:
       "Brass mechanisms, civic ceremony, and a killing committed where everyone thought they could see everything.",
     landingThreads: [
-      "Reconstruct the ceremony timeline before rumor hardens into false certainty.",
+      "Find the public clocktower incident report with simple SQL filters.",
       "Separate what the crowd saw from what the records can actually prove.",
-      "Use the clocktower setting to pin movement, access, and opportunity."
+      "Use the report identifier to retrieve interviews and complete your evidence review."
     ],
-    landingAccessNote: "This archive volume is not yet open for students.",
+    landingAccessNote: "Ready to investigate. Your notes and query drafts are saved on this browser.",
     landingSceneSrc: rainyWindowScene,
     landingSceneAlt: "Rainy window light and a detective desk setting a solemn tone for a public poisoning case.",
     hotspot: { left: "12.9%", top: "20.1%", width: "6.6%", height: "54.6%" },

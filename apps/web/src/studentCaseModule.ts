@@ -7,7 +7,7 @@ import {
   CASE_001_SKELETON_BRIEF,
   CASE_001_SKELETON_RELEASE_GATE,
   CASE_001_SKELETON_STATE_VERSION,
-  isCase001PlayableSkeletonEnabled
+  isCase001PlayableEnabled
 } from "./studentCase001";
 import {
   CASE_004_BRIEF,
@@ -115,7 +115,7 @@ export const CASE_001_PLAYABLE_SKELETON_MODULE: SkeletonPlayableStudentCaseModul
   releaseGate: {
     envName: CASE_001_SKELETON_RELEASE_GATE,
     enabledValue: "true",
-    isEnabled: isCase001PlayableSkeletonEnabled
+    isEnabled: isCase001PlayableEnabled
   },
   skeleton: {
     caseNumber: CASE_001_SKELETON_BRIEF.caseNumber,
@@ -199,7 +199,7 @@ export const CASE_004_PLAYABLE_MODULE: FullPlayableStudentCaseModule = {
   }
 };
 
-export const PLAYABLE_STUDENT_CASE_MODULES = [CASE_004_PLAYABLE_MODULE] as const;
+export const PLAYABLE_STUDENT_CASE_MODULES = [CASE_004_PLAYABLE_MODULE, CASE_001_PLAYABLE_SKELETON_MODULE] as const;
 
 export function getPlayableStudentCaseModule(
   caseId: string | null | undefined
@@ -209,7 +209,7 @@ export function getPlayableStudentCaseModule(
   }
 
   if (caseId === CASE_001_ENTRY_ID) {
-    return isCase001PlayableSkeletonEnabled() ? CASE_001_PLAYABLE_SKELETON_MODULE : null;
+    return isCase001PlayableEnabled() ? CASE_001_PLAYABLE_SKELETON_MODULE : null;
   }
 
   return PLAYABLE_STUDENT_CASE_MODULES.find((module) => module.caseId === caseId) ?? null;

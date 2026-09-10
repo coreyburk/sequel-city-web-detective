@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "gitCommitHash": "6cd8fcffa7295d2b921d8fac579a77477a6c1a56",
-  "generatedAt": "2026-09-03T16:50:54.117Z",
+  "gitCommitHash": "3243f12b0a30a6a122a6468afebd3584c3f8beb2",
+  "generatedAt": "2026-09-09T22:17:09.051Z",
   "files": {
     ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml": {
       "filePath": ".codex/skills/sequel-city-audit-runner-contracts/agents/openai.yaml",
@@ -763,37 +763,37 @@
     },
     ".understand-anything/fingerprints.json": {
       "filePath": ".understand-anything/fingerprints.json",
-      "contentHash": "47bf0e5b373699646ddb701bb4d4b3f4f3473cc70a5de4631dfd7dc60246e214",
+      "contentHash": "d44845aefcbebfd8e8bcd6d4e14b02e05839f8cf967cd773cb74b379ea58ec28",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 13511,
+      "totalLines": 13618,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/intermediate/scan-result.json": {
       "filePath": ".understand-anything/intermediate/scan-result.json",
-      "contentHash": "e34b06f730af7b094c543e024df6f6e7673765f0e656bc6798a26eff785961b7",
+      "contentHash": "0bec75c0e6d56d65144e26ea610fbae0ec743a3f53fa88f5321c480dbd0667e9",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 3980,
+      "totalLines": 4004,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/knowledge-graph.json": {
       "filePath": ".understand-anything/knowledge-graph.json",
-      "contentHash": "211b16d7bd7c20ca4ca0a785f65e8b41fc8e5bfe7a848c7bf764bdf6529a912f",
+      "contentHash": "32e3ec9e68789e1339e6638e8f48ddb9a8bb7d6c6f55ae5adaef38f1d6384e7e",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 15773,
+      "totalLines": 15943,
       "hasStructuralAnalysis": true
     },
     ".understand-anything/meta.json": {
       "filePath": ".understand-anything/meta.json",
-      "contentHash": "66a6a0073d8caa95342dfbdc531e5ee2ab6e027fa1405df6bed7f3ba5f1bc7ac",
+      "contentHash": "f212efb9cbc3dbac873a769459fa651f4076e64ba356cf1f85c4b0da4e744012",
       "functions": [],
       "classes": [],
       "imports": [],
@@ -3455,7 +3455,7 @@
     },
     "apps/web/src/App.test.tsx": {
       "filePath": "apps/web/src/App.test.tsx",
-      "contentHash": "df729012c74051d9e851d5956c9cf5be86aad6a57184cf0ed2aecdbdbab4ebff",
+      "contentHash": "ff2c235cca6919c0507e394ef1cc35d3fce86828ce73da8b9627a4f6261338a6",
       "functions": [
         {
           "name": "chooseJeremyBowersIfAvailable",
@@ -3529,12 +3529,12 @@
         }
       ],
       "exports": [],
-      "totalLines": 4428,
+      "totalLines": 4410,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/App.tsx": {
       "filePath": "apps/web/src/App.tsx",
-      "contentHash": "16e1de6f7ff7a5db7808741b85898bd136cceac18cb1ac162e9c9d13d3d6904f",
+      "contentHash": "bf84caf084ee454d6bf3043ab9b279f22800032c37884780bb89bfd54347e339",
       "functions": [
         {
           "name": "isTextSizeOption",
@@ -3554,7 +3554,7 @@
         {
           "name": "App",
           "params": [
-            "{\n  initialStudentCaseEntered = false\n}"
+            "{\r\n  initialStudentCaseEntered = false\r\n}"
           ],
           "returnType": "JSX.Element",
           "exported": true,
@@ -3710,7 +3710,7 @@
     },
     "apps/web/src/caseAuthoring.test.ts": {
       "filePath": "apps/web/src/caseAuthoring.test.ts",
-      "contentHash": "581a11d7ee0a5bfdba96dd1153f5598bce0b155d624e126bbc185aee4e532ae5",
+      "contentHash": "e84cac67b41f4924f8d87f04b7111b9d89c00eb465ff278c552b75981dd649c7",
       "functions": [
         {
           "name": "buildValidDefinition",
@@ -3748,7 +3748,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 285,
+      "totalLines": 253,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/caseAuthoring.ts": {
@@ -4514,7 +4514,7 @@
     },
     "apps/web/src/components/student/studentCaseLibrary.ts": {
       "filePath": "apps/web/src/components/student/studentCaseLibrary.ts",
-      "contentHash": "2632b0610335ff00d7f74c28db04c9ccc335b572bd72072eb6ca9f4412b673d6",
+      "contentHash": "bf1cf9eb5ca6121572b070845e1dce8423685b2f5f79c2c32ac6254687a23c5b",
       "functions": [
         {
           "name": "getStudentCaseLibraryEntry",
@@ -4693,7 +4693,7 @@
     },
     "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx": {
       "filePath": "apps/web/src/components/student/StudentPlayableCaseSkeletonView.test.tsx",
-      "contentHash": "11f71d59615bf0593e31d4bab5e34dbe287b8d14ab71324abee37eb417aaee64",
+      "contentHash": "eebe2d79cd7d57888e9aae0136091e0ee151e16b45fa9c3259743da51949620d",
       "functions": [
         {
           "name": "buildSuccessfulQueryResponse",
@@ -5595,7 +5595,7 @@
     },
     "apps/web/src/features/investigationThreads/useInvestigationThreads.ts": {
       "filePath": "apps/web/src/features/investigationThreads/useInvestigationThreads.ts",
-      "contentHash": "e27a191ba587c89753fbf3eb5d2a69bed39b70a45041b6c27586057d34810dc7",
+      "contentHash": "cbb1a309acbf07c9d12a24fb9c31d4de276d69f7e6281f96558fc20b82ff000e",
       "functions": [
         {
           "name": "readStorage",
@@ -5641,11 +5641,12 @@
         {
           "name": "useInvestigationThreads",
           "params": [
-            "knownNotebookEntryIds"
+            "knownNotebookEntryIds",
+            "enabled"
           ],
           "returnType": "InvestigationThreadsApi",
           "exported": true,
-          "lineCount": 95
+          "lineCount": 100
         }
       ],
       "classes": [],
@@ -5690,7 +5691,7 @@
         "INVESTIGATION_THREADS_STORAGE_KEY",
         "INVESTIGATION_THREAD_COUNT"
       ],
-      "totalLines": 272,
+      "totalLines": 277,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/features/queryReinforcement/generateReinforcement.test.ts": {
@@ -6516,8 +6517,15 @@
     },
     "apps/web/src/studentCase001.ts": {
       "filePath": "apps/web/src/studentCase001.ts",
-      "contentHash": "5db33c6a84794acaa55e7448627c48271dbda100654deb9e3e3728961fc5507b",
+      "contentHash": "08dd6a950448a3d9496bb34fd5ea765dad035f3e1d453aca32e133ed7e837222",
       "functions": [
+        {
+          "name": "isCase001PlayableEnabled",
+          "params": [],
+          "returnType": "boolean",
+          "exported": true,
+          "lineCount": 3
+        },
         {
           "name": "normalizeSql",
           "params": [
@@ -6618,6 +6626,8 @@
       ],
       "exports": [
         "CASE_001_ENTRY_ID",
+        "CASE_001_RELEASED",
+        "isCase001PlayableEnabled",
         "CASE_001_SKELETON_RELEASE_GATE",
         "CASE_001_SKELETON_BRIEF",
         "CASE_001_BRIEF",
@@ -6642,12 +6652,99 @@
         "normalizeCase001SkeletonState",
         "isCase001PlayableSkeletonEnabled"
       ],
-      "totalLines": 611,
+      "totalLines": 598,
+      "hasStructuralAnalysis": true
+    },
+    "apps/web/src/studentCase001Progress.test.ts": {
+      "filePath": "apps/web/src/studentCase001Progress.test.ts",
+      "contentHash": "3dae16030f694e7a108d4341718ce4c66716717f049ecde8f1fd08302067bcff",
+      "functions": [],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./studentCase001Progress",
+          "specifiers": [
+            "CASE_001_M1",
+            "CASE_001_PROGRESS_KEY",
+            "clearCase001Progress",
+            "normalizeCase001Progress",
+            "readCase001Progress",
+            "writeCase001Progress"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 25,
+      "hasStructuralAnalysis": true
+    },
+    "apps/web/src/studentCase001Progress.ts": {
+      "filePath": "apps/web/src/studentCase001Progress.ts",
+      "contentHash": "b91506a8e103ada009c954442fc19ba2a0874118f8cd771339d4d2a2db15179c",
+      "functions": [
+        {
+          "name": "normalizeCase001Progress",
+          "params": [
+            "raw"
+          ],
+          "returnType": "Case001Progress",
+          "exported": true,
+          "lineCount": 27
+        },
+        {
+          "name": "readCase001Progress",
+          "params": [],
+          "returnType": "Case001Progress",
+          "exported": true,
+          "lineCount": 6
+        },
+        {
+          "name": "writeCase001Progress",
+          "params": [
+            "state"
+          ],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        },
+        {
+          "name": "clearCase001Progress",
+          "params": [],
+          "returnType": "void",
+          "exported": true,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "./studentCase",
+          "specifiers": [
+            "EvidenceNotebookEntry",
+            "StudentView"
+          ]
+        },
+        {
+          "source": "./studentCase001",
+          "specifiers": [
+            "Case001SqlMilestoneId"
+          ]
+        }
+      ],
+      "exports": [
+        "CASE_001_PROGRESS_KEY",
+        "CASE_001_M1",
+        "CASE_001_M2",
+        "normalizeCase001Progress",
+        "readCase001Progress",
+        "writeCase001Progress",
+        "clearCase001Progress"
+      ],
+      "totalLines": 58,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/studentCaseModule.test.ts": {
       "filePath": "apps/web/src/studentCaseModule.test.ts",
-      "contentHash": "5165aa50fe92961458102bad36c272f3d251154fc21ae46a6046fe9e8506943d",
+      "contentHash": "89facb9dc098f69eec3cf5062241639d7d881975cc0513fd4576393d2dc4e9a3",
       "functions": [],
       "classes": [],
       "imports": [
@@ -6707,7 +6804,7 @@
     },
     "apps/web/src/studentCaseModule.ts": {
       "filePath": "apps/web/src/studentCaseModule.ts",
-      "contentHash": "b81d6c5fa9f6bdccac93d0be071adf3daf13175a81214203c6e9f2914f68e20e",
+      "contentHash": "21d8b62701ebabd2d68fc525efee54ac84bf118a8b5a0d2f6495579f1bfdfcee",
       "functions": [
         {
           "name": "getPlayableStudentCaseModule",
@@ -6751,7 +6848,7 @@
             "CASE_001_SKELETON_BRIEF",
             "CASE_001_SKELETON_RELEASE_GATE",
             "CASE_001_SKELETON_STATE_VERSION",
-            "isCase001PlayableSkeletonEnabled"
+            "isCase001PlayableEnabled"
           ]
         },
         {
@@ -6799,9 +6896,66 @@
       "totalLines": 4565,
       "hasStructuralAnalysis": false
     },
+    "apps/web/src/useStudentCaseState.case001.test.tsx": {
+      "filePath": "apps/web/src/useStudentCaseState.case001.test.tsx",
+      "contentHash": "b577dac96c39d507eeb75e20b1d77071236ee3e7ef0af9d12abf58f3edc5b313",
+      "functions": [
+        {
+          "name": "response",
+          "params": [
+            "id"
+          ],
+          "returnType": "Extract<QueryExecutionResponse, { success: true }>",
+          "exported": false,
+          "lineCount": 3
+        }
+      ],
+      "classes": [],
+      "imports": [
+        {
+          "source": "@testing-library/react",
+          "specifiers": [
+            "act",
+            "renderHook",
+            "waitFor"
+          ]
+        },
+        {
+          "source": "./api/client",
+          "specifiers": [
+            "executeQuery",
+            "getSchemaTables"
+          ]
+        },
+        {
+          "source": "./api/types",
+          "specifiers": [
+            "QueryExecutionResponse",
+            "QueryRow"
+          ]
+        },
+        {
+          "source": "./useStudentCaseState",
+          "specifiers": [
+            "useStudentCaseState"
+          ]
+        },
+        {
+          "source": "./studentCase001Progress",
+          "specifiers": [
+            "CASE_001_M1",
+            "CASE_001_M2",
+            "CASE_001_PROGRESS_KEY"
+          ]
+        }
+      ],
+      "exports": [],
+      "totalLines": 51,
+      "hasStructuralAnalysis": true
+    },
     "apps/web/src/useStudentCaseState.ts": {
       "filePath": "apps/web/src/useStudentCaseState.ts",
-      "contentHash": "cbf5f5b84aee3669214e9d96db93bb2058cc765252e593027af43743988dd954",
+      "contentHash": "cce17bc6a1543957a9db139923a0ccfc8fc27255ad23db661d675823c295e4a3",
       "functions": [
         {
           "name": "getStudentCaseStorageKey",
@@ -6990,7 +7144,7 @@
             "activeCaseId"
           ],
           "exported": true,
-          "lineCount": 4009
+          "lineCount": 4076
         }
       ],
       "classes": [],
@@ -7007,6 +7161,7 @@
         {
           "source": "./api/client",
           "specifiers": [
+            "executeQuery",
             "getSchemaTables",
             "verifySuspect"
           ]
@@ -7064,8 +7219,19 @@
             "CASE_001_SAMUEL_STEPS",
             "CASE_001_SQL_FEEDBACK_SLICES",
             "buildCase001MilestoneEvaluationRequest",
-            "isCase001PlayableSkeletonEnabled",
+            "isCase001PlayableEnabled",
             "Case001SqlMilestoneId"
+          ]
+        },
+        {
+          "source": "./studentCase001Progress",
+          "specifiers": [
+            "CASE_001_M1",
+            "CASE_001_M2",
+            "clearCase001Progress",
+            "readCase001Progress",
+            "writeCase001Progress",
+            "Case001Progress"
           ]
         },
         {
@@ -7116,7 +7282,7 @@
         "getStudentCaseStorageKey",
         "useStudentCaseState"
       ],
-      "totalLines": 4637,
+      "totalLines": 4712,
       "hasStructuralAnalysis": true
     },
     "apps/web/src/useStudentCaseState.upsert.test.tsx": {
@@ -7225,7 +7391,7 @@
     },
     "apps/web/tests/browser/case-001-live-smoke.spec.ts": {
       "filePath": "apps/web/tests/browser/case-001-live-smoke.spec.ts",
-      "contentHash": "a2c87a23cf9ef50f84f47335089612d0e196edeef32abf847b6cd2577b898699",
+      "contentHash": "8d35c8780dbdbb2c9aa453bd38d2015888fe2fce197e92dda06c482cde0f934c",
       "functions": [
         {
           "name": "isJsonObject",
@@ -7276,7 +7442,7 @@
         }
       ],
       "exports": [],
-      "totalLines": 254,
+      "totalLines": 268,
       "hasStructuralAnalysis": true
     },
     "apps/web/tests/browser/demo-walkthrough.spec.ts": {
@@ -8048,12 +8214,12 @@
     },
     "docs/00-ssot/END-OF-DAY-HANDOFF.md": {
       "filePath": "docs/00-ssot/END-OF-DAY-HANDOFF.md",
-      "contentHash": "6ed9922a4077cf623c81868c79b4f48e648d88e83c187d11b977d535c2d3a0f6",
+      "contentHash": "c1d3ad48fd78d175169d456dcba476d951d282c0924a053c0fd181175f915265",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 89,
+      "totalLines": 75,
       "hasStructuralAnalysis": true
     },
     "docs/00-ssot/SSOT-AI-Agent-Boundaries.md": {
@@ -10928,12 +11094,22 @@
     },
     "docs/01-work-packages/WP-273-case-001-tier-1-m1-m2-release-slice-implementation-bundle.md": {
       "filePath": "docs/01-work-packages/WP-273-case-001-tier-1-m1-m2-release-slice-implementation-bundle.md",
-      "contentHash": "19d4e97aaacfcad425798d7b8576270aaaec8e337991e954ee2c7bd4adcf3842",
+      "contentHash": "c8b167d43e9e2b649b20e7f38d9ad003be87108b8ec17737077e2dd84a2a8ea5",
       "functions": [],
       "classes": [],
       "imports": [],
       "exports": [],
-      "totalLines": 262,
+      "totalLines": 330,
+      "hasStructuralAnalysis": true
+    },
+    "docs/01-work-packages/WP-274-case-001-tier-1-release-readiness-and-entry-bundle.md": {
+      "filePath": "docs/01-work-packages/WP-274-case-001-tier-1-release-readiness-and-entry-bundle.md",
+      "contentHash": "aa6e9802bc9b001dda1f0928488bb2caf64d1227fda68abc9b7ed6ee4490e2bb",
+      "functions": [],
+      "classes": [],
+      "imports": [],
+      "exports": [],
+      "totalLines": 146,
       "hasStructuralAnalysis": true
     },
     "docs/02-runtime/Backend-Setup-and-Validation.md": {

@@ -1,12 +1,10 @@
 import { expect, request as playwrightRequest, test, type APIRequestContext } from "@playwright/test";
 
 const CASE_001_LIVE_SMOKE_ENV = "CASE_001_LIVE_SMOKE";
-const CASE_001_GATE_ENV = "VITE_ENABLE_CASE_001_PLAYABLE_SKELETON";
-const CASE_001_GATE_VALUE = "true";
 const API_BASE_URL = process.env.VITE_API_BASE_URL ?? "http://127.0.0.1:3001";
 const EXPLORATORY_STARTER_SQL = "SELECT * FROM CrimeSceneReport;";
 const M1_TARGET_SQL =
-  "SELECT CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';";
+  "SELECT ReportID, CrimeID, ReportDate, ReportCity, ReportDescription FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City';";
 const M2_TARGET_SQL =
   "SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID IN (SELECT ReportID FROM CrimeSceneReport WHERE CrimeID = 1080 AND ReportDate = 20230502 AND ReportCity = 'Sequel City') ORDER BY PersonID;";
 
@@ -34,7 +32,7 @@ async function getResponseJson(response: { json: () => Promise<unknown> }): Prom
 }
 
 function formatBlocker(message: string): string {
-  return `WP-273 live smoke blocker: ${message}`;
+  return `WP-274 live smoke blocker: ${message}`;
 }
 
 async function classifyLiveStackReadiness(
@@ -138,18 +136,15 @@ async function classifyLiveStackReadiness(
   return { status: "ready" };
 }
 
-test.describe("Case 001 gated live-stack smoke", () => {
-  test("enters the gated shared shell and completes the M1-M2 SQL slice with non-progressing feedback", async ({
+test.describe("Case 001 released live-stack smoke", () => {
+  test("enters the released shared shell and completes the M1-M2 SQL slice with non-progressing feedback", async ({
     page
   }) => {
     test.skip(
       process.env[CASE_001_LIVE_SMOKE_ENV] !== "1",
       `Set ${CASE_001_LIVE_SMOKE_ENV}=1 to run the opt-in Case 001 live-stack smoke.`
     );
-    test.skip(
-      process.env[CASE_001_GATE_ENV] !== CASE_001_GATE_VALUE,
-      `Set ${CASE_001_GATE_ENV}=${CASE_001_GATE_VALUE} for the gated Case 001 shared-shell smoke.`
-    );
+
 
     const apiRequest = await playwrightRequest.newContext();
     const preflight = await classifyLiveStackReadiness(apiRequest);
@@ -157,11 +152,11 @@ test.describe("Case 001 gated live-stack smoke", () => {
 
     if (preflight.status === "blocked") {
       test.info().annotations.push({
-        type: "WP-254 blocker",
+        type: "WP-274 blocker",
         description: preflight.message
       });
       console.warn(preflight.message);
-      test.skip(true, preflight.message);
+      throw new Error(preflight.message);
     }
 
     await page.goto("/");
@@ -212,7 +207,10 @@ test.describe("Case 001 gated live-stack smoke", () => {
     await expect(page.getByText(/matchedRowCount/i)).toHaveCount(0);
     await expect(page.getByText(/milestoneAdvanced/i)).toHaveCount(0);
 
-    await page.getByLabel("SQL query input").fill(M2_TARGET_SQL);
+    const reportId = responseBody.data.rows[0].values.ReportID;
+    expect(String(reportId)).toMatch(/^\d+$/);
+    const learnerM2Sql = `SELECT PersonID, ReportID, LogTranscript FROM InterviewLog WHERE ReportID = ${reportId} ORDER BY PersonID;`;
+    await page.getByLabel("SQL query input").fill(learnerM2Sql);
     const interviewResponsePromise = page.waitForResponse(
       (response) => response.url().includes("/api/query/execute") && response.status() === 200
     );
@@ -230,12 +228,12 @@ test.describe("Case 001 gated live-stack smoke", () => {
     await expect(page.getByText(/Report-linked interviews located/i)).toBeVisible();
     await expect(page.getByRole("table")).toBeVisible();
     await expect(page.getByText(/clocktower/i).first()).toBeVisible();
-    await expect(page.getByLabel("SQL query input")).toHaveValue(M2_TARGET_SQL);
+    await expect(page.getByLabel("SQL query input")).toHaveValue(learnerM2Sql);
     await expect(page.getByLabel("SQL query input")).not.toHaveValue("SELECT * FROM PersonsOfInterest;");
     await expect(page.getByText(/matchedRowCount/i)).toHaveCount(0);
     await expect(page.getByText(/milestoneAdvanced/i)).toHaveCount(0);
 
-    await page.getByRole("button", { name: "Evidence Board" }).click();
+    if (await page.getByRole("button", { name: "Evidence Board" }).isEnabled()) await page.getByRole("button", { name: "Evidence Board" }).click();
     await expect(page.getByRole("heading", { name: "Evidence Notebook" })).toBeVisible();
     await expect(page.getByText("Completed milestones: 2 / 2")).toBeVisible();
     await expect(
@@ -248,6 +246,22 @@ test.describe("Case 001 gated live-stack smoke", () => {
     const case001StorageKeys = await page.evaluate(() =>
       Object.keys(window.localStorage).filter((key) => key.includes("case-001"))
     );
-    expect(case001StorageKeys).toEqual([]);
+    expect(case001StorageKeys).toEqual(["sequel-city.case-001.student-state.v1"]);
+    await page.evaluate(() => { localStorage.setItem("wp274-unrelated", "keep"); localStorage.setItem("sequel-city.case-004.student-state.v1", "case004-sentinel"); });
+    await page.reload();
+    // Library history may restore entry; explicitly enter if the library is shown.
+    if (await page.getByRole("button", { name: "Select Case 001: The Clocktower Poisoning" }).isVisible()) {
+      await page.getByRole("button", { name: "Select Case 001: The Clocktower Poisoning" }).click();
+      await page.getByRole("button", { name: "Open Case File" }).click();
+    }
+    if (await page.getByRole("button", { name: "Evidence Board" }).isEnabled()) await page.getByRole("button", { name: "Evidence Board" }).click();
+    await expect(page.getByText("Completed milestones: 2 / 2")).toBeVisible();
+    page.once("dialog", dialog => dialog.accept());
+    await page.getByRole("button", { name: "Reset Progress" }).click();
+    await expect(page.getByText("Case 001 Briefing", { exact: true })).toBeVisible();
+    if (await page.getByRole("button", { name: "Evidence Board" }).isEnabled()) await page.getByRole("button", { name: "Evidence Board" }).click();
+    await expect(page.getByText("Completed milestones: 0 / 2")).toBeVisible();
+    expect(await page.evaluate(() => localStorage.getItem("wp274-unrelated"))).toBe("keep");
+    expect(await page.evaluate(() => localStorage.getItem("sequel-city.case-004.student-state.v1"))).toBe("case004-sentinel");
   });
 });

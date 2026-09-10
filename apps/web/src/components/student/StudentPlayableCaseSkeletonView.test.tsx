@@ -146,7 +146,7 @@ describe("StudentPlayableCaseSkeletonView", () => {
     });
 
     expect(await screen.findByText(/Public report located/i)).toBeInTheDocument();
-    expect(screen.getByText(/does not unlock the archive/i)).toBeInTheDocument();
+    expect(screen.getByText(/API checks evidence/i)).toBeInTheDocument();
     expect(
       screen.queryByText(/Spoiler-safe public report text should not be rendered/i)
     ).not.toBeInTheDocument();

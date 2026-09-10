@@ -190,7 +190,7 @@ export default function App({
       ].join("|"),
     [completedMilestones, mastermindEndgamePhase, pendingEvidenceStep]
   );
-  const threadsApi = useInvestigationThreads(notebookEntryIds);
+  const threadsApi = useInvestigationThreads(notebookEntryIds, activeStudentCaseId === "case-004" || (mode === "developer" && selectedLibraryCaseId === "case-004"));
 
   async function refreshStudentSetupState(): Promise<void> {
     try {
@@ -388,7 +388,7 @@ export default function App({
     }
 
     resetStudentCaseProgress();
-    threadsApi.resetThreads();
+    if (selectedPlayableCaseModule.caseId === "case-004") threadsApi.resetThreads();
   }
 
   return (
